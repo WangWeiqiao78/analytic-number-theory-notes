@@ -1,0 +1,66 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8
+
+\documentclass[
+	colors = true,
+	geometry = b5,
+	fontsetup = font-setup-overleaf.tex,
+	titlesetup = titles-setup.tex
+]{AJbook}
+
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,patterns}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{myarrows}
+\usepackage{mycommand}
+\usepackage[unicode, bookmarksnumbered]{hyperref}
+
+\hypersetup{
+	pdfauthor = {王维桥},
+	pdftitle = {数论基础笔记},
+	pdfkeywords = {Number Theory, Course Notes, 数论},
+	CJKbookmarks = true
+}
+
+\addbibresource{references.bib}
+
+\newenvironment{question}{%
+	\par\smallskip
+	\noindent\textbf{问题.}\enspace
+}{%
+	\par\smallskip
+}
+\newcommand{\todo}[1]{%
+	\par\smallskip
+	\noindent\textcolor{red}{\textbf{TODO:} #1}%
+	\par\smallskip
+}
+\newcommand{\weekmarker}[1]{%
+	\par\medskip
+	\noindent\textbf{#1}
+	\par\medskip
+}
+
+\title{数论基础笔记}
+\author{课堂笔记整理}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+
+\input{tex/frontmatter/preface}
+
+\mainmatter
+
+\input{tex/chapters/number-theory-notes}
+
+\backmatter
+% 需要参考文献时，取消下一行注释。
+% \printbibliography[heading=bibintoc]
+
+\end{document}
