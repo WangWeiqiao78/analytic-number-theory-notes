@@ -1,0 +1,289 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8
+
+\documentclass[
+	colors = false,
+	geometry = a4,
+	fontsetup = font-setup-overleaf.tex,
+	titlesetup = titles-setup.tex
+]{AJbook}
+
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,patterns}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{environ}
+\usepackage{myarrows}
+\usepackage{mycommand}
+\usepackage[unicode, bookmarksnumbered]{hyperref}
+
+\AtEndPreamble{%
+	\geometry{
+		paperwidth=254mm,
+		paperheight=359.21mm,
+		left=1.2mm,
+		right=1.2mm,
+		top=1.2mm,
+		bottom=1mm,
+		headheight=0pt,
+		headsep=0pt,
+		footskip=0pt,
+		includehead=false,
+		includefoot=false
+	}%
+}
+
+\pagestyle{empty}
+\raggedbottom
+\setstretch{0.8}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{1.4mm}
+\setlength{\multicolsep}{0pt}
+\setlength{\premulticols}{0pt}
+\setlength{\postmulticols}{0pt}
+\setlength{\abovedisplayskip}{0pt plus 0.4pt}
+\setlength{\belowdisplayskip}{0pt plus 0.4pt}
+\setlength{\abovedisplayshortskip}{0pt plus 0.5pt}
+\setlength{\belowdisplayshortskip}{0pt plus 0.5pt}
+\setlength{\jot}{0pt}
+\setlength{\emergencystretch}{8em}
+\tolerance=9999
+\hbadness=10000
+\clubpenalty=0
+\widowpenalty=0
+\displaywidowpenalty=0
+\interlinepenalty=0
+\predisplaypenalty=0
+\postdisplaypenalty=0
+\brokenpenalty=0
+\binoppenalty=0
+\relpenalty=0
+\mathsurround=0pt
+\thinmuskip=1mu
+\medmuskip=1.5mu plus 1mu minus 1mu
+\thickmuskip=2mu plus 1mu minus 1mu
+\allowdisplaybreaks[4]
+\setlist{nosep,leftmargin=*,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+
+\newcommand{\compactinlinetag}[1]{\quad\textup{(#1)}}
+\AtBeginDocument{%
+	\sloppy
+	\renewcommand{\[}{\unskip\space\(\textstyle}%
+	\renewcommand{\]}{\)\space\ignorespaces}%
+	\RenewEnviron{equation}{\unskip\space\(\textstyle\BODY\)\space\ignorespaces}%
+	\RenewEnviron{align*}{\unskip\space\(\textstyle\begin{aligned}\BODY\end{aligned}\)\space\ignorespaces}%
+	\RenewEnviron{align}{\unskip\space\(\textstyle\begin{aligned}\BODY\end{aligned}\)\space\ignorespaces}%
+	\let\tag\compactinlinetag
+}
+
+\hypersetup{
+	pdfauthor = {王维桥},
+	pdftitle = {数论基础笔记：压缩版},
+	pdfkeywords = {Number Theory, Course Notes, 数论},
+	CJKbookmarks = true
+}
+
+\addbibresource{references.bib}
+
+\newenvironment{question}{%
+	\par\noindent\textbf{问题.}\enspace
+}{%
+	\par
+}
+\newcommand{\todo}[1]{%
+	\par\noindent\textcolor{black}{\textbf{TODO:} #1}\par
+}
+\newcommand{\weekmarker}[1]{}
+\providecommand{\C}{\CC}
+\providecommand{\U}[1]{(\Z/#1\Z)^\times}
+\providecommand{\Cyc}[1]{\Z/#1\Z}
+\providecommand{\e}[1]{e\!\left(#1\right)}
+\providecommand{\expi}[1]{\exp(2\pi i #1)}
+\providecommand{\cond}{\operatorname{cond}}
+
+\makeatletter
+\@beginparpenalty=0
+\@endparpenalty=0
+\@itempenalty=0
+\@secpenalty=0
+\renewcommand\chapter{%
+	\par\addvspace{0.18\baselineskip}%
+	\global\@topnum\z@
+	\@afterindentfalse
+	\secdef\compact@chapter\compact@schapter}
+\def\compact@chapter[#1]#2{%
+	\refstepcounter{chapter}%
+	\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}%
+	\chaptermark{#1}%
+	\noindent{\sffamily\bfseries\fontsize{6.4}{6.6}\selectfont \thechapter\enspace #2}\par\nobreak
+	\vspace{0pt}%
+	\@afterheading}
+\def\compact@schapter#1{%
+	\noindent{\sffamily\bfseries\fontsize{6.4}{6.6}\selectfont #1}\par\nobreak
+	\vspace{0pt}%
+	\@afterheading}
+\makeatother
+
+\titleformat{name=\section}[runin]
+	{\sffamily\bfseries}
+	{\thesection}
+	{0.35em}
+	{#1.}
+\titleformat{name=\section, numberless}[runin]
+	{\sffamily\bfseries}
+	{}
+	{0pt}
+	{#1.}
+\titlespacing*{name=\section}{0pt}{0.1\baselineskip}{0.45em}
+
+\titleformat{name=\subsection}[runin]
+	{\sffamily\bfseries}
+	{\thesubsection}
+	{0.3em}
+	{#1.}
+\titleformat{name=\subsection, numberless}[runin]
+	{\sffamily\bfseries}
+	{}
+	{0pt}
+	{#1.}
+\titlespacing*{name=\subsection}{0pt}{0.06\baselineskip}{0.35em}
+
+\titleformat{name=\subsubsection}[runin]
+	{\sffamily\bfseries}
+	{\thesubsubsection}
+	{0.3em}
+	{#1.}
+\titleformat{name=\subsubsection, numberless}[runin]
+	{\sffamily\bfseries}
+	{}
+	{0pt}
+	{#1.}
+\titlespacing*{name=\subsubsection}{0pt}{0.03\baselineskip}{0.3em}
+
+\makeatletter
+\renewcommand\section{\@ifstar\compactsectionstar\compactsection}
+\newcommand\compactsection[1]{%
+	\par\addvspace{0.04\baselineskip}%
+	\refstepcounter{section}%
+	\addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+	\sectionmark{#1}%
+	\noindent{\sffamily\bfseries\thesection\enspace #1.}\space\ignorespaces
+}
+\newcommand\compactsectionstar[1]{%
+	\par\addvspace{0.04\baselineskip}%
+	\sectionmark{#1}%
+	\noindent{\sffamily\bfseries #1.}\space\ignorespaces
+}
+\renewcommand\subsection{\@ifstar\compactsubsectionstar\compactsubsection}
+\newcommand\compactsubsection[1]{%
+	\par\addvspace{0.02\baselineskip}%
+	\refstepcounter{subsection}%
+	\addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}%
+	\noindent{\sffamily\bfseries\thesubsection\enspace #1.}\space\ignorespaces
+}
+\newcommand\compactsubsectionstar[1]{%
+	\par\addvspace{0.02\baselineskip}%
+	\noindent{\sffamily\bfseries #1.}\space\ignorespaces
+}
+\renewcommand\subsubsection{\@ifstar\compactsubsubsectionstar\compactsubsubsection}
+\newcommand\compactsubsubsection[1]{%
+	\par\addvspace{0pt}%
+	\refstepcounter{subsubsection}%
+	\addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1}%
+	\noindent{\sffamily\bfseries\thesubsubsection\enspace #1.}\space\ignorespaces
+}
+\newcommand\compactsubsubsectionstar[1]{%
+	\par\addvspace{0pt}%
+	\noindent{\sffamily\bfseries #1.}\space\ignorespaces
+}
+\makeatother
+
+	\AtBeginDocument{%
+		\pagestyle{empty}%
+		\thispagestyle{empty}%
+		\raggedright
+		\fontsize{6.328}{6.518}\selectfont
+		\setlength{\theorempreskipamount}{0pt}%
+		\setlength{\theorempostskipamount}{0pt}%
+		\theorempreskip{0pt}%
+		\theorempostskip{0pt}%
+		\theoremseparator{\ }%
+		\theoremsymbol{}%
+		\theorembodyfont{\fangsong}%
+		\theoremheaderfont{\sffamily\bfseries\thmheiti}%
+		\renewtheorem{theorem}{定理}[section]%
+		\renewtheorem{corollary}[theorem]{推论}%
+		\renewtheorem{lemma}[theorem]{引理}%
+		\renewtheorem{proposition}[theorem]{命题}%
+		\renewtheorem{definition}[theorem]{定义}%
+		\renewtheorem{definition-theorem}[theorem]{定义--定理}%
+		\renewtheorem{definition-proposition}[theorem]{定义--命题}%
+		\renewtheorem{hypothesis}[theorem]{假设}%
+		\renewtheorem{conjecture}[theorem]{猜想}%
+		\theorembodyfont{\songti}%
+		\renewtheorem{example}[theorem]{例}%
+		\renewtheorem{remark}[theorem]{注记}%
+		\renewtheorem{convention}[theorem]{约定}%
+		\renewtheorem{exercise}[theorem]{练习}%
+		\newcommand{\compactthmhead}[3]{%
+			\par\noindent{\sffamily\bfseries #1#2%
+			\if\relax\detokenize{#3}\relax\else\ (#3)\fi}%
+			\enspace\ignorespaces
+		}%
+		\RenewDocumentEnvironment{theorem}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{定理}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{corollary}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{推论}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{lemma}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{引理}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{proposition}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{命题}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{definition}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{定义}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{definition-theorem}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{定义--定理}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{definition-proposition}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{定义--命题}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{hypothesis}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{假设}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{conjecture}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{猜想}{\thetheorem}{#1}\begingroup\fangsong
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{example}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{例}{\thetheorem}{#1}\begingroup\songti
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{remark}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{注记}{\thetheorem}{#1}\begingroup\songti
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{convention}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{约定}{\thetheorem}{#1}\begingroup\songti
+		}{\endgroup\par\ignorespacesafterend}%
+		\RenewDocumentEnvironment{exercise}{O{}}{%
+			\refstepcounter{theorem}\compactthmhead{练习}{\thetheorem}{#1}\begingroup\songti
+		}{\endgroup\par\ignorespacesafterend}%
+		\renewenvironment{proof}[1][证明]{%
+			\par\noindent{\sffamily\bfseries #1}\enspace\ignorespaces
+		}{%
+			\ifhmode\unskip\nobreak\hfill\openbox\par\else\leavevmode\hfill\openbox\par\fi
+			\ignorespacesafterend
+		}%
+	}
+
+\begin{document}
+
+\begin{multicols}{2}
+\input{tex/chapters/number-theory-notes-compact-filtered}
+\end{multicols}
+
+\end{document}
