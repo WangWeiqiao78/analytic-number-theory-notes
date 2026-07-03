@@ -1,0 +1,511 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8
+
+\documentclass[
+	colors = true,
+	geometry = a4,
+	fontsetup = font-setup-overleaf.tex,
+	titlesetup = titles-setup.tex
+]{AJbook}
+
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{myarrows}
+\usepackage{mycommand}
+\usepackage[unicode, bookmarksnumbered]{hyperref}
+
+\AtEndPreamble{%
+	\geometry{
+		paper=a4paper,
+		left=1mm,
+		right=1mm,
+		top=1mm,
+		bottom=1mm,
+		headheight=0pt,
+		headsep=0pt,
+		footskip=0pt,
+		includehead=false,
+		includefoot=false
+	}%
+}
+
+\pagestyle{empty}
+\raggedbottom
+\setstretch{0.82}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\abovedisplayskip}{1pt plus 0.5pt minus 0.5pt}
+\setlength{\belowdisplayskip}{1pt plus 0.5pt minus 0.5pt}
+\setlength{\abovedisplayshortskip}{0.5pt plus 0.5pt minus 0.5pt}
+\setlength{\belowdisplayshortskip}{0.5pt plus 0.5pt minus 0.5pt}
+\setlength{\jot}{0.5pt}
+\setlength{\emergencystretch}{3em}
+\allowdisplaybreaks[4]
+
+\makeatletter
+\renewcommand\chapter{%
+	\par\addvspace{0.02\baselineskip}%
+	\global\@topnum\z@
+	\@afterindentfalse
+	\secdef\compact@chapter\compact@schapter}
+\def\compact@chapter[#1]#2{%
+	\refstepcounter{chapter}%
+	\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}%
+	\chaptermark{#1}%
+	\noindent{\sffamily\bfseries\normalsize #2}\par\nobreak
+	\vspace{0pt}%
+	\@afterheading}
+\def\compact@schapter#1{%
+	\noindent{\sffamily\bfseries\normalsize #1}\par\nobreak
+	\vspace{0pt}%
+	\@afterheading}
+\makeatother
+
+\AtBeginDocument{%
+	\pagestyle{empty}%
+	\thispagestyle{empty}%
+	\fontsize{6.9}{6.9}\selectfont
+}
+
+\hypersetup{
+	pdfauthor = {},
+	pdftitle = {},
+	pdfkeywords = {Number Theory, Exercises, Solutions},
+	CJKbookmarks = true
+}
+
+\definecolor{problemblue}{RGB}{20,70,150}
+
+\newenvironment{sheetexercise}[1]{%
+	\par\addvspace{0.03\baselineskip}
+	\begingroup\color{problemblue}%
+	\noindent\textbf{Exercise #1.}\enspace
+}{%
+	\unskip\enspace
+	\endgroup
+}
+
+\newenvironment{solution}{%
+	\textit{Solution.}\enspace
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\providecommand{\dd}{\mathop{}\!\mathrm d}
+\providecommand{\eof}[1]{\mathrm e^{2\pi i #1}}
+\providecommand{\one}{\mathbf 1}
+\providecommand{\ord}{\operatorname{ord}}
+\providecommand{\rad}{\operatorname{rad}}
+
+\begin{document}
+
+\chapter{Exercise Sheet 1}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+$\pi(x)\geq\log\log x$.
+\end{sheetexercise}
+\begin{solution}pf: $p_{n+1}\leq p_1\cdots p_n+1$，归纳，$p_n\leq2^{2^{n-1}}\leq e^{e^{n-1}}$，取对数。\end{solution}
+
+\begin{sheetexercise}{2}
+(a) $\tau(n^2)=\sum_{d\mid n}\mu(d)\tau(n/d)^2$；(b) $\sum_{d^k\mid n}\mu(d)=1_{\text{无 }k\text{ 次方因子}}$；(c) $\mu(n)=\sum_{\substack{1\leq a\leq n, (a,n)=1}}e^{2\pi ia/n}$.
+\end{sheetexercise}
+\begin{solution}(a) pf: $\tau(\cdot^2)=\mu*\tau(\cdot)^2$，只需 $\tau(\cdot)^2=\tau(\cdot^2)*u$，显。(b) pf: 最大 $k$ 次方因子设为 $p_1^{k\alpha_1}\cdots p_m^{k\alpha_m}$，若为 $1$，则 LHS$=1$，否则为 $\sum_{d\mid p_1\cdots p_m}\mu(d)=0$。(c) pf: 先证 RHS 可乘，因为$m,n$互素时, 在模 $mn$ 意义下 $\{am+bn\mid a\in(\mathbb Z/n)^\times,\ b\in(\mathbb Z/m)^\times\}=(\mathbb Z/mn)^\times$，再说 $p^\alpha$ 时 LHS=RHS（用 $p$ 进制）。\end{solution}
+
+\begin{sheetexercise}{3}
+(a) $\sum_{d\mid n}\mu(d)^2=2^{\omega(n)}$；(b) $\sum_{d\mid n}\mu(d)\tau(d)=(-1)^{\omega(n)}$.
+\end{sheetexercise}
+\begin{solution}(a) pf: 显。(b) pf: LHS$=\sum_{k=0}^{\omega(n)}\binom{\omega(n)}k(-1)^k2^k=(1-2)^{\omega(n)}=(-1)^{\omega(n)}$。\end{solution}
+
+\begin{sheetexercise}{4}
+$f$ 可乘，则 $f^{-1}$ 完全可乘 iff $f(p^\ell)=0$，$\ell\geq2$.
+\end{sheetexercise}
+\begin{solution}pf: 已知可乘则完全可乘等价于$f^{-1}=\mu f$ 故显。\end{solution}
+
+\begin{sheetexercise}{5}
+$\{f:f*f=u\}$ 恰有两个，是否可乘？
+\end{sheetexercise}
+\begin{solution}pf: $f$ 满足 $f(1)=\pm1$，递推 $f(n)=\frac1{2f(1)}(1-\sum_{\substack{d\mid n,\,d\neq1,n}}f(d)f(n/d))$，该递推确定，故恰有两个。若 $f(1)=-1$ 不可乘；$f(1)=1$ 可乘（用反证法找最小的 $mn$）。\end{solution}
+
+\begin{sheetexercise}{6}
+$(f*g)^{-1}=f^{-1}*g^{-1}$.
+\end{sheetexercise}
+\begin{solution}显。\end{solution}
+
+\begin{sheetexercise}{7}
+$\operatorname{supp}\Lambda_k\subseteq\{n:\omega(n)\leq k\}$；$0\leq\Lambda_k(n)\leq(\log n)^k$.
+\end{sheetexercise}
+\begin{solution}\textcircled{\scriptsize 1} pf: $\Lambda_k=\Lambda_{k-1}\log+\Lambda_{k-1}*\Lambda$，故显。\textcircled{\scriptsize 2} $\Lambda\geq0$，是因为递推式, “$\leq$”是因为$\log^k=\Lambda_k*u\Rightarrow \Lambda_k(n)=\log^k n-\sum_{\substack{d\mid n, \, d<n}}\Lambda_k(d)\leq\log^k n$。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 2}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+求 $f\in A$ s.t. $\frac1{\varphi(n)}=\sum_{d\mid n}\frac1d f(n/d)$.
+\end{sheetexercise}
+\begin{solution}pf: $a(n)=1/n$ 有 $a^{-1}(n)=\mu(n)/n$，故 $f=\frac1\varphi*a^{-1}$ 可乘，$f(p)=\frac1{p(p-1)}$，$f(p^\alpha)=0$（$\alpha\geq2$），故 $f(n)=\mu(n)^2\prod_{p\mid n}\frac1{p(p-1)}=\frac{\mu(n)^2}{n\varphi(n)}$。\end{solution}
+
+\begin{sheetexercise}{2}
+$\sum_{n\leq x}\frac1{\varphi(n)}=C_1\log x+C_2+O(\log x/x)$.
+\end{sheetexercise}
+\begin{solution}pf: $\sum_{n\leq x}\frac1{\varphi(n)}=\sum_{n\leq x}a*f(n)=\sum_{d\leq x}f(d)\sum_{m\leq x/d}\frac1m=\sum_{d\leq x}f(d)(\log\frac xd+\gamma+O(d/x)):=\log x\sum_{d\geq1}f(d)+(-\sum_{d\geq1}f(d)\log d+\gamma\sum_{d\geq1}f(d))-\log x\sum_{d>x}f(d)-(-\sum_{d>x}f(d)\log d+\gamma\sum_{d>x}f(d))+O(\sum_{d\leq x}f(d)d/x)$。由以下估计可证原题：\textcircled{\scriptsize 1} $\sum_{d\geq1}f(d)$，$\sum_{d\geq1}f(d)\log d$ 收敛。pf: $\varphi(n)\gg n/\log\log n$（由此也可知 $\sum_{n\leq x}1/\varphi(n)=O(\log x)$）。\textcircled{\scriptsize 2} $\sum_{d\leq x}f(d)d=O(\log x)$。pf: $|\sum_{d\leq x}f(d)d|=|\sum_{d\leq x}\mu(d)^2/\varphi(d)|\leq|\sum_{d\leq x}1/\varphi(d)|=O(\log x)$。\textcircled{\scriptsize 3} $\sum_{d>x}f(d)=O(1/x)$。pf: $f(d)=d^{-2}\mu(d)^2d/\varphi(d)$，记为 $d^{-2}b(d)$，由 2-1，$\frac n{\varphi(n)}=n\,a*f(n)=n\sum_{d\mid n}\frac{d\mu^2(d)}{n\,d\varphi(d)}=\sum_{d\mid n}\frac{\mu^2(d)}{\varphi(d)}$，即 $|b(n)|\leq n/\varphi(n)=\sum_{d\mid n}\mu^2(d)/\varphi(d)$，那 $|\sum_{n\leq x}b(n)|\leq\sum_{n\leq x}\sum_{d\mid n}\mu^2(d)/\varphi(d)=\sum_{d\leq x}\frac{\mu^2(d)}{\varphi(d)}[x/d]\leq x\sum_{d\leq x}\frac{\mu^2(d)}{d\varphi(d)}=x\sum_{d\leq x}f(d)=O(x)$，即 $\sum_{d>x}f(d)=\lim_{N\to\infty}\sum_{x<d\leq N}\frac{b(d)}{d^2}=\lim_{N\to\infty}\int_x^N\frac1{\xi^2}d\sum_{x<d\leq\xi}b(d)=\lim_{N\to\infty}[O(1/N)-2\int_x^N\xi^{-3}\sum_{x<d\leq\xi}b(d)d\xi]=2\int_x^\infty\xi^{-3}O(\xi)d\xi=O(1/x)$。\textcircled{\scriptsize 4} $\sum_{d>x}f(d)\log d=O(\log x/x)$。pf: LHS$=\sum_{d>x}b(d)\log d\,d^{-2}=\lim_{N\to\infty}\sum_{x<d\leq N}b(d)\frac{\log d}{d^2}=\lim_{N\to\infty}\int_x^N\frac{\log\xi}{\xi^2}d\sum_{x<d\leq\xi}b(d)=O(\log N/N)-\int_x^N\frac{1-\log\xi}{\xi^3}\sum_{x<d<\xi}b(d)d\xi=2\int_x^\infty\frac{\log\xi-1}{\xi^3}O(\xi)d\xi=O(\log x/x)$ 注意 $\log x+1/x$ 导数是$-\log x/x^2$, 故得证\end{solution}
+
+\begin{sheetexercise}{3}
+对 $x>3$，$\sum_{1<n\leq x}\frac1{n\log n}=\log\log x+C_1+O(1/(x\log x))$.
+\end{sheetexercise}
+\begin{solution}pf: Euler--Maclaurin，LHS$=\int_2^x\frac{d\xi}{\xi\log\xi}+\int_2^x(\{\xi\}-\frac12)(\frac1{\xi\log\xi})'d\xi+(\{x\}-\frac12)\frac1{x\log x}-(\{2\}-\frac12)\frac1{2\log2}=\{\log\log x\}-\{\log\log2+\frac1{4\log2}+\int_2^\infty[\{\xi\}-\frac12](\frac1{\xi\log\xi})'d\xi\}-\{\int_x^\infty[\{\xi\}-\frac12](\frac1{\xi\log\xi})'d\xi+(\{x\}-\frac12)\frac1{x\log x}\}$，即为所求。\end{solution}
+
+\begin{sheetexercise}{4}
+$r_2(n):=\#\{(a,b)\in\mathbb Z^2\mid a^2+b^2=n\}$，求证 $\sum_{n\leq x}r_2(n)=\pi x+O(\sqrt x)$.
+\end{sheetexercise}
+\begin{solution}pf: $\sum_{n\leq x}r_2(n)=4\sum_{0\leq a\leq\sqrt x}\sum_{0<b<\sqrt{x-a^2}}1+1=4\sum_{0\leq a\leq\sqrt x}[\sqrt{x-a^2}]+1=4\sum_{0\leq a\leq\sqrt x}\sqrt{x-a^2}+O(\sqrt x)$。关于$a$ 单调，$\sum_{0\leq a\leq\sqrt x}\sqrt{x-a^2}=\int_0^{\sqrt x}\sqrt{x-a^2}\,da+O(\sqrt x)=-\frac{x\arccos(a/\sqrt x)}2\big|_0^{\sqrt x}+\frac{a\sqrt{x-a^2}}2\big|_0^{\sqrt x}+O(\sqrt x)=\frac\pi4x+O(\sqrt x)$，且 $a=0$ 值也为 $O(\sqrt x)$。\end{solution}
+
+\begin{sheetexercise}{5}
+$Q_2(x)=\#\{n\leq x\mid n\text{ 无平方因子}\}$，则 $Q_2(x)=C_2x+O(\sqrt x)$（$C_2=6/\pi^2$）.
+\end{sheetexercise}
+\begin{solution}pf: $Q_2(x)=\sum_{n\leq x}\mu^2(n)=\sum_{n\leq x}\sum_{d^2\mid n}\mu(d)=\sum_{d\leq\sqrt x}[x/d^2]\mu(d)=\sum_{d\leq\sqrt x}\frac{x\mu(d)}{d^2}+O(\sqrt x)=x\sum_{d\geq1}\frac{\mu(d)}{d^2}+x\sum_{d>\sqrt x}\frac{\mu(d)}{d^2}+O(\sqrt x)=\frac1{\zeta(2)}x+O(x\int_{\sqrt x}^\infty\xi^{-2}d\xi)+O(\sqrt x)=\frac1{\zeta(2)}x+O(\sqrt x)$。\end{solution}
+
+\begin{sheetexercise}{6}
+$\forall\varepsilon>0,\exists C_\varepsilon>0,\tau(n)<C_\varepsilon n^\varepsilon$.
+\end{sheetexercise}
+\begin{solution}pf: 选 $P$ s.t. $\forall p>P$，$\forall\alpha\in\mathbb N_{\geq1}$，$\alpha+1<p^{\varepsilon\alpha}$，再取 $C_\varepsilon=\prod_{p<P}\sup_{\alpha\geq1}(\alpha+1)/p^{\alpha\varepsilon}<\infty$，则 $\tau(\prod p_i^{\alpha_i})=\prod(\alpha_i+1)\leq C_\varepsilon\prod p_i^{\varepsilon\alpha_i}$。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 3}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+若 $\sum_{p\leq x}f(p)\log p=(ax+b)\log x+cx+O(1)$（$x\geq2$），则 $\exists B=B(f)$, $\sum_{p\leq x}f(p)=ax+(a+c)(\frac{x}{\log x}+\int_2^x\frac{\dd t}{\log^2t})+b\log\log x+B+O(\frac1{\log x})$.
+\end{sheetexercise}
+\begin{solution}pf: $A(x):=\sum_{p\leq x}f(p)\log p$, LHS$=\sum_{2\leq n\leq x}f(n)\log n\,\delta_p(n)\frac1{\log n}\stackrel{\mathrm{Abel}}{=}\frac{A(x)}{\log x}+\int_{3/2}^xA(\xi)\frac1{\xi\log^2\xi}\dd\xi=[\text{条件}]\ ax+b+c\frac{x}{\log x}+O(\frac1{\log x})+\int_{3/2}^x(\frac{a\xi+b}{\xi\log\xi}+\frac c{\log^2\xi}+\frac{E(\xi)}{\xi\log^2\xi})\dd\xi$，其中 $E(\xi)\ll1$，注意 $\frac1{x\log x}=(\log\log x)'$ 且 $a\int_{3/2}^x\frac{\dd\xi}{\log\xi}=a\frac{\xi}{\log\xi}\big|_{3/2}^x+a\int_{3/2}^x\frac{\dd\xi}{\log^2\xi}$，积分下限可调整后放入 $B$ 中。\end{solution}
+
+\begin{sheetexercise}{2}
+证明对 $n\geq16$，$\sum_{p\mid n}\frac1p\ll\log\log\log n$.
+\end{sheetexercise}
+\begin{solution}pf: $\sum_{p\mid n}\frac1p=\sum_{\substack{p\mid n, \, p \leq\log n}}\frac1p+\sum_{\substack{p\mid n, \, p>\log n}}\frac1p\ll(\text{by Mertens})\ \log\log\log n+\sum_{\substack{p>\log n\\p\mid n}}\frac1p$. 由于 $(\log n)^{\log n/\log\log n}=n$  从而$ >\log n$ 素数个数不超过 $\frac{\log n}{\log\log n}$，于是 $\sum_{\substack{p>\log n,\, p\mid n}}\frac1p\leq\frac1{\log n}\frac{\log n}{\log\log n}\ll\log\log\log n$。\end{solution}
+
+\begin{sheetexercise}{3}
+证明 $\sum_p\frac1{p(\log\log p)^\alpha}$，$\alpha>1$ 收敛，$\alpha\leq1$ 发散.
+\end{sheetexercise}
+\begin{solution}pf: 忽略前面的项，$=\lim_{N\to\infty}S_N$，其中 $S_N=\sum_{5< n\leq N}\delta_p(n)\frac1n\frac1{(\log\log n)^\alpha}=\sum_{5< p\leq N}\frac1p\frac1{(\log\log N)^\alpha}+\int_5^N(\sum_{5< p\leq\xi}\frac1p)\frac{\alpha}{(\log\log\xi)^{\alpha+1}}\frac{\dd\xi}{\xi\log\xi}$，而 $\sum_{p\leq x}\frac1p\sim\log\log x$ 且 $\int_5^\infty\frac{\dd x}{x\log x(\log\log x)^\alpha}$ 在 $\alpha>1$ 收敛，$\alpha\leq1$ 发散（用换元 $u=\log\log x$，$\frac{\dd x}{x\log x}=\dd u$）即证。\end{solution}
+
+\begin{sheetexercise}{4}
+设 $S(x)=\#\{n\leq x\mid p\mid n\Rightarrow p\leq\sqrt n\}$，证明 $S(x)=(1-\log2)x+O(x/\log x)$.
+\end{sheetexercise}
+\begin{solution}pf: $S(x)=[x]-\sum_{2\leq p\leq x}\sum_{\substack{m\leq x/p, \,m<p}}1=[x]-\sum_{2\leq p\leq\sqrt{x}}\sum_{m<p}1-\sum_{\sqrt{x}<p\leq x}\sum_{m\leq x/p}1=[x]-\sum_{2\leq p\leq\sqrt{x}}(p-1)-\sum_{\sqrt{x}<p\leq x}[\frac xp]$，而 $[x]=x+O(1)$，$\sum_{2\leq p\leq\sqrt{x}}(p-1)\leq\sqrt{x}\pi(\sqrt{x})=O(x/\log x)$，$\sum_{\sqrt{x}<p\leq x}[\frac xp]=x\sum_{\sqrt{x}<p\leq x}\frac1p+O(\pi(x))=x[(\log\log x+C+O(\frac1{\log x}))-(\log\log\sqrt{x}+C+O(\frac1{\log\sqrt{x}}))]+O(x/\log x)=x\log2+O(x/\log x)$，代回即得。\end{solution}
+
+\begin{sheetexercise}{5}
+若 $\sum_{n\leq x}\frac{\mu(n)}n=o(1)$，则 PNT.
+\end{sheetexercise}
+\begin{solution}pf: $\sum_{1/2<n\leq x}\mu(n)=\sum_{1/2<n\leq x}\frac{\mu(n)}n\,n\stackrel{\mathrm{Abel}}{=}x\sum_{1/2<n\leq x}\frac{\mu(n)}n-\int_{1/2}^x\sum_{1/2<n\leq\xi}\frac{\mu(n)}n\dd\xi=o(x)+\int_{1/2}^{\sqrt{x}}M\dd\xi+\int_{\sqrt{x}}^xo(1)\dd\xi=o(x)\Rightarrow\mathrm{PNT}$。\end{solution}
+
+\begin{sheetexercise}{6}
+$L(N)=\operatorname{lcm}\{1,2,\ldots,N\}$，求证 PNT$\Leftrightarrow\lim_{N\to\infty}L(N)^{1/N}=e$.
+\end{sheetexercise}
+\begin{solution}pf: $\log L(N)=\sum_{p^\alpha\leq N}\log p=\psi(N)$，故 $L(N)^{1/N}\to e$ iff $\frac{\psi(N)}N\to1$ iff $\psi(x)\sim x$ iff PNT。\end{solution}
+
+\begin{sheetexercise}{7}
+$\forall n>1$，$\exists p$ s.t. $p\Vert n!$.
+\end{sheetexercise}
+\begin{solution}pf: Bertrand's 假设，取 $\frac n2<p<n$，则 $2p>n$，之后显然。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 4}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+$\mathrm{TFAE}$: (a) $f(n)\ll n^A$（$A>0$）；(b) $\sigma_a<+\infty$.
+\end{sheetexercise}
+\begin{solution}pf: \textcircled{\scriptsize 1} (a) 蕴含 $|f(n)|\leq Cn^A$，故 $|L_f(s)|\leq\sum_{n\geq1}\frac C{n^{\sigma-A}}$，即 $\operatorname{Re}(s)>A+1$ 时 $L_f(s)$ 绝对收敛，那 $\sigma_a<+\infty$。\textcircled{\scriptsize 2} (b) 蕴含 $\exists c>0$，$\sum_{n\geq1}\frac{f(n)}{n^c}$ 绝对收敛，那 $\lim_{n\to\infty}\frac{|f(n)|}{n^c}=0$，则 $f(n)\ll n^c$。\end{solution}
+
+\begin{sheetexercise}{2}
+(a) 找例子 s.t. $\sigma_a=\sigma_c+1$；(b) 任给实数 $\sigma_a,\sigma_c$，$\sigma_a-1\leq\sigma_c\leq\sigma_a$，求 $f$ 使 $L_f$ 对应参数为 $\sigma_a,\sigma_c$.
+\end{sheetexercise}
+\begin{solution}对 (a) $f(n)=(-1)^n$ 有 $\sigma_c=0,\sigma_a=1$；(b) $f(n)=(-1)^n n^{\sigma_a-1}+1_{n=2^k}n^{\sigma_c}$，前一个对应 $L$ 级数参数为 $\sigma_a-1,\sigma_a$，后一个为 $\sigma_c$。\end{solution}
+
+\begin{sheetexercise}{3}
+找 $F(s)=\sum_{m_1,m_2,m_3\geq1}(m_1+m_2+m_3)^{-s}$ 的绝对收敛横坐标，用 $\zeta(s)$ 表示.
+\end{sheetexercise}
+\begin{solution}$F(s)=\sum_{n\geq1}\sum_{m_1+m_2+m_3=n}n^{-s}=\sum_{n\geq3}\binom{n-1}2n^{-s}$，$\binom{n-1}2\asymp n^2/2$，故 $\sigma_a=3$。$F(s)=\sum_{n\geq3}\frac{n^2-3n+2}2n^{-s}=\frac12(\zeta(s-2)-3\zeta(s-1)+2\zeta(s))$（$n=0,1,2$ 项抵消）。\end{solution}
+
+\begin{sheetexercise}{4}
+$\chi(n)$ 定义为 $\chi(1)=1$，$\chi(p_1^{\alpha_1}\cdots p_k^{\alpha_k})=\alpha_1\alpha_2\cdots\alpha_k$，计算 (a) $\sum_{n\geq1}\frac{\tau(n^2)}{n^s}$；(b) $\sum_{n\geq1}\frac{2^{\omega(n)}}{n^s}$；(c) $\sum_{n\geq1}\frac{(-1)^{\Omega(n)}}{n^s}$；(d) $\sum_{n\geq1}\frac{3^{\omega(n)}\chi(n)}{n^s}$.
+\end{sheetexercise}
+\begin{solution}pf: (a) $\tau(n^2)$ 可乘，用 Euler 乘积，$\sum_{n\geq1}\frac{\tau(n^2)}{n^s}=\prod_p(1+\sum_{\nu\geq1}\frac{\tau(p^{2\nu})}{p^{\nu s}})=\prod_p(1+\sum_{\nu\geq1}\frac{2\nu+1}{p^{\nu s}})=\prod_p((1-p^{-s})^{-1}(1-p^{-s})^{-1}(1+p^{-s}))=\prod_p(1-p^{-s})^{-3}(1-p^{-2s})=\frac{\zeta(s)^3}{\zeta(2s)}$。(b) $2^{\omega(n)}$ 可乘，原式 $=\prod_p(1+\sum_{\nu\geq1}\frac2{p^{\nu s}})=\prod_p(1-p^{-2s})\prod_p(1-p^{-s})^{-2}=\frac{\zeta(s)^2}{\zeta(2s)}$。(c) 显然 $=\frac{\zeta(2s)}{\zeta(s)}$（是 Liouville 函数）。(d) 可乘，$=\prod_p(1+\sum_{\nu\geq1}\frac{3\nu}{p^{\nu s}})=(\text{错位相减})=\prod_p(1+\frac{3p^s}{(p^s-1)^2})=\prod_p(1-p^{-3s})(1-p^{-s})^{-3}=\frac{\zeta(s)^3}{\zeta(3s)}$。\end{solution}
+
+\endgroup
+
+\begin{sheetexercise}{5}
+对 $c>0$, $\int_{(c)}=\int_{c-i\infty}^{c+i\infty}$. 证明 $(2\pi i)^{-1}\int_{(2)}y^s s^{-2}\dd s=0$ if $0<y\leq1$， $=\log y$ if $y\geq1$; 用包含$\Lambda$的和式表示 $(2\pi i)^{-1}\int_{(2)}y^s s^{-2}(-\zeta'/\zeta)(s)\dd s$ 
+\end{sheetexercise}
+\begin{solution}
+模仿讲义围道积分，模仿讲义perron公式可得$(2\pi i)^{-1}\int_{(2)}y^s s^{-2}(-\zeta'/\zeta)(s)\dd s=\sum_{n\leq y} \Lambda(n)\log (y/n)$ 
+\end{solution}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{6}
+$\operatorname{Re}(s)>1$，$\frac1{\zeta(s)}=s\int_1^\infty\frac{M(x)}{x^{s+1}}\dd x$，$-\frac{\zeta'(s)}{\zeta(s)}=s\int_1^\infty\frac{\psi(x)}{x^{s+1}}\dd x$，其中 $M(x)=\sum_{n\leq x}\mu(n)$，$\psi(x)=\sum_{n\leq x}\Lambda(n)$.
+\end{sheetexercise}
+\begin{solution}pf: (a) $s\int_1^N\frac{M(x)}{x^{s+1}}\dd x=s\sum_{n=1}^N\mu(n)\int_n^N\frac1{x^{s+1}}\dd x=-[\sum_{n=1}^N\frac{\mu(n)}{N^s}-\sum_{n=1}^N\frac{\mu(n)}{n^s}]$  （取$N\to\infty$）= $\sum_{n=1}^\infty\frac{\mu(n)}{n^s}=\frac1{\zeta(s)}$。(b) $s\int_1^N\frac{\psi(x)}{x^{s+1}}\dd x=s\sum_{n=1}^N\Lambda(n)\int_n^N\frac1{x^{s+1}}\dd x=-[\sum_{n=1}^N\frac{\Lambda(n)}{N^s}-\sum_{n=1}^N\frac{\Lambda(n)}{n^s}] \to \sum_{n=1}^\infty\frac{\Lambda(n)}{n^s}=-\frac{\zeta'(s)}{\zeta(s)}$。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 5}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+$k=2^\alpha$，$\forall a$ 奇，$a\equiv(-1)^{r_{-1}(a)}5^{r_0(a)}\pmod{2^\alpha}$，对 $\alpha\geq2$，(a) $r_{-1}(a)\equiv\frac{a-1}2\pmod2$；(b) $a\equiv a'\pmod{2^\alpha}$ iff $r_{-1}(a')\equiv r_{-1}(a)\pmod2$，$r_0(a')\equiv r_0(a)\pmod{2^{\alpha-2}}$.
+\end{sheetexercise}
+\begin{solution}pf: 显，见讲义。\end{solution}
+
+\begin{sheetexercise}{2}
+$\varphi^\ast(k)$ 是模 $k$ 本原特征个数。求证 $\varphi^\ast(k)=\sum_{d\mid k}\mu(d)\varphi(k/d)=k\prod_{p\Vert k}(1-\frac2p)\prod_{p^2\mid k}(1-\frac1p)^2$.
+\end{sheetexercise}
+\begin{solution}pf: 每个模 $k$ 特征唯一由一个模 $d\mid k$ 本原特征诱导，故 $\varphi(k)=\sum_{d\mid k}\varphi^\ast(d)\Rightarrow\varphi^\ast(k)=\sum_{d\mid k}\mu(d)\varphi(k/d)$，第二个等式由可乘性，只需化 $k=p^\alpha$，$\sum_{d\mid p^\alpha}\mu(d)\varphi(p^\alpha/d)=\varphi(p^\alpha)-\varphi(p^{\alpha-1})$\end{solution}
+
+\begin{sheetexercise}{3}
+$\chi$ 模 $k$ 的 D 特征，$k'\mid k$，TFAE: (a) $\chi$ 由 $k'$ 本原特征诱导；(b) 若 $(n_i,k)=1$ 且 $n_1\equiv n_2\pmod{k'}$，则 $\chi(n_1)=\chi(n_2)$；(c) $\chi(n_1)=1$，$\forall n_1\equiv1\pmod{k'}$，$(n_1,k)=1$.
+\end{sheetexercise}
+\begin{solution}pf: 讲义 6.3.2。\end{solution}
+
+\begin{sheetexercise}{4}
+$k=2^\alpha$，$\alpha\geq3$，$\chi(n,k,m_{-1},m_0)=(-1)^{m_{-1}r_{-1}(n)}e(\frac{m_0r_0(n)}{2^{\alpha-2}})$（$(n,2)=1$），本原 iff $(m_0,2)=1$.
+\end{sheetexercise}
+\begin{solution}pf: 见 6.3.6。\end{solution}
+
+\begin{sheetexercise}{5}
+模 $4$ 非主特征本原：$\chi_4(n)=(-1)^{\frac{n-1}2}$（$(n,2)=1$）。模 $8$ 本原实特征只有，$\chi_8(n)=(-1)^{\frac{n^2-1}8}$（$(n,2)=1$，$\chi_4(n)\chi_8(n)=(-1)^{\frac{(n-1)(n+5)}8}$（$(n,2)=1$）。
+\end{sheetexercise}
+\begin{solution}pf: 直接计算。\end{solution}
+
+\begin{sheetexercise}{6}
+$f:\mathbb Z/q\mathbb Z\to\mathbb C$，$\widehat f:\mathbb Z/q\mathbb Z\to\mathbb C$，$\widehat f(\alpha):=\frac1{\sqrt q}\sum_{a\bmod q}f(a)e^{2\pi i\alpha a/q}$。(a) $f,g:\mathbb Z/q\mathbb Z\to\mathbb C$，证明 $\sum_{a\bmod q}f(a)\overline{g(a)}=\sum_{\alpha\bmod q}\widehat f(\alpha)\overline{\widehat g(\alpha)}$；(b) $\sum_{a\bmod q}|f(a)|^2=\sum_{a\bmod q}|\widehat f(a)|^2$；(c) $I=[A,B]\subset[0,q]$，计算 $\widehat{\one_I}(\alpha)$；(d) 求证 $\sum_{\alpha\bmod q}|\widehat{\one_I}(\alpha)|\ll\sqrt q\log q$；(e) 证明对本原 D-特征 $\chi\bmod q$，$\forall N\geq1$，$\sum_{n=1}^N\chi(n)\ll\sqrt q\log q$.
+\end{sheetexercise}
+\begin{solution}(a) pf: 换序求和，显，（用加法特征正交性。）(b) pf: (a)中取 $f=g$。(c) pf: $\widehat{\one_I}(\alpha)=\frac1{\sqrt q}\sum_{A\leq a\leq B}e^{2\pi i\alpha a/q}$（等比级数）。不妨设 $A,B\in\mathbb Z$，（否则考虑 $[A]+1$，$[B]$；$\widehat{\one_I}(0)=\frac1{\sqrt q}(B-A+1)$，$\widehat{\one_I}(\alpha)=\frac1{\sqrt q}\frac{e^{2\pi i\alpha A/q}(1-e^{2\pi i\alpha(B-A+1)/q})}{1-e^{2\pi i\alpha/q}}$。(d) pf: 其中 $L=\widehat B-\widehat A+1$，LHS$=\frac1{\sqrt q}\sum_{\alpha\bmod q}\frac{|1-e^{2\pi i\alpha L/q}|}{|1-e^{2\pi i\alpha/q}|}\leq\sum_\alpha\frac1{\sqrt q}\frac2{|1-e^{2\pi i\alpha/q}|}=\frac1{\sqrt q}\sum_{\alpha\bmod q}\frac1{|\sin(\pi\alpha/q)|}\ll\frac2{\sqrt q}\sum_{\alpha=1}^{(q+1)/2}\frac{\pi}{2\alpha\pi/q}\ll\sqrt q\log q$，（利用 $x\in[0,\pi/2]$，$\sin x>\frac2\pi x$ 和 $\sin x=\sin(\pi-x)$。）(e) pf: 见讲义 thm 6.4.9。\end{solution}
+
+\begin{sheetexercise}{7}
+$p$ 素数，$(\frac np)$ 是 D特征模 $p$，求证模 $p$ 的最小非二次剩余大小为 $O(\sqrt p\log p)$.
+\end{sheetexercise}
+\begin{solution}pf: $\chi(n):=(\frac np)$ 不是模 $1$ 本原特征，从而是模 $p$ 本原特征。若 $N$ 是最小的模 $p$ 非二次剩余，则 $N-1=\sum_{n=1}^{N-1}\chi(n)\ll\sqrt p\log p$，故 $N\ll\sqrt p\log p$。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 6}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+有限 Abel 群 $G$：$G\simeq \widehat{G}$.
+\end{sheetexercise}
+\begin{solution}pf: 见讲义 6.1 节。\end{solution}
+
+\begin{sheetexercise}{2}
+(a) $\operatorname{Re}(s)>1$，$\zeta(s)=\frac1{s-1}+1-s\int_1^\infty\frac{\{\xi\}}{\xi^{s+1}}\dd\xi$（给出 $\operatorname{Re}(s)>0$ 的亚纯延拓）；(b) 洛朗展开 $\zeta(s)=\frac1{s-1}+\gamma+O(|s-1|)$（$s\to1$），$\gamma=\lim_{n\to\infty}(\sum_{k=1}^n\frac1k-\log n)$.
+\end{sheetexercise}
+\begin{solution}pf: (a) Euler-Maclaurin（讲义 2.2.3），$\zeta(s)=\lim_{N\to\infty}(1+\sum_{1<n\leq N}\frac1{n^s})=1+\int_1^\infty\frac1{x^s}\dd x-\int_1^\infty(\{x\}-\frac12)\frac{s}{x^{s+1}}\dd x+\lim_{N\to\infty}\frac{\{N\}-1/2}{N^s}-\frac{\{1\}-1/2}{1^s}=1+\frac1{s-1}-s\int_1^\infty\frac{\{\xi\}}{\xi^{s+1}}\dd\xi$。(b) $\zeta(s)=\frac1{s-1}+(1-\int_1^\infty\frac{\{\xi\}}{\xi^2}\dd\xi)+(\int_1^\infty\frac{\{\xi\}}{\xi^2}\dd\xi-s\int_1^\infty\frac{\{\xi\}}{\xi^{s+1}}\dd\xi)$，由讲义 2.2.4，$\gamma=1-\int_1^\infty\frac{\{\xi\}}{\xi^2}\dd\xi$，而且 $\int_1^\infty\frac{\{\xi\}}{\xi^2}\dd\xi-s\int_1^\infty\frac{\{\xi\}}{\xi^{s+1}}\dd\xi=\int_1^\infty(\frac{\{\xi\}}{\xi^2}-\frac{\{\xi\}}{\xi^{s+1}})\dd\xi-(s-1)\int_1^\infty\frac{\{\xi\}}{\xi^{s+1}}\dd\xi=\int_1^\infty\frac{\{\xi\}}{\xi^{s+1}}(\xi^{s-1}-1)\dd\xi+O(s-1)=\int_1^\infty O(\frac1{\xi^{1+\delta}})O((s-1)\log\xi)\dd\xi=O(s-1)$（$s\to1$）。\end{solution}
+
+\endgroup
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{3}
+$\prod_{p\leq x}(1-\frac1p)^{-1}=C\log x+O(1)$，求证 $C=e^\gamma$.
+\end{sheetexercise}
+\begin{solution}pf: $P(x)=\prod_{p\leq x}(1-\frac1p)^{-1}$，$L=\log x$。Ex 6-2 (b) $\Rightarrow \zeta(1+\frac1L)=L+O(1)$，而且 $\log\zeta(1+\frac1L)=\sum_p-\log(1-p^{-1-1/L})=\sum_p\sum_{k\geq1}\frac{p^{-k(1+1/L)}}k=\sum_p-\log(1-\frac1p)p^{-1/L}+o(1)$（$x\to\infty$）。由 Abel，$\sum_p-\log(1-\frac1p)p^{-1/L}=\int_{1-0}^{\infty}y^{-1/L}\dd\sum_{2\leq p\leq y}-\log(1-\frac1p)=\frac1L\int_2^\infty y^{-1/L-1}\sum_{2\leq p\leq y}-\log(1-\frac1p)\dd y$，故 $\log L+o(1)=\log\zeta(1+\frac1L)=\frac1L\int_2^\infty y^{-1/L-1}\log\prod_{p\leq y}(1-\frac1p)^{-1}\dd y+o(1)$。而 $C\log y+O(1)=C\log y(1+O(\frac1{\log y}))$，故上式 $=\frac1L\int_2^\infty y^{-1/L-1}[\log C+\log\log y+O(\frac1{\log y})]\dd y+o(1)=\log L+\log C-\gamma+o(1)$（换元 $\frac{\dd y}y=\dd(\log y)$），所以 $\log C=\gamma$，$C=e^\gamma$。\end{solution}
+
+\endgroup
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{4}
+$\chi\bmod q$，$\chi\ne\chi_0$，$x\geq2$，证明 (a) $\sum_{n\leq x}\frac{\chi(n)\log n}{n}=-L'(1,\chi)+O_\chi(\frac{\log x}{x})$；(b) $\sum_{n\leq x}\frac{\chi(n)\log n}{n}=L(1,\chi)\sum_{m\leq x}\frac{\chi(m)\Lambda(m)}m+O_\chi(\frac1x\sum_{n\leq x}\Lambda(n))$，从而 $\sum_{n\leq x}\frac{\chi(n)\Lambda(n)}n=O_\chi(1)$；(c) $\sum_{p\leq x}\frac{\chi(p)\log p}{p}=O_\chi(1)$；(d) $\sum_{p\leq x}\frac{\chi(p)}p=b(\chi)+O_\chi(\frac1{\log x})$，其中 $b(\chi)=\log L(1,\chi)-\sum_p\sum_{k\geq2}\frac{\chi(p^k)}{kp^k}$.
+\end{sheetexercise}
+\begin{solution}pf: (a) $\sum_{n=1}^N\frac{\chi(n)}{n^s}=\frac{S(N)}{N^s}+s\int_1^N\frac{S(y)}{y^{s+1}}\dd y$，$S(y)=\sum_{n\leq y}\chi(n)$ 有界，故 $L_\chi$ 的 $\sigma_c\leq0$。讲义 4.10 $\Rightarrow -L'(1,\chi)=\sum_{n\geq1}\frac{\chi(n)\log n}{n}=\sum_{n\leq x}\frac{\chi(n)\log n}{n}+\sum_{n>x}\frac{\chi(n)\log n}{n}$，而 $\sum_{n>x}\frac{\log n}{n}\chi(n)\overset{\mathrm{Abel}}{=}\lim_{N\to\infty}[\sum_{x<n\leq N}\chi(n)\frac{\log N}{N}-\int_x^N\sum_{x<n\leq\xi}\chi(n)(\frac{\log\xi}{\xi})'\dd\xi]=O_\chi(\frac{\log x}{x})$。(b) $\log=\Lambda\ast1$，$\sum_{n\leq x}\frac{\chi(n)\log n}{n}=\sum_{n\leq x}\sum_{d\mid n}\frac{\chi(d)\Lambda(d)}d\frac{\chi(n/d)}{n/d}=\sum_{d\leq x}\frac{\chi(d)\Lambda(d)}d\sum_{n\leq x/d}\frac{\chi(n)}n=L(1,\chi)\sum_{d\leq x}\frac{\chi(d)\Lambda(d)}d-\sum_{d\leq x}\frac{\chi(d)\Lambda(d)}d\sum_{m>x/d}\frac{\chi(m)}m$，且 $\sum_{d\leq x}\frac{\chi(d)\Lambda(d)}d\sum_{m>x/d}\frac{\chi(m)}m=(dm=e)\sum_{d\leq x}\Lambda(d)\sum_{\substack{e>x\\ d\mid e}}\frac{\chi(e)}e$，Abel 求和 $\Rightarrow O_\chi(\frac1x\sum_{n\leq x}\Lambda(n))$。(c) $\sum_{p\leq x}\frac{\chi(p)\log p}{p}=\sum_{n\leq x}\frac{\chi(n)\Lambda(n)}n-\sum_{\substack{p^\ell\leq x\\ \ell\geq2}}\frac{\chi(p)^\ell\log p}{p^\ell}$，由 (b) 第一项有界，第二项 $\leq\sum_{p\leq\sqrt{x}}\log p\sum_{\ell\geq2}\frac1{p^\ell}=\sum_{p\leq\sqrt{x}}\frac{\log p}{p(p-1)}=O(\sum\frac1{n^{1.5}})$ 有界。(d) $\sum_p\sum_{k\geq1}\frac{\chi(p^k)}{kp^k}=-\sum_p\log(1-\frac{\chi(p)}p)=\log L(1,\chi)$，故 $\sum_p\frac{\chi(p)}p=\log L(1,\chi)-\sum_p\sum_{k\geq2}\frac{\chi(p^k)}{kp^k}$。而 $\sum_{p>x}\frac{\chi(p)}p=\sum_{p>x}\frac{\chi(p)\log p}{p}\frac1{\log p}\overset{\mathrm{Abel}}{=}\sum_{x<p\leq N}\frac{\chi(p)\log p}{p}\frac1{\log N}-\int_x^N(\frac1{\log\xi})'\sum_{x<p\leq\xi}\frac{\chi(p)\log p}{p}\dd\xi=O_\chi(\frac1{\log x})$，（由 (c) ）\end{solution}
+
+\endgroup
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{5}
+$|\arg s|\leq\pi-\delta$，求证 $\Gamma'(s)/\Gamma(s)=\log s-\frac1{2s}+O_\delta(|s|^{-2})$.
+\end{sheetexercise}
+\begin{solution}pf: $F(s)\triangleq \log\Gamma(s)-(s-\frac12)\log s+s-\frac{\log(2\pi)}2$。由 Stirling，$F(s)=O_\delta(|s|^{-1})$（$s\to\infty$，$|\arg s|\leq\pi-\frac\delta2$）。$|s|$ 充分大时，$\exists C_\delta>0$，$D(s,C_\delta|s|)\subset\{|\arg z|\leq\pi-\frac\delta2\}$，故 Cauchy 积分公式 $\Rightarrow |F'(s)|\leq \frac1{C_\delta|s|}\sup_{|z-s|=C_\delta|s|}|F(z)|=O_\delta(\frac1{|s|^2})$。故 $F'(s)=O_\delta(\frac1{|s|^2})$，即为所求。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 7}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.04\baselineskip}
+}
+
+\noindent\textbf{引理.}\enspace $f$ 整函数，非多项式，$f(z)=\sum_{n=0}^{\infty}a_nz^n$，则 $f$ 阶为 $\rho(f)=\limsup_{n\to\infty}\frac{n\log n}{-\log|a_n|}$（$a_n=0$ 时对应项视为 $0$）。
+\begin{solution}pf: Cauchy 积分公式 $\Rightarrow |a_n|\leq \sup_{|z|=r}|f(z)|\frac1{r^n}$。若 $\sup_{|z|=r}|f(z)|\ll\exp(r^{\rho+\epsilon})$，取 $r\asymp n^{1/(\rho+\epsilon)}$，则 $-\log|a_n|\gg\frac{n}{\rho+\epsilon}\log n+O(n)$，故 $\limsup_{n\to\infty}\frac{n\log n}{-\log|a_n|}\leq\rho+\epsilon$。另一方面，若 $-\log|a_n|\gg\frac{n\log n}{\mu}$，则 $|a_n|r^n\leq\exp(n\log r-\frac{n\log n}{\mu})$，$n\sim r^\mu\Rightarrow\sup_{|z|=r}f(z)\leq\exp(Cr^\mu)$（$r$ 充分大），$\Rightarrow\rho(f)\leq\mu$，$\mu\to\limsup_{n\to\infty}\frac{n\log n}{-\log|a_n|}$。\end{solution}
+
+\begin{sheetexercise}{1}
+$\forall\alpha>0$，$f_\alpha(z)=\sum_{j=1}^{\infty}\frac{z^j}{\Gamma(1+j/\alpha)}$ 为 $\alpha$ 阶整函数.
+\end{sheetexercise}
+\begin{solution}pf: $a_j\triangleq\Gamma(1+j/\alpha)^{-1}$，Stirling $\Rightarrow-\frac1j\log|a_j|=\frac1\alpha(\log j+O(1))\to+\infty$，故收敛半径 $R=\frac1{\limsup_{j\to\infty}|a_j|^{1/j}}=+\infty$，故整。$\limsup_{n\to\infty}\frac{n\log n}{-\log|a_n|}=\alpha$，故阶为 $\alpha$。\end{solution}
+
+\endgroup
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.04\baselineskip}
+}
+
+\begin{sheetexercise}{2}
+$f(z)\triangleq\sum_{n=0}^{\infty}e^{-n^2}z^n$ 是非多项式 $0$ 阶整函数.
+\end{sheetexercise}
+\begin{solution}pf: 因为 $\limsup_{n\to\infty}\frac{n\log n}{-\log|e^{-n^2}|}=0$。\end{solution}
+
+\begin{sheetexercise}{3}
+整函数 $f$ 阶为 $\alpha$，$f(0)\ne0$，$\forall\epsilon>0$，$\sum_{\rho,\,f(\rho)=0}\frac1{|\rho|^{\alpha+\epsilon}}<\infty$（计重数）.
+\end{sheetexercise}
+\begin{solution}pf: Thm 10.2.6 说 $\sum_{|\rho|<R}1\ll R^{\alpha+\delta}$。设零点最小模长为 $r$，则 $\sum_{\rho}\frac1{|\rho|^{\alpha+\epsilon}}=\sum_{n>r}\sum_{2^n<|\rho|\leq2^{n+1}}\frac1{|\rho|^{\alpha+\epsilon}}\ll\sum_{n>r}\frac{\sum_{|\rho|\leq2^{n+1}}1}{2^{n(\alpha+\epsilon)}}\leq\sum_{n>r}\frac{2^{(n+1)(\alpha+\delta)}}{2^{n(\alpha+\epsilon)}}=\sum_{n>r}2^{\alpha+\delta-n(\epsilon-\delta)}<\infty$（等比级数，一开始取 $\delta<\epsilon$）。\end{solution}
+
+\endgroup
+
+\begin{sheetexercise}{4}
+Hadamard $\zeta^*(s)=e^{Bs}\prod_\rho(1-\frac{s}{\rho})e^{s/\rho}$ 中 $B=-\sum_\rho\frac1\rho=-2\sum_{\gamma>0}\frac{\beta}{\beta^2+\gamma^2}$，其中 $\rho=\beta+i\gamma$，$\sum_\rho\frac1\rho\triangleq\lim_{x\to\infty}\sum_{|\rho|<x}\frac1\rho$.
+\end{sheetexercise}
+\begin{solution}pf: $\frac{\zeta^{*'}(s)}{\zeta^*(s)}=B+\sum_\rho(\frac1{s-\rho}+\frac1\rho)$。$s\to0\Rightarrow\frac{\zeta^{*'}}{\zeta^*}(0)=B$。由 $\zeta^*(s)=\zeta^*(1-s)$，$\frac{\zeta^{*'}}{\zeta^*}(0)=-\frac{\zeta^{*'}}{\zeta^*}(1)=-[B+\sum_\rho(\frac1{1-\rho}+\frac1\rho)]$。由 $\rho$ 零点，$1-\rho$ 也为 $\zeta^*$ 零点，故对称主值下 $\sum_\rho\frac1{1-\rho}=\sum_\rho\frac1\rho$，得 $B=-\sum_\rho\frac1\rho$。又 $\rho=\beta+i\gamma$ 是零点时 $\bar\rho=\beta-i\gamma$ 也是零点，故 $B=-\sum_{\gamma>0}(\frac1{\beta+i\gamma}+\frac1{\beta-i\gamma})=-2\sum_{\gamma>0}\frac{\beta}{\beta^2+\gamma^2}$。\end{solution}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.04\baselineskip}
+}
+
+\begin{sheetexercise}{5}
+设 $\chi$ 是模 $q$ 的本原 Dirichlet 特征，$\chi(-1)=1$。证明 $L(s,\chi)=\sum_{n\geq1}\chi(n)n^{-s}$ 解析延拓到整个复平面，并满足 $\pi^{-(1-s)/2}q^{(1-s)/2}\Gamma(\frac{1-s}{2})L(1-s,\overline\chi)=\frac{\sqrt q}{\tau(\chi)}\pi^{-s/2}q^{s/2}\Gamma(\frac s2)L(s,\chi)$，其中 $\tau(\chi):=\sum_{a=1}^q\chi(a)e^{2\pi ia/q}$；并说明 $\chi(-1)=-1$ 时哪里出问题.
+\end{sheetexercise}
+\begin{solution}pf: 除 $q=1$ 的主特征外，本原特征非主，以下看非主情形。定义 $\theta(x,\chi):=\sum_{n\in\mathbb Z}\chi(n)e^{-\pi n^2x/q}$。由 $\chi(-1)=1$，有 $\theta(x,\chi)=2\sum_{n\geq1}\chi(n)e^{-\pi n^2x/q}$。当 $\operatorname{Re}s>1$ 时逐项积分，且 $\int_0^\infty e^{-\pi n^2x/q}x^{s/2-1}\dd x=(q/\pi)^{s/2}\Gamma(\frac s2)n^{-s}$，故记 $I(s,\chi):=\int_0^\infty\theta(x,\chi)x^{s/2}\frac{\dd x}{x}$，则 $I(s,\chi)=2\pi^{-s/2}q^{s/2}\Gamma(\frac s2)L(s,\chi)$（$*$）。接着按 $n=a+mq$ 分解并对内层用 Poisson 求和：$\theta(x,\chi)=\sum_{a\bmod q}\chi(a)\sum_{m\in\mathbb Z}e^{-\pi(a+mq)^2x/q}$，而 $\sum_{m\in\mathbb Z}e^{-\pi(a+mq)^2x/q}=\frac1q\sqrt{\frac qx}\sum_{k\in\mathbb Z}e^{2\pi ika/q}e^{-\pi k^2/(qx)}$；又 $\chi$ 本原给 $\sum_{a\bmod q}\chi(a)e^{2\pi ika/q}=\overline\chi(k)\tau(\chi)$，于是 $\theta(x,\chi)=\frac{\tau(\chi)}{\sqrt{qx}}\theta(\frac1x,\overline\chi)$。由定义知 $x\to\infty$ 时 $\theta(x,\chi)$ 指数衰减，由变换式知 $x\to0^+$ 时也足够衰减，故 $I(s,\chi)$ 全纯；再由（$*$）定义 $L(s,\chi):=\frac12\pi^{s/2}q^{-s/2}I(s,\chi)/\Gamma(\frac s2)$，得到解析延拓。对 $I(1-s,\overline\chi)$ 作 $x=1/y$，并用上面对 $\overline\chi$ 的变换式，得 $I(1-s,\overline\chi)=\frac{\sqrt q}{\tau(\chi)}I(s,\chi)$；把（$*$）分别用于 $(s,\chi)$ 和 $(1-s,\overline\chi)$ 即得函数方程。若 $\chi(-1)=-1$，则 $\theta(x,\chi)$ 中 $n$ 与 $-n$ 两项抵消，所以 $\theta(x,\chi)\equiv0$，上面的积分公式不能恢复 $L(s,\chi)$；应改用 $\theta_1(x,\chi)=\sum_{n\in\mathbb Z}n\chi(n)e^{-\pi n^2x/q}$，Gamma 因子改为 $\Gamma(\frac{s+1}{2})$。\end{solution}
+
+\endgroup
+
+\chapter{Exercise Sheet 8}
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{1}
+若存在 $C>0$ 使 $\zeta(s)$ 任一零点 $\rho$ 满足 $\operatorname{Re}\rho<1-C/\log(2+|\operatorname{Im}\rho|)$，不用显式公式证明存在 $c>0$ 使 $\psi(x)=\sum_{n\leq x}\Lambda(n)=x+O(xe^{-c\sqrt{\log x}})$.
+\end{sheetexercise}
+\begin{solution}pf: 只需看非整数 $x$，整数点由 Perron 半权公式或 $x\pm0$ 逼近。记 $L=\log x$，$L_T=\log(T+2)$，取 $a=1+1/L$，$b=1-C/(2\log T)$，$3\leq T\leq x$。若 $|\gamma|\leq T$，则零点 $\rho=\beta+i\gamma$ 满足 $\beta<1-C/\log(2+|\gamma|)\leq1-C/\log(2+T)<b$（小 $T$ 吸入常数），故矩形 $b\leq\operatorname{Re}s\leq a$，$|\operatorname{Im}s|\leq T$ 中 $-\zeta'/\zeta$ 只有 $s=1$ 的简单极点，且 $-\zeta'/\zeta(s)=1/(s-1)+O(1)$。Perron 公式给 $\psi(x)=\frac1{2\pi i}\int_{a-iT}^{a+iT}(-\zeta'/\zeta(s))x^s s^{-1}\dd s+O(xL^2/T)$。由柯西留数定理移线到 $\operatorname{Re}s=b$，穿过 $s=1$ 的留数为 $x$。无零矩形中标准 Jensen--Cauchy 估计给 $-\zeta'/\zeta(s)\ll_C L_T^2$，故新竖线为 $O_C(x^bL_T^3)$，横边与截断误差为 $O_C(xL^2/T)$。于是 $\psi(x)=x+O_C(x^bL_T^3+xL^2/T)$。取 $T=\exp(A\sqrt L)$，$A=\sqrt{C/2}$，则 $x^b=x\exp(-CL/(2\log T))=xe^{-A\sqrt L}$ 且 $x/T=xe^{-A\sqrt L}$；吸收对数幂得 $\psi(x)=x+O(xe^{-c_1\sqrt{\log x}})$.\end{solution}
+
+\begin{sheetexercise}{2}
+设 $\mu$ 为 Mobius 函数。用 Perron 公式证明存在 $c>0$ 使 $\sum_{n\leq x}\mu(n)=O(xe^{-c\sqrt{\log x}})$。可用事实：若 $\zeta(\sigma+i\tau)\neq0$ 对 $\sigma\geq1-c_0/\log(|\tau|+2)$ 成立，则当 $\sigma\geq1-\frac{c_0}{2\log(|\tau|+2)}$ 时 $1/|\zeta(\sigma+i\tau)|\ll_{c_0}\log(|\tau|+2)$.
+\end{sheetexercise}
+\begin{solution}pf: 设无零区域为 $\zeta(\sigma+i\tau)\neq0$，$\sigma\geq1-\kappa/\log(|\tau|+2)$。由题中 fact，若 $\sigma\geq1-\kappa/(2\log(|\tau|+2))$，则 $1/|\zeta(\sigma+i\tau)|\ll_\kappa\log(|\tau|+2)$。记 $M(x)=\sum_{n\leq x}\mu(n)$，$L=\log x$，$L_T=\log(T+2)$，取 $a=1+1/L$，$b=1-\kappa/(2\log T)$。Perron 公式给 $M(x)=\frac1{2\pi i}\int_{a-iT}^{a+iT}x^s(s\zeta(s))^{-1}\dd s+O(xL/T)$。移线到 $\operatorname{Re}s=b$；因 $1/\zeta(s)$ 在矩形内全纯且 $s=1$ 是 $1/\zeta$ 的零点而非极点，所以无留数。由 fact，竖线为 $O_\kappa(x^bL_T^2)$，横边与截断误差为 $O_\kappa(xL/T)$，故 $M(x)=O_\kappa(x^bL_T^2+xL/T)$。取 $T=\exp(B\sqrt L)$，$B=\sqrt{\kappa/2}$，则 $x^b=xe^{-B\sqrt L}$ 且 $x/T=xe^{-B\sqrt L}$，吸收对数幂得 $\sum_{n\leq x}\mu(n)=O(xe^{-c_2\sqrt{\log x}})$。\end{solution}
+
+\endgroup
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{3}
+$N\in\mathbb N$，$\operatorname{Li}(x)=\frac{x}{\log x}\sum_{n=0}^{N-1}\frac{n!}{(\log x)^n}+O_N(\frac{x}{(\log x)^{N+1}})$.
+\end{sheetexercise}
+\begin{solution}pf: $\operatorname{Li}(x)=\int_2^x\frac1{\log u}\dd u$，反复分部积分得 $\frac{x}{\log x}\sum_{n=0}^{N-1}\frac{n!}{(\log x)^n}+\int_2^x\frac{\dd u}{(\log u)^{N+1}}$。余项 $=\int_2^{\sqrt x}\frac{\dd u}{(\log u)^{N+1}}+\int_{\sqrt x}^x\frac{\dd u}{(\log u)^{N+1}}\leq\frac{\sqrt x}{(\log2)^{N+1}}+\frac{x-\sqrt x}{(\frac12\log x)^{N+1}}\ll_N\frac{x}{(\log x)^{N+1}}$.\end{solution}
+
+\endgroup
+
+\begingroup
+\renewenvironment{solution}{%
+	\ignorespaces
+}{%
+	\par\addvspace{0.02\baselineskip}
+}
+
+\begin{sheetexercise}{4}
+记 $M(x):=\sum_{n\leq x}\mu(n)$ 与 $\psi(x):=\sum_{n\leq x}\Lambda(n)$。则在 $0\leq\theta\leq1$ 下，$M(x)=O_\varepsilon(x^{1-\theta+\varepsilon})$ 当且仅当 $\psi(x)=x+O_\varepsilon(x^{1-\theta+\varepsilon})$.
+\end{sheetexercise}
+\begin{solution}pf: $\theta=0$ 平凡，设 $0<\theta\leq1$，置 $\alpha=1-\theta<1$。先证两边都等价于 $\zeta(s)\neq0$ 对 $\operatorname{Re}s>\alpha$。若 $M(x)=O_\varepsilon(x^{\alpha+\varepsilon})$，则 $\operatorname{Re}s>1$ 时 $1/\zeta(s)=\sum\mu(n)n^{-s}=s\int_1^\infty M(t)t^{-s-1}\dd t$；对 $\sigma=\operatorname{Re}s>\alpha$ 取 $\eta>0$ 使 $\alpha+\eta<\sigma$，被积函数为 $O(t^{\alpha+\eta-\sigma-1})$，故积分在 $\operatorname{Re}s>\alpha$ 局部一致收敛，给出 $1/\zeta$ 全纯延拓，于是 $\zeta$ 无零。若 $\psi(x)=x+O_\varepsilon(x^{\alpha+\varepsilon})$，写 $\psi=x+E$，则 $\operatorname{Re}s>1$ 时 $-\zeta'/\zeta(s)=s\int_1^\infty\psi(t)t^{-s-1}\dd t=\frac{s}{s-1}+s\int_1^\infty E(t)t^{-s-1}\dd t$，同理后一积分在 $\operatorname{Re}s>\alpha$ 全纯，故 $-\zeta'/\zeta(s)-1/(s-1)$ 全纯；若 $\zeta$ 在此半平面有零点，则 $-\zeta'/\zeta$ 有极点，矛盾。反过来设 $\zeta(s)\neq0$ 对 $\operatorname{Re}s>\alpha$。任取 $\varepsilon>0$，取 $b=\alpha+\varepsilon/3$，$c=1+1/\log x$，$T=x$。在 $\operatorname{Re}s\geq b$ 中用标准零点避开估计 $1/\zeta(s)\ll_\varepsilon(|t|+2)^{\varepsilon/3}$ 与 $-\zeta'/\zeta(s)\ll_\varepsilon\log^2(|t|+3)$。Perron 公式给 $M(x)=\frac1{2\pi i}\int_{c-iT}^{c+iT}\frac{x^s}{s\zeta(s)}\dd s+O(\log x)$，移线到 $\operatorname{Re}s=b$，不穿过留数，新竖线 $\ll_\varepsilon x^b\int_0^T(t+2)^{\varepsilon/3}(t+1)^{-1}\dd t=O_\varepsilon(x^{\alpha+\varepsilon})$，横边与截断误差同阶，故 $M(x)=O_\varepsilon(x^{\alpha+\varepsilon})$。同样 $\psi(x)=\frac1{2\pi i}\int_{c-iT}^{c+iT}(-\zeta'/\zeta(s))x^s s^{-1}\dd s+O(\log^2x)$，移线只穿过 $s=1$，因 $-\zeta'/\zeta(s)=1/(s-1)+O(1)$，留数为 $\operatorname{Res}_{s=1}((-\zeta'/\zeta(s))x^s/s)=x$；余下竖线 $\ll_\varepsilon x^b\int_0^T\log^2(t+3)(t+1)^{-1}\dd t=O_\varepsilon(x^{\alpha+\varepsilon})$，故 $\psi(x)=x+O_\varepsilon(x^{\alpha+\varepsilon})$。整数 $x$ 处用 Perron 半权公式或 $x\pm0$ 逼近即可，代回 $\alpha=1-\theta$ 得证。\end{solution}
+
+\endgroup
+
+\enlargethispage{2\baselineskip}
+
+\begin{proposition}[柯西积分公式（Cauchy integral formula）]
+设 $\Omega\subset\mathbb C$ 为区域，$f$ 在 $\Omega$ 上全纯。若 $\overline{D(z_0,r)}\subset\Omega$，则对任意 $n\geq0$，$f^{(n)}(z_0)=\frac{n!}{2\pi i}\int_{|\zeta-z_0|=r}\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\,\dd\zeta$。
+\end{proposition}
+
+\noindent\textbf{留数定理（residue theorem）.} 设 $\gamma$ 为正向简单闭曲线，$f$ 在 $\gamma$ 及其内部除有限个孤立奇点 $a_1,\ldots,a_m$ 外全纯，则 $\int_\gamma f(z)\,\dd z=2\pi i\sum_{j=1}^m \operatorname{Res}(f,a_j)$。
+
+\end{document}
