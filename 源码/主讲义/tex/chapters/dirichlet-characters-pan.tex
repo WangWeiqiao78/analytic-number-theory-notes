@@ -1,0 +1,1292 @@
+% Source: /Users/wangweiqiao/Downloads/数论基础, 潘承洞/数论基础, 潘承洞_170-192.pdf
+% 原 PDF 页码 167--189。按原文顺序转写；少量衔接词与定理环境为排版需要加入。
+
+\chapter{Dirichlet 特征}
+\label{chap:dirichlet-characters}
+
+类似于自然数列中的素数分布问题，我们可以讨论在算术（等差）数列中的素数分布。这个问题之所以重要，不仅由于它是经典的素数分布问题的推广，更由于它在许多著名的数论问题的研究中起着重要作用。研究这一问题的主要工具是 Dirichlet 所引进的一类称之为特征的完全可乘函数 $\chi(n)$，通常称为 Dirichlet 特征（Dirichlet character）。本章所讨论的特征均为 Dirichlet 特征。
+
+\section{模为素数幂的特征的定义及其性质}
+
+首先我们来定义以素数幂为模的特征。
+
+设 $k=p^\alpha$，$p>2$，$\alpha\geq 1$，设 $g$ 是所有模 $p^\alpha$（即 $p$ 给定，$\alpha$ 任意）的最小正原根。若 $(n,k)=1$，令 $r=\operatorname{ind} n$，即
+\[
+	n\equiv g^r\pmod k.
+\]
+此处为方便起见，令
+\[
+	e(x)=e^{2\pi i x}.
+\]
+
+\begin{definition}[原文 定义 1]
+	设 $k=p^\alpha$，$p>2$，$\alpha\geq 1$。定义在全体自然数 $n$ 上的函数
+	\begin{equation}
+		\chi(n)=\chi(n;k)=\chi(n;k,m)=
+		\begin{cases}
+			0, & (n,k)>1,\\
+			e\left(\dfrac{m\operatorname{ind}n}{\varphi(k)}\right), & (n,k)=1
+		\end{cases}
+		\tag{1}
+	\end{equation}
+	称为模 $k$ 的特征，这里参数 $m$ 为整数。
+\end{definition}
+
+由定义可看出，对同一个 $k$，特征关于 $m$ 是周期函数，周期为 $\varphi(k)$，所以对应于模 $k$ 的全部特征可由
+\[
+	m=0,1,\ldots,\varphi(k)-1
+\]
+得到。
+
+再设 $k=2^\alpha$。当 $\alpha\geq 3$ 时，模 $k$ 没有原根。但对任一奇数 $n$，可引进指标组，即
+\[
+	n\equiv (-1)^{r_{-1}}5^{r_0}\pmod {2^\alpha}.
+\]
+
+\begin{definition}[原文 定义 2]
+	设 $k=2^\alpha$，$\alpha\geq 1$。由下列公式给出定义在全体自然数 $n$ 上的函数，称为模 $k$ 的特征：
+	\begin{equation}
+		\chi(n)=\chi(n;2)=\chi(n;2,0,0)=
+		\begin{cases}
+			0, & (n,2)>1,\\
+			1, & (n,2)=1;
+		\end{cases}
+		\tag{2}
+	\end{equation}
+	\begin{equation}
+		\chi(n)=\chi(n;4)=\chi(n;4,m_{-1},0)=
+		\begin{cases}
+			0, & (n,2)>1,\\
+			(-1)^{m_{-1}r_{-1}}, & (n,2)=1,
+		\end{cases}
+		\tag{3}
+	\end{equation}
+	这里 $n\equiv (-1)^{r_{-1}}\pmod 4$，参数 $m_{-1}$ 为整数；当 $\alpha\geq 3$ 时，
+	\begin{equation}
+		\chi(n)=\chi(n;2^\alpha)=\chi(n;2^\alpha,m_{-1},m_0)=
+		\begin{cases}
+			0, & (n,2)>1,\\
+			(-1)^{m_{-1}r_{-1}}e\left(\dfrac{m_0r_0}{2^{\alpha-2}}\right), & (n,2)=1,
+		\end{cases}
+		\tag{4}
+	\end{equation}
+	这里参数 $m_{-1},m_0$ 为整数。
+\end{definition}
+
+由定义及指标的性质可得到下面的定理。
+
+\begin{theorem}[原文 定理 1]
+	设 $k=p^\alpha$，$p\geq 2$，$\alpha\geq 1$，则有
+	\[
+	\begin{cases}
+		\chi(n;p^\alpha)=0, & (n,p)>1,\\
+		|\chi(n;p^\alpha)|=1, & (n,p)=1,\\
+		\chi(1;p^\alpha)=1;
+	\end{cases}
+	\]
+	$\chi(n;p^\alpha)$ 是 $n$ 的周期函数，周期为 $p^\alpha$；并且 $\chi(n;p^\alpha)$ 是 $n$ 的完全可乘函数，即
+	\[
+		\chi(n_1n_2;p^\alpha)=\chi(n_1;p^\alpha)\chi(n_2;p^\alpha).
+	\]
+\end{theorem}
+
+\begin{theorem}[原文 定理 2]
+	对每一个模 $k=p^\alpha$，$p\geq 2$，$\alpha\geq 1$，恰好有 $\varphi(k)$ 个不同的特征。
+\end{theorem}
+
+\begin{proof}
+	首先设 $k=p^\alpha$，$p>2$，$\alpha\geq 1$。由定义 1 知，模 $k$ 的所有特征由
+	\[
+		m=0,1,2,\ldots,\varphi(k)-1
+	\]
+	得到，故只要证明这 $\varphi(k)$ 个特征两两不相同。
+
+	设 $0\leq m,m'<\varphi(k)$，$m\neq m'$。若
+	\[
+		\chi(n;k,m)=\chi(n;k,m'),
+	\]
+	则由定理 1 的第一部分及当 $n$ 遍历模 $k$ 的简化系时其指标 $r$ 遍历模 $\varphi(k)$ 的完全系，得到
+	\[
+	\begin{aligned}
+		\varphi(k)
+		&=
+		\sum_{\substack{1\leq n\leq k\\ (n,k)=1}}
+		\chi(n;k,m)\overline{\chi(n;k,m')}  \\
+		&=
+		\sum_{r=0}^{\varphi(k)-1}
+		e\left(\frac{(m-m')r}{\varphi(k)}\right)
+		=0.
+	\end{aligned}
+	\]
+	这矛盾。因此对 $k=p^\alpha$，$p>2$ 的情形已经证明。
+
+	现在设 $k=2^\alpha$，$\alpha\geq 3$。由定义 2 知，$m_{-1},m_0$ 和 $m_{-1}+2,m_0+2^{\alpha-2}$ 对应同一个特征，所以模 $k$ 的所有特征由
+	\[
+		m_{-1}=0,1,\qquad m_0=0,1,\ldots,2^{\alpha-2}-1
+	\]
+	给出，共有 $2\cdot 2^{\alpha-2}=\varphi(2^\alpha)$ 个。因此只要证明这些特征两两不相同。
+
+	用反证法。设
+	\[
+		0\leq m_{-1},m'_{-1}<2,\qquad
+		0\leq m_0,m'_0<2^{\alpha-2},
+	\]
+	且 $m_{-1}=m'_{-1}$、$m_0=m'_0$ 不能同时成立。若
+	\[
+		\chi(n;k,m_{-1},m_0)=\chi(n;k,m'_{-1},m'_0),
+	\]
+	则由定理 1 的第一部分及当 $n$ 遍历模 $k$ 的简化系时其指标组 $r_{-1},r_0$ 分别遍历模 $2$ 及 $2^{\alpha-2}$ 的完全系，得到
+	\[
+	\begin{aligned}
+		\varphi(2^\alpha)
+		&=
+		\sum_{\substack{1\leq n\leq 2^\alpha\\ (n,2)=1}}
+		\chi(n;k,m_{-1},m_0)\overline{\chi(n;k,m'_{-1},m'_0)}  \\
+		&=
+		\sum_{r_{-1}=0}^{1}(-1)^{r_{-1}(m_{-1}-m'_{-1})}
+		\sum_{r_0=0}^{2^{\alpha-2}-1}
+		e\left(\frac{(m_0-m'_0)r_0}{2^{\alpha-2}}\right)
+		=0.
+	\end{aligned}
+	\]
+	上式最后一步用到了对参数的限制。矛盾，于是 $k=2^\alpha$，$\alpha\geq 3$ 的情形也得证。
+
+	最后，当 $k=2$ 时只有 $1$ 个特征；当 $k=4$ 时有 $2$ 个不同特征。因此定理全部得证。
+\end{proof}
+
+我们把下面的特征称为主特征（principal character）：
+\begin{equation}
+	\chi_0(n;k)=
+	\begin{cases}
+		0, & (n,k)>1,\\
+		1, & (n,k)=1.
+	\end{cases}
+	\tag{5}
+\end{equation}
+主特征可简记为 $\chi_0(n;k)=\chi_0(n)=\chi_0$。
+
+\begin{theorem}[原文 定理 3，正交性]
+	设 $k=p^\alpha$，$p\geq 2$，$\alpha\geq 1$，则有
+	\begin{equation}
+		\frac{1}{\varphi(k)}\sum_{\chi\bmod k}\chi(n)
+		=
+		\begin{cases}
+			1, & n\equiv 1\pmod k,\\
+			0, & n\not\equiv 1\pmod k,
+		\end{cases}
+		\tag{6}
+	\end{equation}
+	这里的求和号表示对模 $k$ 的所有 $\varphi(k)$ 个特征求和，并且
+	\begin{equation}
+		\frac{1}{\varphi(k)}\sum_{n=1}^{k}\chi(n)
+		=
+		\begin{cases}
+			1, & \chi=\chi_0,\\
+			0, & \chi\neq\chi_0.
+		\end{cases}
+		\tag{6'}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	我们只证明式 \((6)\) 的第二个式子。以 $p>2$ 的情形为例，当 $n\not\equiv1\pmod k$ 时，$\operatorname{ind}n\not\equiv0\pmod{\varphi(k)}$，故
+	\[
+		\sum_{\chi\bmod k}\chi(n)
+		=
+		\sum_{m=0}^{\varphi(k)-1}
+		e\left(\frac{m\operatorname{ind}n}{\varphi(k)}\right)
+		=0.
+	\]
+	模 $2^\alpha$ 的情形同理使用指标组，其他几个式子可从定义直接推出。
+\end{proof}
+
+特征 $\chi(n)$ 的一个重要性质是周期性。对模 $k$ 的特征来说，$k$ 当然是它的周期，但是特征可以有小于 $k$ 的周期。例如对模 $k=p^\alpha$、$\alpha>1$ 来说，显有
+\[
+	\chi_0(n;p^\alpha)=\chi_0(n;p),
+\]
+因此
+\[
+	\chi_0(n+p;p^\alpha)=\chi_0(n;p^\alpha).
+\]
+所以，对每一个模 $k$ 的特征 $\chi(n;k)$，一定有一个最小正周期 $e$；利用带余数除法很容易证明 $e\mid k$。我们把非主特征中最小正周期恰好等于其模的特征称为原特征（primitive character），其他的称为非原特征（imprimitive character）。这样模 $k$ 的特征就被分为原特征、非原特征两类，而最重要的是原特征。显然，模 $p$（$p>2$）的非主特征均为原特征，模 $2$ 没有原特征，模 $4$ 的原特征为 $\chi(n;4,1,0)$。
+
+\begin{theorem}[原文 定理 4]
+	设 $k=p^\alpha$，$p>2$，则 $\chi(n;p^\alpha,m)$ 是原特征的充要条件为
+	\[
+		(m,p)=1.
+	\]
+	当 $k=2^\alpha$，$\alpha\geq 3$ 时，$\chi(n;2^\alpha,m_{-1},m_0)$ 为原特征的充要条件为
+	\[
+		(m_0,2)=1.
+	\]
+\end{theorem}
+
+\begin{proof}
+	设 $k=p^\alpha$，$p>2$。先证必要性。设
+	\[
+		\chi(n;p^\alpha,m)
+		=
+		e\left(\frac{m\operatorname{ind}n}{\varphi(p^\alpha)}\right),
+		\qquad 0<m<\varphi(p^\alpha),
+	\]
+	为非主特征。若 $(m,p)>1$，则可写
+	\[
+		m=m'p^\beta,\qquad (m',p)=1,\qquad 1\leq\beta<\alpha.
+	\]
+	于是
+	\[
+		\chi(n;p^\alpha,m)
+		=
+		e\left(\frac{m'\operatorname{ind}n}{\varphi(p^{\alpha-\beta})}\right)
+		=
+		\chi(n;p^{\alpha-\beta},m').
+	\]
+	这与原特征的定义矛盾，所以必有 $(m,p)=1$。
+
+	再证充分性。因为对模 $k=p$ 来说，$(n,p)=1$ 时的非主特征均为原特征。现设 $k=p^\alpha$，$\alpha>1$。由于最小正周期 $e\mid k$，我们只要证明当 $(m,p)=1$ 时，模 $k$ 的非主特征对任意 $1\leq\lambda<\alpha$ 不可能以模 $p^\lambda$ 为其周期。取 $n=1+p^\lambda$。显然 $n\equiv1\pmod {p^\lambda}$，但 $n\not\equiv1\pmod {p^{\lambda+1}}$。若 $r=\operatorname{ind}n$，则指标的性质给出
+	\[
+		r\equiv0\pmod {\varphi(p^\lambda)},\qquad
+		r\not\equiv0\pmod {\varphi(p^{\lambda+1})}.
+	\]
+	于是可写
+	\[
+		r=a\varphi(p^\lambda),\qquad p\nmid a.
+	\]
+	因为 $(m,p)=1$，所以
+	\[
+		\frac{m\operatorname{ind}n}{\varphi(p^\alpha)}
+		=
+		\frac{ma}{p^{\alpha-\lambda}}
+	\]
+	不是整数，从而
+	\[
+		\chi(n;p^\alpha,m)\neq1=\chi(1;p^\alpha,m).
+	\]
+	因此 $p^\lambda$ 不是周期，故该特征为原特征。
+
+	下面证明 $k=2^\alpha$ 的情形。当 $k=2$ 时，仅有一个主特征 $\chi_0(n;2)$；当 $k=4$ 时，非主特征为 $\chi(n;4,1,0)$，因为 $\chi(3;4,1,0)=-1$，所以它是原特征。
+
+	当 $\alpha\geq 3$ 时，非主特征为
+	\[
+		\chi(n;2^\alpha,m_{-1},m_0)
+		=
+		(-1)^{m_{-1}r_{-1}}
+		e\left(\frac{m_0r_0}{2^{\alpha-2}}\right),
+		\qquad (n,2)=1,
+	\]
+	这里参数 $m_{-1},m_0$ 满足
+	\[
+		0\leq m_{-1}<2,\qquad 0\leq m_0<2^{\alpha-2},
+	\]
+	且 $m_{-1},m_0$ 不同时为 $0$。
+
+	先证必要性。若 $(m_0,2)>1$，当 $m_0=0$ 时必有 $m_{-1}=1$，此时
+	\[
+		\chi(n;2^\alpha,m_{-1},m_0)=\chi(n;4,1,0),
+	\]
+	因为 $\alpha\geq3$，这和 $\chi$ 为原特征矛盾。若 $m_0>0$，则可写
+	\[
+		m_0=m'_0\,2^\beta,\qquad 1\leq\beta<\alpha-2,\qquad (m'_0,2)=1.
+	\]
+	由指标组性质知，当 $n\equiv n'\pmod {2^{\alpha-\beta}}$ 且 $(n,2)=1$ 时，
+	\[
+		r_{-1}(n)\equiv r_{-1}(n')\pmod 2,\qquad
+		r_0(n)\equiv r_0(n')\pmod {2^{\alpha-\beta-2}}.
+	\]
+	于是 $\chi$ 有小于 $2^\alpha$ 的周期，矛盾。因此必有 $(m_0,2)=1$。
+
+	再证充分性。若 $(m_0,2)=1$，则对任意 $2\leq\lambda<\alpha$，取 $n=1+2^\lambda$。显然 $n\not\equiv1\pmod {2^\alpha}$，且由指标组性质可得
+	\[
+		r_{-1}(n)=0,\qquad r_0(n)\not\equiv0\pmod {2^{\alpha-2}}.
+	\]
+	于是
+	\[
+		\chi(n;2^\alpha,m_{-1},m_0)\neq1.
+	\]
+	故任意 $2^\lambda$（$\lambda<\alpha$）均不为其周期，所以它是原特征。
+\end{proof}
+
+\begin{theorem}[原文 定理 5]
+	设 $k=p^\alpha$，$p\geq 2$。对模 $k$ 的每一个非主特征，必有唯一的一个模 $k^*=p^\lambda$（$\lambda\leq\alpha$）及唯一的一个模 $k^*$ 的原特征与它恒等。反过来，对模 $k^*=p^\lambda$ 的每一个原特征，对每一个模 $k=p^\alpha$（$\alpha\geq\lambda$），必有唯一的一个模 $k$ 的非主特征与它恒等。
+\end{theorem}
+
+\begin{proof}
+	先证 $k=p^\alpha$，$p>2$ 的情形。若 $\chi(n;p^\alpha,m)$ 是原特征，则取 $k^*=p^\alpha$，所得原特征就是它自身。若它是非原特征，则必有 $\alpha\geq2$，$0<m<\varphi(p^\alpha)$，且 $(m,p)>1$。于是可写
+	\[
+		m=m'p^\beta,\qquad 1\leq\beta<\alpha,\qquad (m',p)=1.
+	\]
+	由式 \((1)\) 得
+	\[
+		\chi(n;p^\alpha,m)=\chi(n;p^{\alpha-\beta},m'),
+	\]
+	而由定理 4 知右边为模 $p^{\alpha-\beta}$ 的原特征。唯一性由原特征的定义推出。反过来，当 $\alpha=\lambda$ 时取原特征自身；当 $\alpha>\lambda$ 时，只要取 $m$ 为相应参数乘以 $p^{\alpha-\lambda}$ 即可。
+
+	下面证明 $k=2^\alpha$ 的情形。若 $\chi(n;2^\alpha,m_{-1},m_0)$ 为原特征，则取 $k^*=2^\alpha$，所得原特征就是它自身。若它为非原特征，则必有 $\alpha\geq3$ 且 $(m_0,2)>1$。当 $m_0=0$ 时，必有 $m_{-1}=1$，而
+	\[
+		\chi(n;2^\alpha,1,0)=\chi(n;4,1,0),
+	\]
+	即为对应模 $4$ 的原特征。当 $m_0>0$ 时，可写
+	\[
+		m_0=m'_0\,2^\beta,\qquad 1\leq\beta<\alpha-2,\qquad (m'_0,2)=1.
+	\]
+	由特征定义及指标组性质知
+	\[
+		\chi(n;2^\alpha,m_{-1},m_0)
+		=
+		\chi(n;2^{\alpha-\beta},m_{-1},m'_0),
+	\]
+	而右边为模 $2^{\alpha-\beta}$ 的原特征。反过来，当 $\alpha=\lambda$ 时取原特征自身；当 $\alpha>\lambda$ 时，模 $4$ 的原特征对应于模 $2^\alpha$（$\alpha\geq3$）的非原特征 $\chi(n;2^\alpha,1,0)$；模 $2^\lambda$（$\lambda>2$）的原特征 $\chi(n;2^\lambda,m_{-1},m_0)$ 对应于模 $2^\alpha$ 的非原特征
+	\[
+		\chi(n;2^\alpha,m_{-1},m_0\,2^{\alpha-\lambda}).
+	\]
+	定理得证。
+\end{proof}
+
+仅取实值的特征称为实特征（real character），其他称为复特征（complex character），主特征显然为实特征。
+
+\begin{theorem}[原文 定理 6]
+	设 $k=p^\alpha$，$p>2$，则 $\chi(n;p^\alpha,m)$ 为实特征的充要条件是
+	\[
+		m\equiv0,\ \frac{1}{2}\varphi(p^\alpha)\pmod{\varphi(p^\alpha)}.
+	\]
+	模 $2$、模 $4$ 的特征均为实特征。当 $k=2^\alpha$（$\alpha\geq3$）时，$\chi(n;2^\alpha,m_{-1},m_0)$ 为实特征的充要条件为
+	\[
+		m_0\equiv0,\ 2^{\alpha-3}\pmod {2^{\alpha-2}}.
+	\]
+\end{theorem}
+
+\begin{proof}
+	由特征的定义可直接推出定理的论断。
+\end{proof}
+
+\begin{theorem}[原文 定理 7]
+	设 $k=p^\alpha$，那么当且仅当模 $k=4,8$ 及 $p$（$p>2$）时，才有实原特征存在。
+\end{theorem}
+
+\begin{proof}
+	当 $k=2$ 时无原特征。$k=4$ 时其非主特征为
+	\[
+		\chi(n;4,1,0)=
+		\begin{cases}
+			0, & (n,2)>1,\\
+			(-1)^{(n-1)/2}, & (n,2)=1,
+		\end{cases}
+	\]
+	显然为实原特征。
+
+	当 $k=2^\alpha$，$\alpha\geq3$ 时，由定理 6 知，仅当 $m_0=2^{\alpha-3}$ 时才是实的非主特征；由定理 4 又知，仅当 $(m_0,2)=1$ 时才为原特征，所以一定有 $\alpha=3$，即 $k=8$。此时有两个实原特征：
+	\[
+		\chi(n;8,0,1),\qquad \chi(n;8,1,1),
+	\]
+	且
+	\[
+		\chi(n;8,0,1)=
+		\begin{cases}
+			0, & (n,2)>1,\\
+			(-1)^{r_0}, & (n,2)=1,
+		\end{cases}
+	\]
+	其中 $n\equiv5^{r_0}\pmod 8$，并且
+	\[
+		\chi(n;8,1,1)=\chi(n;4,1,0)\chi(n;8,0,1).
+	\]
+
+	当 $k=p^\alpha$，$p>2$ 时，由定理 6 知，仅当 $m=\frac{1}{2}\varphi(p^\alpha)$ 时才是实的非主特征；由定理 4 知，只有当 $(m,p)=1$ 时才是原特征，故必有 $\alpha=1$。于是实原特征为
+	\[
+		\chi\left(n;p,\frac{p-1}{2}\right)
+		=
+		(-1)^{\operatorname{ind}n}
+		=
+		\left(\frac{n}{p}\right),
+	\]
+	这里 $\left(\frac{n}{p}\right)$ 为 Legendre 符号（Legendre symbol）。因为原根一定是二次非剩余，所以若 $n\equiv g^r\pmod p$，则
+	\[
+		\left(\frac{n}{p}\right)
+		=
+		\left(\frac{g^r}{p}\right)
+		=
+		\left(\frac{g}{p}\right)^r
+		=
+		(-1)^r.
+	\]
+	定理得证。
+\end{proof}
+
+以上我们定义了以素数幂为模的特征，并讨论了它们的基本性质。下面我们来定义任意正整数 $k$（$k\geq2$）为模的特征，并把以上的定理推广到任意模的情形。
+
+\section{任意模的特征的定义及其性质}
+
+\begin{definition}[原文 定义 3]
+	设 $k\geq2$，其标准分解式为
+	\[
+		k=p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_s^{\alpha_s}.
+	\]
+	由等式
+	\begin{equation}
+		\chi(n)=\chi(n;k)=\prod_{j=1}^{s}\chi(n;p_j^{\alpha_j})
+		\tag{7}
+	\end{equation}
+	所确定的函数 $\chi(n)$ 称为模 $k$ 的特征。这里 $\chi(n;p_j^{\alpha_j})$ 为以素数幂 $p_j^{\alpha_j}$ 为模的特征。
+\end{definition}
+
+不难看出，定理 1 对一般模的特征也是成立的。
+
+\begin{theorem}[原文 定理 \(1'\)]
+	设 $\chi(n;k)$ 为模 $k$ 的特征，则有
+	\[
+	\begin{cases}
+		\chi(n;k)=0, & (n,k)>1,\\
+		|\chi(n;k)|=1, & (n,k)=1,\\
+		\chi(1;k)=1;
+	\end{cases}
+	\]
+	并且
+	\[
+		\chi(n+k;k)=\chi(n;k),\qquad
+		\chi(n_1n_2;k)=\chi(n_1;k)\chi(n_2;k).
+	\]
+\end{theorem}
+
+\begin{theorem}[原文 定理 8]
+	对每一个模 $k$，恰好有 $\varphi(k)$ 个不同的特征。
+\end{theorem}
+
+\begin{proof}
+	由于对每一个模 $p_j^{\alpha_j}$ 恰好有 $\varphi(p_j^{\alpha_j})$ 个不同的特征，所以对模 $k$ 来说至多有
+	\[
+		\varphi(p_1^{\alpha_1})\varphi(p_2^{\alpha_2})\cdots\varphi(p_s^{\alpha_s})
+		=
+		\varphi(k)
+	\]
+	个两两不同的特征。
+
+	设
+	\begin{equation}
+		\chi(n;k)=\prod_{j=1}^{s}\chi(n;p_j^{\alpha_j}),
+		\qquad
+		\chi'(n;k)=\prod_{j=1}^{s}\chi'(n;p_j^{\alpha_j}).
+		\tag{8}
+	\end{equation}
+	我们要证明 $\chi(n;k)=\chi'(n;k)$ 的充要条件是
+	\begin{equation}
+		\chi(n;p_j^{\alpha_j})=\chi'(n;p_j^{\alpha_j}),
+		\qquad 1\leq j\leq s.
+		\tag{9}
+	\end{equation}
+	充分性是显然的。下面证明必要性。
+
+	设
+	\begin{equation}
+		K_j=\frac{k}{p_j^{\alpha_j}},\qquad
+		K'_jK_j\equiv1\pmod {p_j^{\alpha_j}},
+		\qquad 1\leq j\leq s,
+	\tag{10}
+	\end{equation}
+	并令
+	\begin{equation}
+		n=K'_1K_1n_1+K'_2K_2n_2+\cdots+K'_sK_sn_s.
+	\tag{11}
+	\end{equation}
+	由中国剩余定理可知，当 $n_1,n_2,\ldots,n_s$ 分别遍历模
+	\[
+		p_1^{\alpha_1},p_2^{\alpha_2},\ldots,p_s^{\alpha_s}
+	\]
+	的完全（简化）系时，$n$ 亦遍历模 $k$ 的完全（简化）系。由 \((10)\)、\((11)\) 知，对 $1\leq j\leq s$ 有
+	\begin{equation}
+		n\equiv n_j\pmod {p_j^{\alpha_j}}.
+		\tag{12}
+	\end{equation}
+	所以由定理 \(1'\) 得到
+	\begin{equation}
+		\chi(n;k)=\prod_{j=1}^{s}\chi(n;p_j^{\alpha_j})
+		=
+		\prod_{j=1}^{s}\chi(n_j;p_j^{\alpha_j}),
+		\tag{13}
+	\end{equation}
+	以及
+	\begin{equation}
+		\chi'(n;k)=\prod_{j=1}^{s}\chi'(n;p_j^{\alpha_j})
+		=
+		\prod_{j=1}^{s}\chi'(n_j;p_j^{\alpha_j}).
+		\tag{14}
+	\end{equation}
+	由 \((13)\)、\((14)\) 可以证明对任一 $j_0$，$1\leq j_0\leq s$，恒有
+	\begin{equation}
+		\chi(n_{j_0};p_{j_0}^{\alpha_{j_0}})
+		=
+		\chi'(n_{j_0};p_{j_0}^{\alpha_{j_0}}).
+		\tag{15}
+	\end{equation}
+	为此取 $n_j=1$（$j\neq j_0$）。这样由假定 $\chi(n;k)=\chi'(n;k)$ 以及 \((13)\)、\((14)\) 推出 \((15)\)，证明了必要性，定理得证。
+\end{proof}
+
+我们把下面的特征称为主特征：
+\begin{equation}
+	\chi_0(n;k)=
+	\begin{cases}
+		0, & (n,k)>1,\\
+		1, & (n,k)=1.
+	\end{cases}
+	\tag{16}
+\end{equation}
+主特征可简记为 $\chi_0(n;k)=\chi_0(n)=\chi_0$。
+
+\begin{theorem}[原文 定理 9，正交性]
+	设 $k\geq2$，则有
+	\begin{equation}
+		\frac{1}{\varphi(k)}
+		\sum_{\chi\bmod k}\chi(n)
+		=
+		\begin{cases}
+			1, & n\equiv1\pmod k,\\
+			0, & n\not\equiv1\pmod k,
+		\end{cases}
+		\tag{17}
+	\end{equation}
+	这里的求和号表示对模 $k$ 的所有 $\varphi(k)$ 个特征求和，并且
+	\begin{equation}
+		\frac{1}{\varphi(k)}
+		\sum_{n=1}^{k}\chi(n)
+		=
+		\begin{cases}
+			1, & \chi=\chi_0,\\
+			0, & \chi\neq\chi_0.
+		\end{cases}
+		\tag{18}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	设
+	\[
+		k=2^{\alpha_0}p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_s^{\alpha_s}.
+	\]
+	记
+	\begin{equation}
+		C_{-1}=
+		\begin{cases}
+			1, & \alpha_0=1,\\
+			2, & \alpha_0\geq2,
+		\end{cases}
+		\qquad
+		C_0=
+		\begin{cases}
+			1, & \alpha_0=1,\\
+			2^{\alpha_0-2}, & \alpha_0\geq2,
+		\end{cases}
+		\tag{19}
+	\end{equation}
+	并令
+	\[
+		C_i=\varphi(p_i^{\alpha_i}),\qquad 1\leq i\leq s.
+	\]
+	当 $(n,k)=1$ 时，
+	\begin{equation}
+		\chi(n;k)=
+		e\left(\frac{m_{-1}r_{-1}}{C_{-1}}\right)
+		e\left(\frac{m_0r_0}{C_0}\right)
+		e\left(\frac{m_1r_1}{C_1}\right)\cdots
+		e\left(\frac{m_sr_s}{C_s}\right),
+		\tag{20}
+	\end{equation}
+	这里 $r_{-1},r_0$ 为 $n$ 对模 $2^{\alpha_0}$ 的指标组，$r_i$ 为 $n$ 对模 $p_i^{\alpha_i}$ 的指标，并且
+	\[
+		0\leq r_i<C_i,\qquad 0\leq m_i<C_i,\qquad -1\leq i\leq s.
+	\]
+	于是
+	\[
+	\begin{aligned}
+		\sum_{\chi\bmod k}\chi(n)
+		&=
+		\sum_{m_{-1}=0}^{C_{-1}-1}
+		\sum_{m_0=0}^{C_0-1}
+		\sum_{m_1=0}^{C_1-1}
+		\cdots
+		\sum_{m_s=0}^{C_s-1}
+		\prod_{i=-1}^{s}e\left(\frac{m_ir_i}{C_i}\right)  \\
+		&=
+		\prod_{i=-1}^{s}
+		\sum_{m_i=0}^{C_i-1}
+		e\left(\frac{m_ir_i}{C_i}\right).
+	\end{aligned}
+	\]
+	当且仅当 $n\equiv1\pmod k$ 时，才有 $r_i=0$（$-1\leq i\leq s$），此时各个和分别等于对应的 $C_i$，乘积等于 $\varphi(k)$。而当 $n\not\equiv1\pmod k$ 时，至少存在一个 $i$ 使 $r_i\neq0$，此时相应的和式为零。这就证明了 \((17)\)。
+
+	为了证明 \((18)\)，有类似的公式
+	\[
+	\begin{aligned}
+		\sum_{n=1}^{k}\chi(n)
+		&=
+		\sum_{r_{-1}=0}^{C_{-1}-1}
+		\sum_{r_0=0}^{C_0-1}
+		\sum_{r_1=0}^{C_1-1}
+		\cdots
+		\sum_{r_s=0}^{C_s-1}
+		\prod_{i=-1}^{s}e\left(\frac{m_ir_i}{C_i}\right).
+	\end{aligned}
+	\]
+	当且仅当 $\chi=\chi_0$ 时，才有 $m_i=0$（$-1\leq i\leq s$），这时上式等于 $\varphi(k)$；而当 $\chi\neq\chi_0$ 时，至少存在一个 $m_i\neq0$，此时相应的和式为零。至此定理证毕。
+\end{proof}
+
+从定理的证明中可以看出，式 \((17)\) 可写成下面更为一般的形式：
+\begin{equation}
+	\frac{1}{\varphi(k)}
+	\sum_{\chi\bmod k}\overline{\chi}(n)\chi(l)
+	=
+	\begin{cases}
+		1, & n\equiv l\pmod k,\\
+		0, & n\not\equiv l\pmod k.
+	\end{cases}
+	\tag{17'}
+\end{equation}
+这里的求和号表示对模 $k$ 的所有 $\varphi(k)$ 个特征求和。
+
+特征和模 $k$ 的简化系之间有一种对偶关系，可解释如下：显然，由 \((20)\) 式知，模 $k$ 的特征由数组
+\[
+	m_{-1},m_0,m_1,\ldots,m_s,\qquad 0\leq m_i<C_i,\quad -1\leq i\leq s
+\]
+所完全确定。我们以 $\chi(n;k,h)$、$(h,k)=1$ 表示模 $k$ 的这样一个特征，即它所对应的数组 $m_{-1},m_0,m_1,\ldots,m_s$ 恰好是 $h$ 对模
+\[
+	2^{\alpha_0},p_1^{\alpha_1},\ldots,p_s^{\alpha_s}
+\]
+的指标组和指标。这样，当 $h$ 过模 $k$ 的简化系时，$\chi(n;k,h)$ 就给出了模 $k$ 的全部特征。
+
+对于模 $k$ 的特征亦可分为实特征与复特征。又 $\overline{\chi}(n)$ 亦为一个特征，称为 $\chi(n)$ 的共轭复特征。在定理 8 的证明中我们很容易看出下面的定理成立。
+
+\begin{theorem}[原文 定理 10]
+	$\chi(n;k)$ 为主（实）特征的充要条件是所有的 $\chi(n;p_j^{\alpha_j})$（$1\leq j\leq s$）均为主（实）特征。
+\end{theorem}
+
+对模 $k$ 我们同样可引进原特征的概念。但是由于在 \((7)\) 式中可能有主特征出现，所以我们不采用以前模为素数幂的原特征定义，而引进下面的定义。
+
+\begin{definition}[原文 定义 4]
+	设 $k\geq2$，$\chi(n;k)$ 是模 $k$ 的一个非主特征。如果在条件 $(n,k)=1$ 下，不存在 $k_1<k$，使得当
+	\[
+		n\equiv n'\pmod {k_1}
+	\]
+	时恒有
+	\[
+		\chi(n;k)=\chi(n';k),
+	\]
+	则 $\chi(n;k)$ 称为模 $k$ 的原特征。
+\end{definition}
+
+显然当 $k$ 为素数幂时，这里的定义和原来的定义是一致的。由定义看出，原特征是这样的特征：它在条件 $(n,k)=1$ 之下，不存在比 $k$ 更小的正周期；若存在比 $k$ 更小的正周期，则称为非原特征。设 $e$ 是最小的正周期，则容易证明 $e\mid k$。
+
+\begin{theorem}[原文 定理 11]
+	$\chi(n;k)$ 是模 $k$ 的原特征的充要条件是所有的 $\chi(n;p_j^{\alpha_j})$（$1\leq j\leq s$）均为原特征。
+\end{theorem}
+
+\begin{proof}
+	仍记
+	\[
+		K_j=\frac{k}{p_j^{\alpha_j}},\qquad
+		K'_jK_j\equiv1\pmod {p_j^{\alpha_j}}
+	\]
+	（$1\leq j\leq s$）。由定理 8 的证明知
+	\begin{equation}
+		\chi(n;k)=\prod_{j=1}^{s}\chi(n_j;p_j^{\alpha_j}),
+	\tag{21}
+	\end{equation}
+	这里
+	\[
+		n=K'_1K_1n_1+\cdots+K'_sK_sn_s.
+	\]
+
+	先证充分性，用反证法。若 $\chi(n;k)$ 不是原特征，则必有 $e\mid k$，$e<k$，使对任意
+	\begin{equation}
+		n\equiv n'\pmod e,\qquad (n,k)=(n',k)=1
+		\tag{22}
+	\end{equation}
+	都有
+	\begin{equation}
+		\chi(n;k)=\chi(n';k).
+		\tag{23}
+	\end{equation}
+	设
+	\[
+		e=p_1^{\beta_1}\cdots p_s^{\beta_s}.
+	\]
+	因为 $e\mid k$ 且 $e<k$，故至少有一个 $j$ 使 $\beta_j<\alpha_j$。取任意
+	\[
+		n_j\equiv n'_j\pmod {p_j^{\beta_j}},\qquad
+		(n_j,p_j)=(n'_j,p_j)=1,
+	\]
+	并令 $n_i=n'_i=1$（$i\neq j$），所对应的 $n,n'$ 必满足 \((22)\)。再由 \((21)\)、\((23)\) 得到
+	\[
+		\chi(n_j;p_j^{\alpha_j})=\chi(n'_j;p_j^{\alpha_j}),
+	\]
+	所以 $\chi(n;p_j^{\alpha_j})$ 不是原特征，矛盾。
+
+	再证必要性。若对某一个 $j$，$\chi(n;p_j^{\alpha_j})$ 不是原特征，则必有 $\beta_j<\alpha_j$，使得对任意
+	\[
+		n_j\equiv n'_j\pmod {p_j^{\beta_j}},\qquad
+		(n_j,p_j)=(n'_j,p_j)=1
+	\]
+	都有
+	\[
+		\chi(n_j;p_j^{\alpha_j})=\chi(n'_j;p_j^{\alpha_j}).
+	\]
+	取
+	\[
+		n=K'_1K_1n_1+\cdots+K'_sK_sn_s,\qquad
+		n'=K'_1K_1n'_1+\cdots+K'_sK_sn'_s,
+	\]
+	其中 $n_i\equiv n'_i\pmod {p_i^{\alpha_i}}$（$i\neq j$），而
+	\[
+		n_j\equiv n'_j\pmod {p_j^{\beta_j}}.
+	\]
+	则
+	\[
+		n\equiv n'\pmod e,\qquad (n,k)=(n',k)=1,
+	\]
+	其中
+	\[
+		e=\frac{k}{p_j^{\alpha_j-\beta_j}}<k.
+	\]
+	对满足上面条件的 $n,n'$ 显然有
+	\[
+		\chi(n;k)=\chi(n';k),
+	\]
+	所以 $\chi(n;k)$ 不是原特征，矛盾。定理证毕。
+\end{proof}
+
+\begin{theorem}[原文 定理 12]
+	$\chi(n;k)$ 是模 $k$ 的实原特征的充要条件是所有的 $\chi(n;p_j^{\alpha_j})$（$1\leq j\leq s$）均为实原特征；其模 $k$ 必为
+	\[
+		k=2^{\alpha}p_1p_2\cdots p_s
+	\]
+	的形式，其中 $\alpha=0,2,3$。
+\end{theorem}
+
+\begin{proof}
+	可由定理 10、定理 11 及定理 7 推出结论。
+\end{proof}
+
+由定理 11 及定理 5 可得到下面的定理。
+
+\begin{theorem}[原文 定理 13]
+	对模 $k$ 的每一个非主特征 $\chi(n;k)$，必存在唯一的一个模 $k^*$、$k^*\mid k$，及唯一的一个模 $k^*$ 的原特征 $\chi^*(n;k^*)$，使对所有满足 $(n,k)=1$ 的 $n$ 成立
+	\[
+		\chi(n;k)=\chi^*(n;k^*).
+	\]
+	反过来，对模 $k^*$ 的一个原特征 $\chi^*(n;k^*)$，对每一个模 $k$、$k^*\mid k$，必存在唯一的一个模 $k$ 的非主特征 $\chi(n;k)$，使对所有满足 $(n,k)=1$ 的 $n$ 成立
+	\[
+		\chi^*(n;k^*)=\chi(n;k).
+	\]
+\end{theorem}
+
+我们把上述性质所刻画的一一对应关系称为 $\chi^*$ 是 $\chi$ 所对应的原特征，而 $\chi$ 是由 $\chi^*$ 导出的特征，记作
+\[
+	\chi\sim\chi^*
+	\qquad\text{或}\qquad
+	\chi(n;k)\sim \chi^*(n;k^*).
+\]
+
+由原特征的定义知，模 $k$（$k\geq2$）的主特征是非原特征。有时为了方便起见，我们把模 $k=1$ 的特征定义为 $\chi(n;1)\equiv1$，它是主特征，但显然满足原特征的定义，所以亦是一个原特征。这时就把它看作所有模 $k$ 的主特征所对应的原特征。反过来，任意模 $k$ 的主特征都是由 $\chi(n;1)$ 导出的特征。
+
+下面的定理说明了定理 \(1'\) 中刻画的特征的三个性质是它的最基本的特性。
+
+\begin{theorem}[原文 定理 14]
+	设 $k$ 为自然数，$f(n)$ 是一个不恒为零的数论函数，满足下面三个条件：
+	\[
+	\begin{aligned}
+		&f(n)=0,\qquad (n,k)>1,\\
+		&f(n+k)=f(n),\\
+		&f(mn)=f(m)f(n).
+	\end{aligned}
+	\]
+	则必有一个模 $k$ 的特征 $\chi(n;k)$ 存在，使得
+	\[
+		\chi(n;k)=f(n).
+	\]
+\end{theorem}
+
+\begin{proof}
+	设 $(a,k)=1$，$\chi$ 为模 $k$ 的任一特征，令
+	\[
+		T=\sum_{n=1}^{k} f(n)\chi(n).
+	\]
+	则由 $f$ 的周期性、完全可乘性及 $\chi$ 的周期性可得
+	\[
+		T
+		=
+		\sum_{n=1}^{k}f(an)\chi(an)
+		=
+		f(a)\chi(a)T.
+	\]
+	亦即
+	\[
+		T(1-f(a)\chi(a))=0.
+	\]
+	由上式推知，要么存在一个特征 $\chi$ 使得 $T\neq0$，那么对这个特征就有
+	\[
+		f(a)\chi(a)=1,
+	\]
+	也就是
+	\[
+		f(a)=\overline{\chi}(a);
+	\]
+	要么对所有的特征 $\chi$ 均有 $T=0$。下面证明后一种情形不可能成立。
+
+	假设对所有 $\chi$ 都有 $T=0$，则对任意 $l$、$(l,k)=1$，有
+	\[
+		\sum_{\chi\bmod k}\overline{\chi}(l)
+		\sum_{n=1}^{k}f(n)\chi(n)
+		=0.
+	\]
+	但由 \((17')\) 知上式左边等于
+	\[
+		\sum_{n=1}^{k}f(n)\sum_{\chi\bmod k}\overline{\chi}(l)\chi(n)
+		=
+		f(l)\varphi(k).
+	\]
+	因为 $f(n)$ 不恒为零，所以一定存在一个 $l$ 使得 $f(l)\neq0$，矛盾。至此定理证毕。
+\end{proof}
+
+由定理 14 可推出下面的定理。
+
+\begin{theorem}[原文 定理 15]
+	设 $\chi(n;k_1)$、$\chi(n;k_2)$ 分别为模 $k_1,k_2$ 的特征，则
+	\[
+		\chi(n;k_1)\chi(n;k_2)
+	\]
+	为模 $[k_1,k_2]$ 的特征。
+\end{theorem}
+
+上面的定理当然亦可从特征的定义来直接证明。
+
+\section{特征和}
+
+设 $k\geq2$，$\chi(n)$ 为模 $k$ 的特征，$m$ 为整数，我们称
+\begin{equation}
+	G(m;\chi)=\sum_{l=1}^{k}\chi(l)e\left(\frac{ml}{k}\right)
+	\tag{24}
+\end{equation}
+为 Gauss 和（Gauss sum）。当 $m=1$ 时，我们记
+\begin{equation}
+	G(1;\chi)=\tau(\chi).
+	\tag{25}
+\end{equation}
+当 $\chi=\chi^0$ 时，我们记
+\begin{equation}
+	G(m;\chi^0)=C(m;k),
+	\tag{26}
+\end{equation}
+即
+\begin{equation}
+	C(m;k)=\sum_{\substack{1\leq l\leq k\\ (l,k)=1}}e\left(\frac{ml}{k}\right),
+	\tag{27}
+\end{equation}
+通常 $C(m;k)$ 称为 Ramanujan 和（Ramanujan sum）。
+
+由 Gauss 和的定义不难得到下面的定理。
+
+\begin{theorem}[原文 定理 16]
+	有以下性质：
+	\[
+	\begin{aligned}
+		& G(m_1;\chi)=G(m_2;\chi),\qquad m_1\equiv m_2\pmod k;\\
+		& G(-m;\chi)=\overline{\chi}(-1)G(m;\chi);\\
+		& G(m;\overline{\chi})=\chi(-1)\overline{G(m;\chi)};\\
+		& G(0;\chi^0)=\varphi(k),\qquad G(0;\chi)=0,\quad \chi\neq\chi^0;\\
+		& G(m;\chi)=\overline{\chi}(m)\tau(\chi),\qquad (m,k)=1.
+	\end{aligned}
+	\]
+\end{theorem}
+
+\begin{theorem}[原文 定理 17]
+	设 $k=k_1k_2$，$(k_1,k_2)=1$，$\chi_1,\chi_2$ 分别是模 $k_1,k_2$ 的特征，令 $\chi=\chi_1\chi_2$，则有
+	\begin{equation}
+		G(m;\chi)=\chi_1(k_2)\chi_2(k_1)G(m;\chi_1)G(m;\chi_2).
+		\tag{28}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	由定理 15 知 $\chi$ 为模 $k$ 的特征。令 $l=k_2l_1+k_1l_2$，则当 $l_1,l_2$ 分别通过模 $k_1,k_2$ 的完全系时，$l$ 通过模 $k$ 的完全系。所以
+	\[
+	\begin{aligned}
+		G(m;\chi)
+		&=
+		\sum_{l=1}^{k}\chi(l)e\left(\frac{ml}{k}\right)  \\
+		&=
+		\sum_{l_1=1}^{k_1}\sum_{l_2=1}^{k_2}
+		\chi(k_2l_1+k_1l_2)
+		e\left(\frac{m(l_1k_2+l_2k_1)}{k}\right)  \\
+		&=
+		\sum_{l_1=1}^{k_1}\chi_1(k_2l_1)e\left(\frac{ml_1}{k_1}\right)
+		\sum_{l_2=1}^{k_2}\chi_2(k_1l_2)e\left(\frac{ml_2}{k_2}\right)  \\
+		&=
+		\chi_1(k_2)\chi_2(k_1)G(m;\chi_1)G(m;\chi_2).
+	\end{aligned}
+	\]
+\end{proof}
+
+\begin{corollary}
+	设 $k=k_1k_2$，$(k_1,k_2)=1$，则有
+	\begin{equation}
+		C(m;k)=C(m;k_1)C(m;k_2),
+		\tag{29}
+	\end{equation}
+	即 $C(m;k)$ 为 $k$ 的可乘函数。
+\end{corollary}
+
+\begin{theorem}[原文 定理 18]
+	有
+	\begin{equation}
+		C(m;k)=\mu\left(\frac{k}{(m,k)}\right)
+		\frac{\varphi(k)}{\varphi\left(\frac{k}{(m,k)}\right)}.
+		\tag{30}
+	\end{equation}
+	特别地，当 $(m,k)=1$ 时，有
+	\begin{equation}
+		C(m;k)=C(1;k)=\mu(k).
+		\tag{31}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	因为 $C(m;k)$ 为 $k$ 的可乘函数，所以只要对 $k=p^\alpha$ 的情形来证明 \((30)\) 即可。此时
+	\[
+	\begin{aligned}
+		C(m;p^\alpha)
+		&=
+		\sum_{\substack{1\leq l\leq p^\alpha\\ (l,p)=1}}
+		e\left(\frac{ml}{p^\alpha}\right)  \\
+		&=
+		\sum_{l=1}^{p^\alpha}e\left(\frac{ml}{p^\alpha}\right)
+		-
+		\sum_{l=1}^{p^{\alpha-1}}e\left(\frac{ml}{p^{\alpha-1}}\right)  \\
+		&=
+		\begin{cases}
+			p^\alpha-p^{\alpha-1}, & p^\alpha\mid m,\\
+			-p^{\alpha-1}, & p^{\alpha-1}\parallel m,\\
+			0, & p^{\alpha-1}\nmid m.
+		\end{cases}
+	\end{aligned}
+	\]
+	所以
+	\[
+		C(m;p^\alpha)=
+		\mu\left(\frac{p^\alpha}{(p^\alpha,m)}\right)
+		\frac{\varphi(p^\alpha)}
+		{\varphi\left(\frac{p^\alpha}{(p^\alpha,m)}\right)}.
+	\]
+	定理得证。
+\end{proof}
+
+定理 17 说明了对一般 Gauss 和的讨论可以归结为对模为素数幂的特征的 Gauss 和的讨论。而定理 16 的第五条表明，当 $(m,k)=1$ 时，$G(m;\chi)$ 可以归结为较简单的 $\tau(\chi)$。下面我们要证明，当 $\chi$ 为原特征时，定理 16 的第五条在 $(m,k)>1$ 时亦是成立的，这是 Gauss 和的一个极为重要的性质。
+
+\begin{theorem}[原文 定理 19]
+	设 $\chi$ 为模 $k$ 的原特征，则有
+	\[
+		G(m;\chi)=0,\qquad (m,k)>1.
+	\]
+\end{theorem}
+
+\begin{proof}
+	我们只要对模 $k=p^\alpha$，$p\geq2$ 的情形证明即可。当 $k=2$ 时无原特征；当 $k=2^2$ 时，原特征为
+	\[
+		\chi(n)=(-1)^{(n-1)/2},\qquad (n,2)=1.
+	\]
+	设 $m=2m'$，则
+	\[
+	\begin{aligned}
+		G(m;\chi)
+		&=
+		\chi(1)e\left(\frac{2m'}{4}\right)
+		+\chi(3)e\left(\frac{2m'\cdot3}{4}\right)  \\
+		&=
+		e\left(\frac{m'}{2}\right)(\chi(1)+\chi(3))=0.
+	\end{aligned}
+	\]
+
+	现设 $k=2^\alpha$，$\alpha\geq3$，$m=2m'$，$\chi$ 为模 $2^\alpha$ 的原特征。由定理 4 的证明知
+	\[
+		\chi(l)=(-1)^{m_{-1}r_{-1}}
+		e\left(\frac{m_0r_0}{2^{\alpha-2}}\right),
+		\qquad (m_0,2)=1,\quad (l,k)=1,
+	\]
+	这里 $r_{-1},r_0$ 为 $l$ 的指标组。因此
+	\[
+	\begin{aligned}
+		G(m;\chi)
+		&=
+		\sum_{l=1}^{2^\alpha}\chi(l)e\left(\frac{lm}{2^\alpha}\right)
+		=
+		\sum_{l=1}^{2^\alpha}\chi(l)e\left(\frac{lm'}{2^{\alpha-1}}\right).
+	\end{aligned}
+	\]
+	令 $l=v+u2^{\alpha-1}$，得
+	\begin{equation}
+		G(m;\chi)=
+		\sum_{v=1}^{2^{\alpha-1}}
+		e\left(\frac{vm'}{2^{\alpha-1}}\right)
+		\sum_{u=0}^{1}\chi(u2^{\alpha-1}+v).
+		\tag{32}
+	\end{equation}
+	对 $(v,2)=1$，我们要证明
+	\begin{equation}
+		\sum_{u=0}^{1}\chi(u2^{\alpha-1}+v)=0.
+		\tag{33}
+	\end{equation}
+	因为 $(v,2)=1$，可取 $v^{-1}$ 使 $vv^{-1}\equiv1\pmod {2^\alpha}$，必有 $(v^{-1},2)=1$，因此
+	\begin{equation}
+		\chi(v^{-1})
+		\sum_{u=0}^{1}\chi(u2^{\alpha-1}+v)
+		=
+		\sum_{u=0}^{1}\chi(u2^{\alpha-1}+1)
+		=
+		\chi(1)+\chi(1+2^{\alpha-1}).
+		\tag{34}
+	\end{equation}
+	只要证明 $\chi(1+2^{\alpha-1})=-1$ 即可。设 $r_{-1},r_0$ 为 $1+2^{\alpha-1}$ 对模 $2^\alpha$ 的指标组，则
+	\[
+		r_{-1}=0,\qquad r_0=2^{\alpha-3}.
+	\]
+	因为 $(m_0,2)=1$，所以
+	\[
+		\chi(1+2^{\alpha-1})
+		=
+		e\left(\frac{m_0\,2^{\alpha-3}}{2^{\alpha-2}}\right)
+		=
+		(-1)^{m_0}
+		=-1.
+	\]
+	因此 \((33)\) 成立。
+
+	下面讨论 $k=p^\alpha$，$p>2$ 的情形。首先当 $\alpha=1$ 时，由 $p\mid m$ 及 $\chi\neq\chi_0$ 立即推出
+	\[
+		G(m;\chi)=\sum_{l=1}^{k}\chi(l)=0.
+	\]
+	所以剩下的只要证明 $\alpha\geq2$ 的情形。令 $l=v+up^{\alpha-1}$，则有
+	\begin{equation}
+	\begin{aligned}
+		G(m;\chi)
+		&=
+		\sum_{\substack{1\leq v\leq p^{\alpha-1}\\ (v,p)=1}}
+		\sum_{u=0}^{p-1}
+		\chi(up^{\alpha-1}+v)
+		e\left(\frac{m(up^{\alpha-1}+v)}{p^\alpha}\right)  \\
+		&=
+		\sum_{\substack{1\leq v\leq p^{\alpha-1}\\ (v,p)=1}}
+		e\left(\frac{m'v}{p^{\alpha-1}}\right)
+		\sum_{u=0}^{p-1}\chi(up^{\alpha-1}+v),
+	\end{aligned}
+	\tag{35}
+	\end{equation}
+	这里 $m=m'p$。因为 $(v,p)=1$，所以由 \((35)\) 得到
+	\begin{equation}
+		G(m;\chi)=
+		\sum_{\substack{1\leq v\leq p^{\alpha-1}\\ (v,p)=1}}
+		e\left(\frac{m'v}{p^{\alpha-1}}\right)
+		\chi(v)
+		\sum_{u=0}^{p-1}\chi(up^{\alpha-1}+1).
+		\tag{36}
+	\end{equation}
+	现在证明
+	\begin{equation}
+		\sum_{u=0}^{p-1}\chi(up^{\alpha-1}+1)=0.
+		\tag{37}
+	\end{equation}
+	设 $g$ 为所有模 $p^\beta$（$\beta\geq1$）的原根，以 $r=r(u)$、$r'=r'(u)$ 分别表示 $up^{\alpha-1}+1$ 对模 $p^\alpha$、$p^{\alpha-1}$ 的指标。由指标性质知必有
+	\[
+		r'\equiv0\pmod{\varphi(p^{\alpha-1})},\qquad
+		r\equiv r'\pmod{\varphi(p^{\alpha-1})}.
+	\]
+	因此
+	\[
+		r=r(u)=b(u)p^{\alpha-2}(p-1),\qquad 0\leq b(u)<p.
+	\]
+	由于当 $0\leq u\leq p-1$ 时，$up^{\alpha-1}+1$ 对模 $p^\alpha$ 两两不同余，所以它们的指标对模 $\varphi(p^\alpha)$ 亦两两不同余。因此 $b(u)$ 对模 $p$ 两两不同余；所以当 $u$ 遍历模 $p$ 的完全系时，$b=b(u)$ 亦遍历模 $p$ 的完全系。若 $\chi(l)=e(a\operatorname{ind}l/\varphi(p^\alpha))$，则由原特征性知 $(a,p)=1$，于是
+	\[
+	\begin{aligned}
+		\sum_{u=0}^{p-1}\chi(up^{\alpha-1}+1)
+		&=
+		\sum_{u=0}^{p-1}
+		e\left(\frac{a r(u)}{\varphi(p^\alpha)}\right)  \\
+		&=
+		\sum_{u=0}^{p-1}
+		e\left(\frac{a b(u)p^{\alpha-2}(p-1)}{\varphi(p^\alpha)}\right)  \\
+		&=
+		\sum_{b=0}^{p-1}e\left(\frac{ab}{p}\right)=0.
+	\end{aligned}
+	\]
+	定理全部证毕。
+\end{proof}
+
+由定理 19 及定理 16 的第五条得到下面的定理。
+
+\begin{theorem}[原文 定理 20]
+	设 $\chi$ 为模 $k$ 的原特征，则有
+	\begin{equation}
+		G(m;\chi)=\overline{\chi}(m)\tau(\chi).
+		\tag{38}
+	\end{equation}
+\end{theorem}
+
+\begin{theorem}[原文 定理 21]
+	设 $\chi$ 为模 $k$ 的原特征，则有
+	\begin{equation}
+		|\tau(\chi)|=\sqrt{k}.
+		\tag{39}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	由 \((38)\) 得到
+	\begin{equation}
+		\sum_{m=1}^{k}|G(m;\chi)|^2
+		=
+		\sum_{m=1}^{k}|\chi(m)|^2|\tau(\chi)|^2
+		=
+		\varphi(k)|\tau(\chi)|^2.
+		\tag{40}
+	\end{equation}
+	但另一方面，由 $G(m;\chi)$ 的定义得到
+	\begin{equation}
+	\begin{aligned}
+		\sum_{m=1}^{k}|G(m;\chi)|^2
+		&=
+		\sum_{m=1}^{k}
+		\sum_{l_1=1}^{k}\chi(l_1)e\left(\frac{ml_1}{k}\right)
+		\sum_{l_2=1}^{k}\overline{\chi}(l_2)e\left(\frac{-ml_2}{k}\right)  \\
+		&=
+		\sum_{l_1=1}^{k}\sum_{l_2=1}^{k}
+		\chi(l_1)\overline{\chi}(l_2)
+		\sum_{m=1}^{k}e\left(\frac{m(l_1-l_2)}{k}\right)  \\
+		&=
+		k\sum_{l=1}^{k}\chi(l)\overline{\chi}(l)
+		=
+		k\varphi(k).
+	\end{aligned}
+	\tag{41}
+	\end{equation}
+	由 \((40)\)、\((41)\) 即得 \((39)\)。
+\end{proof}
+
+最后我们指出特征和的一个重要性质。设 $\chi$ 是模 $k$ 的非主特征，则由 \((18)\) 式知，对任意的 $M,N$ 有
+\begin{equation}
+	\left|
+	\sum_{n=N+1}^{N+M}\chi(n)
+	\right|
+	<
+	\frac{1}{2}\varphi(k).
+	\tag{42}
+\end{equation}
+但这个估计是较粗糙的，我们有下面的定理。
+
+\begin{theorem}[原文 定理 22]
+	设 $\chi$ 是模 $k$ 的原特征，则对任意的 $M,N$ 有
+	\begin{equation}
+		\left|
+		\sum_{n=N+1}^{N+M}\chi(n)
+		\right|
+		<
+		\sqrt{k}\log k.
+		\tag{43}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	不失一般性，可设 $M<k$。由 \((38)\) 式知
+	\[
+		\chi(n)=
+		\frac{1}{\tau(\overline{\chi})}
+		\sum_{l=1}^{k}\overline{\chi}(l)e\left(\frac{nl}{k}\right),
+	\]
+	所以
+	\[
+		\sum_{n=N+1}^{N+M}\chi(n)
+		=
+		\frac{1}{\tau(\overline{\chi})}
+		\sum_{l=1}^{k}\overline{\chi}(l)
+		\sum_{n=N+1}^{N+M}e\left(\frac{nl}{k}\right).
+	\]
+	若以 $S$ 记作上式右边的和式，则由上式得到
+	\begin{equation}
+		|S|
+		\leq
+		\frac{1}{\sqrt{k}}
+		\sum_{l=1}^{k-1}
+		\left|
+		\sum_{n=0}^{M-1}e\left(\frac{nl}{k}\right)
+		\right|.
+		\tag{44}
+	\end{equation}
+	由于当 $1\leq l\leq k-1$ 时有
+	\[
+		\left|
+		\sum_{n=0}^{M-1}e\left(\frac{nl}{k}\right)
+		\right|
+		\leq
+		\frac{2}{|1-e(l/k)|}
+		=
+		\left(\sin\frac{\pi l}{k}\right)^{-1},
+	\]
+	所以
+	\begin{equation}
+		|S|
+		\leq
+		\frac{1}{\sqrt{k}}
+		\sum_{l=1}^{k-1}
+		\left(\sin\frac{\pi l}{k}\right)^{-1}.
+		\tag{45}
+	\end{equation}
+	但当 $0\leq x\leq \pi/2$ 时，有
+	\[
+		\sin x\geq \frac{2}{\pi}x.
+	\]
+	所以当 $k$ 为奇数时，由上式得到
+	\begin{equation}
+		|S|
+		\leq
+		\frac{2}{\sqrt{k}}
+		\sum_{l=1}^{(k-1)/2}
+		\left(\sin\frac{\pi l}{k}\right)^{-1}
+		<
+		\sqrt{k}
+		\sum_{l=1}^{(k-1)/2}\frac{1}{l}.
+		\tag{46}
+	\end{equation}
+	当 $k$ 是偶数时得到
+	\begin{equation}
+		|S|
+		<
+		\frac{2}{\sqrt{k}}
+		\sum_{l=1}^{(k-1)/2}
+		\left(\sin\frac{\pi l}{k}\right)^{-1}
+		+
+		\frac{1}{\sqrt{k}}
+		\leq
+		\sqrt{k}\sum_{l=1}^{k/2-1}\frac{1}{l}
+		+
+		\frac{1}{\sqrt{k}}.
+		\tag{47}
+	\end{equation}
+	再利用不等式
+	\[
+		\log\frac{2m+1}{2m-1}
+		=
+		\int_{2m-1}^{2m+1}\frac{dt}{t}
+		>
+		\frac{1}{m},
+		\qquad m\geq1,
+	\]
+	可得，当 $k$ 为奇数时
+	\begin{equation}
+		\sum_{l=1}^{(k-1)/2}\frac{1}{l}<\log k;
+		\tag{48}
+	\end{equation}
+	当 $k$ 为偶数时
+	\begin{equation}
+		\sum_{l=1}^{k/2-1}\frac{1}{l}
+		<
+		\log(k-1)
+		\leq
+		\log k-\frac{1}{\sqrt{k}}.
+		\tag{49}
+	\end{equation}
+	由 \((45)\)--\((49)\) 即得 \((43)\)。
+\end{proof}
