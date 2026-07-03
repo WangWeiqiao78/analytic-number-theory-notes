@@ -1,0 +1,1410 @@
+% compact: extracted from ../../chapter5-6-rewrite.tex for compressed lecture only.
+\chapter{指数、原根和指标}
+
+本章始终把模 $n$ 的可逆剩余类看成群
+\(
+  \U n=(\Z/n\Z)^\times .
+\)
+所谓模 $n$ 存在原根，现代地说就是 $\U n$ 是循环群（cyclic group，循环群）；若
+$g\in \U n$ 生成 $\U n$，则也称整数 $g$ 是模 $n$ 的原根。这样定义之后，后面的定理本质上都是在讨论
+$\U n$ 的群结构。
+
+\section{阶、原根与基本定理}
+
+\begin{theorem}[二的高次幂没有原根]
+若 $k\ge 3$，则模 $2^k$ 不存在原根。更准确地说，对任意奇数 $a$，有 $a^{2^{k-2}}\equiv 1\pmod {2^k}$。
+\end{theorem}
+
+\begin{proof}
+先证模 $8$：任意奇数可写成 $2h+1$，而 $(2h+1)^2=4h(h+1)+1\equiv 1\pmod 8$。下面对 $k\ge3$ 归纳。$k=3$ 已证；若 $2^{k-1}\mid a^{2^{k-3}}-1$，则
+$a^{2^{k-2}}-1=(a^{2^{k-3}}-1)(a^{2^{k-3}}+1)$，其中第一因子含有 $2^{k-1}$，第二因子为偶数，故乘积含有 $2^k$。于是 $a^{2^{k-2}}\equiv1\pmod {2^k}$，而 $2^{k-2}<\varphi(2^k)$，所以模 $2^k$ 没有原根。
+\end{proof}
+
+\begin{proposition}[幂的阶]
+若 $(a,n)=1$，$c\ge 1$，则 $\delta_n(a^c)=\dfrac{\delta_n(a)}{(\delta_n(a),c)}$。
+\end{proposition}
+
+\begin{proposition}[互素阶的乘积]
+若 $(a,n)=(b,n)=1$ 且 $(\delta_n(a),\delta_n(b))=1$，则 $\delta_n(ab)=\delta_n(a)\delta_n(b)$。
+\end{proposition}
+
+\begin{remark}
+若 $\delta_n(a)$ 与 $\delta_n(b)$ 不互素，一般不能写成 $\delta_n(ab)=\operatorname{lcm}(\delta_n(a),\delta_n(b))$。例如模 $10$ 中，$3$ 与 $7$ 的阶都为 $4$，但
+$3\cdot 7\equiv 1\pmod {10}$，所以乘积的阶为 $1$。
+\end{remark}
+
+\begin{theorem}[阶的最小公倍数可以实现]
+若
+\(
+  (a,n)=(b,n)=1,
+\)
+则存在整数，使得
+\(
+  \delta_n(c)=\operatorname{lcm}(\delta_n(a),\delta_n(b)).
+\)
+\end{theorem}
+
+\begin{proof}
+记
+\(
+  r=\delta_n(a),\qquad s=\delta_n(b),\qquad L=\operatorname{lcm}(r,s),
+\)
+并写
+\(
+  L=\prod_q q^{\lambda_q}.
+\)
+对每个素数因子而言，在
+\(
+  r,\qquad s
+\)
+中至少有一个含有
+\(
+  q^{\lambda_q}.
+\)
+若这个最高幂来自
+\(
+  r,
+\)
+取
+\(
+  c_q=a^{\,r/q^{\lambda_q}};
+\)
+若来自
+\(
+  s,
+\)
+取
+\(
+  c_q=b^{\,s/q^{\lambda_q}}.
+\)
+于是
+\(
+  \delta_n(c_q)=q^{\lambda_q}.
+\)
+令
+\(
+  c=\prod_q c_q.
+\)
+这些阶两两互素，由上一命题可知
+\(
+  \delta_n(c)=\prod_q q^{\lambda_q}=L.
+\)
+\end{proof}
+
+\begin{proposition}[中国剩余定理下的阶]
+若
+\(
+  (n_1,n_2)=1,\qquad (a,n_1n_2)=1,
+\)
+则
+\(
+  \delta_{n_1n_2}(a)
+  =
+  \operatorname{lcm}\bigl(\delta_{n_1}(a),\delta_{n_2}(a)\bigr).
+\)
+\end{proposition}
+
+\begin{proof}
+由中国剩余定理（Chinese remainder theorem，中国剩余定理）
+\(
+  \Z/n_1n_2\Z\simeq \Z/n_1\Z\times \Z/n_2\Z
+\)
+可知
+\(
+  a^t\equiv 1\pmod {n_1n_2}
+\)
+当且仅当
+\(
+  a^t\equiv 1\pmod {n_1},\qquad
+  a^t\equiv 1\pmod {n_2}.
+\)
+因此满足条件的正整数
+\(
+  t
+\)
+正是同时被
+\(
+  \delta_{n_1}(a),\qquad \delta_{n_2}(a)
+\)
+整除的正整数，最小者就是
+\(
+  \operatorname{lcm}\bigl(\delta_{n_1}(a),\delta_{n_2}(a)\bigr).
+\)
+\end{proof}
+
+\begin{corollary}
+若 $(n_1,n_2)=1$，且分别给定 $(a_1,n_1)=1$、$(a_2,n_2)=1$，则存在 $a$ 满足
+\(
+  a\equiv a_1\pmod {n_1},\qquad
+  a\equiv a_2\pmod {n_2},
+\)
+并且
+\(
+  \delta_{n_1n_2}(a)
+  =
+  \operatorname{lcm}\bigl(\delta_{n_1}(a_1),\delta_{n_2}(a_2)\bigr).
+\)
+\end{corollary}
+
+\section{原根存在定理}
+
+为了统一表述，定义
+\(
+  \Phi(2^\alpha)=
+  \begin{cases}
+    \varphi(2^\alpha), & 0\le \alpha\le 2,\\
+    \dfrac12\varphi(2^\alpha)=2^{\alpha-2}, & \alpha\ge 3.
+  \end{cases}
+\)
+若
+\(
+  n=2^{\alpha_0}p_1^{\alpha_1}\cdots p_s^{\alpha_s}
+\)
+是 $n$ 的素因子分解，其中 $p_i$ 为奇素数，则记
+\(
+  \varepsilon(n)
+  =
+  \operatorname{lcm}\bigl(\Phi(2^{\alpha_0}),
+  \varphi(p_1^{\alpha_1}),\ldots,\varphi(p_s^{\alpha_s})\bigr).
+\)
+这个数就是群 $\U n$ 中元素的阶所能达到的最大值，也就是 $\U n$ 的指数。
+
+\begin{theorem}[模素数存在原根]
+若 $p$ 为素数，则 $\U p$ 是循环群。等价地，存在模 $p$ 的原根。
+\end{theorem}
+
+\begin{lemma}[从模 $p$ 提升到模 $p^2$]
+设 $p$ 为奇素数，$g$ 是模 $p$ 的原根。则在
+\(
+  g,\ g+p,\ g+2p,\ldots,g+(p-1)p
+\)
+中，至少有一个是模 $p^2$ 的原根。
+\end{lemma}
+
+\begin{proof}
+因为每个 $g+tp$ 都模 $p$ 同余于 $g$，所以它模 $p^2$ 的阶只能是
+\(
+  p-1\quad\text{或}\quad p(p-1)=\varphi(p^2).
+\)
+如果某个 $t$ 使得
+\(
+  (g+tp)^{p-1}\not\equiv 1\pmod {p^2},
+\)
+那么 $g+tp$ 就是模 $p^2$ 的原根。
+
+设
+\(
+  g^{p-1}=1+cp.
+\)
+用二项式展开得
+\(
+  (g+tp)^{p-1}
+  \equiv
+  g^{p-1}+(p-1)g^{p-2}tp
+  \equiv
+  1+p\bigl(c+(p-1)g^{p-2}t\bigr)
+  \pmod {p^2}.
+\)
+括号中关于 $t$ 的一次式模 $p$ 只有一个零点。因此在 $t=0,1,\ldots,p-1$ 中，至多一个 $t$ 使得
+$(g+tp)^{p-1}\equiv 1\pmod {p^2}$。于是至少存在一个 $t$ 使 $g+tp$ 为模 $p^2$ 原根。
+\end{proof}
+
+\begin{theorem}[奇素数幂模原根]
+若 $p$ 为奇素数，$\alpha\ge 1$，则模 $p^\alpha$ 存在原根。更具体地，若 $g$ 是模 $p^2$ 的原根，则 $g$ 是每个模
+$p^\alpha$ 的原根。
+\end{theorem}
+
+\begin{proof}
+对 $\alpha=1,2$ 已由前面的定理与引理得到。设 $\alpha\ge 2$，并假设 $g$ 是模 $p^\alpha$ 的原根，即
+\(
+  \delta_{p^\alpha}(g)=\varphi(p^\alpha)=p^{\alpha-1}(p-1).
+\)
+因为 $g^{\varphi(p^\alpha)}\equiv 1\pmod {p^\alpha}$，可写
+\(
+  g^{\varphi(p^\alpha)}=1+up^\alpha.
+\)
+若 $p\nmid u$，则
+\(
+  g^{\varphi(p^\alpha)}\not\equiv 1\pmod {p^{\alpha+1}},
+\)
+从而模 $p^{\alpha+1}$ 的阶为 $p\varphi(p^\alpha)=\varphi(p^{\alpha+1})$。
+
+只需说明从模 $p^2$ 原根开始，始终有 $p\nmid u$。若某一步 $p\mid u$，则
+\(
+  g^{\varphi(p^\alpha)}\equiv 1\pmod {p^{\alpha+1}}.
+\)
+降到模 $p^2$ 后会推出
+\(
+  g^{p-1}\equiv 1\pmod {p^2},
+\)
+这与 $g$ 为模 $p^2$ 原根矛盾。因此 $g$ 的阶每一步都乘以 $p$，故 $g$ 是所有模 $p^\alpha$ 的原根。
+\end{proof}
+
+\begin{corollary}
+若 $p$ 为奇素数，$\alpha\ge 1$，则模 $2p^\alpha$ 也存在原根。
+\end{corollary}
+
+\begin{proof}
+由中国剩余定理，具体映射为
+\(\Phi:\U{2p^\alpha}\to \U{2}\times\U{p^\alpha},\ [a]_{2p^\alpha}\mapsto ([a]_2,[a]_{p^\alpha})\)。
+由于 \(\U{2}=\{[1]_2\}\)，复合第二个分量投影得到同构
+\(\pi:\U{2p^\alpha}\to \U{p^\alpha},\ [a]_{2p^\alpha}\mapsto [a]_{p^\alpha}\)。
+其反向映射为：给定 \([u]_{p^\alpha}\in\U{p^\alpha}\)，取唯一的 \([x]_{2p^\alpha}\) 满足
+\(x\equiv 1\pmod 2,\ x\equiv u\pmod {p^\alpha}\)，并令
+\(\iota([u]_{p^\alpha})=[x]_{2p^\alpha}\)。因此若 \([g]_{p^\alpha}\) 是生成元，则 \(\iota([g]_{p^\alpha})\) 是 \(\U{2p^\alpha}\) 的生成元，即给出模 \(2p^\alpha\) 的原根。
+\end{proof}
+
+\begin{theorem}[原根存在的完全判别]
+模 $n$ 存在原根当且仅当
+\(
+  n=1,\ 2,\ 4,\ p^\alpha,\ 2p^\alpha
+\)
+之一，其中 $p$ 为奇素数，$\alpha\ge 1$。
+\end{theorem}
+
+\begin{proof}
+充分性已经证明：$1,2,4$ 的情形直接；奇素数幂与其二倍由上面的定理和推论得到。
+
+下面证明必要性。若 $2^\alpha\mid n$ 且 $\alpha\ge 3$，则由中国剩余定理，$\U n$ 映到 $\U{2^\alpha}$。模
+$2^\alpha$ 中任意元素的阶都整除 $2^{\alpha-2}$，而 $\varphi(2^\alpha)=2^{\alpha-1}$，这会使 $\U n$ 的指数严格小于
+$\varphi(n)$，故 $\U n$ 不能循环。
+
+若 $n$ 含有两个不同的奇素因子，即
+\(
+  p^\alpha q^\beta\mid n,\qquad p\ne q,
+\)
+则
+\(
+  \varphi(p^\alpha)\quad\text{和}\quad \varphi(q^\beta)
+\)
+都为偶数。中国剩余定理给出
+\(
+  \U n
+  \longrightarrow
+  \U{p^\alpha}\times \U{q^\beta}
+\)
+的投影，而右边元素的阶所能达到的最大值只可能是
+\(
+  \operatorname{lcm}\bigl(\varphi(p^\alpha),\varphi(q^\beta)\bigr)
+  <
+  \varphi(p^\alpha)\varphi(q^\beta).
+\)
+因此整体群的指数小于群的阶，也不可能循环。
+
+于是 $n$ 至多含一个奇素因子，且 $2$ 的指数至多为 $1$，除非没有奇素因子时允许 $2,4$。这正得到列出的形式。
+\end{proof}
+
+\begin{theorem}[循环情形中给定阶的元素个数]
+若模 $n$ 存在原根，且 $d\mid \varphi(n)$，则模 $n$ 中阶为 $d$ 的元素恰有
+\(
+  \varphi(d)
+\)
+个。特别地，模 $n$ 的原根个数为
+\(
+  \varphi(\varphi(n)).
+\)
+\end{theorem}
+
+\begin{proof}
+设 $g$ 是模 $n$ 的原根，则 $\U n=\langle g\rangle$，群的阶为 $m=\varphi(n)$。任意元素可唯一写成
+\(
+  g^r,\qquad r\in \Z/m\Z.
+\)
+由幂的阶公式，
+\(
+  \delta_n(g^r)=\frac{m}{(m,r)}.
+\)
+令它等于 $d$，即
+\(
+  (m,r)=m/d.
+\)
+这等价于 $r=(m/d)u$ 且 $(u,d)=1$。这样的 $u$ 模 $d$ 有 $\varphi(d)$ 个。
+\end{proof}
+
+\begin{theorem}[一般模数中给定阶的元素个数]
+设 \(n=2^{\alpha_0}p_1^{\alpha_1}\cdots p_s^{\alpha_s}\)，其中 \(p_i\) 为互异奇素数。若 \(d\mid \varepsilon(n)\)，则 \(\U n\) 中阶为 \(d\) 的元素个数为
+\(
+A_n(d)=\sum_{e\mid d}\mu\!\left(\frac d e\right)\rho_{\alpha_0}(e)\prod_{i=1}^s (e,\varphi(p_i^{\alpha_i})),
+\)
+其中 \(\mu\) 是 Möbius 函数（Möbius function），并且 \(\rho_{\alpha}(e)=1\) 当 \(\alpha=0,1\)，\(\rho_2(e)=(e,2)\)，而 \(\alpha\ge3\) 时 \(\rho_{\alpha}(e)=(e,2)(e,2^{\alpha-2})\)。若 \(d\nmid\varepsilon(n)\)，则这样的元素不存在。
+\end{theorem}
+
+\begin{proof}
+记 \(R_n(e)=\#\{x\in\U n:x^e=1\}\)。由中国剩余定理，\(\U n\simeq \U{2^{\alpha_0}}\times \prod_{i=1}^s\U{p_i^{\alpha_i}}\)。奇素数幂部分是循环群，故 \(\U{p_i^{\alpha_i}}\) 中满足 \(x^e=1\) 的元素个数为 \((e,\varphi(p_i^{\alpha_i}))\)。二幂部分中，\(\alpha=0,1\) 时群平凡，\(\alpha=2\) 时 \(\U4\simeq C_2\)，\(\alpha\ge3\) 时 \(\U{2^\alpha}\simeq C_2\times C_{2^{\alpha-2}}\)，所以二幂部分贡献正是 \(\rho_{\alpha_0}(e)\)。因此 \(R_n(e)=\rho_{\alpha_0}(e)\prod_{i=1}^s(e,\varphi(p_i^{\alpha_i}))\)。若 \(A_n(t)\) 表示阶恰为 \(t\) 的元素个数，则 \(R_n(e)=\sum_{t\mid e}A_n(t)\)，因为 \(x^e=1\) 当且仅当 \(x\) 的阶整除 \(e\)。由 Möbius 反演（Möbius inversion）得到所述公式。最后，元素的阶必整除群的指数 \(\varepsilon(n)\)，所以 \(d\nmid\varepsilon(n)\) 时不存在阶为 \(d\) 的元素。
+\end{proof}
+
+\section{结构定理、指标与指标组}
+
+上节讨论原根是否存在。本节把剩余类群的结构直接写出来。这样做之后，“原根存在”只是“这些直积分量能否合并成一个循环群”的特例。
+
+\begin{theorem}[奇素数幂模单位群]
+若 $p$ 为奇素数，$\alpha\ge 1$，取模 $p^\alpha$ 的原根 $g$，则映射
+\(
+  \Cyc{\varphi(p^\alpha)}
+  \longrightarrow
+  \U{p^\alpha},\qquad
+  r\longmapsto g^r
+\)
+是群同构。
+\end{theorem}
+
+\begin{theorem}[二的幂模单位群]
+若 $\alpha\ge 3$，则
+\(
+  \U{2^\alpha}\simeq \Cyc2\times \Cyc{2^{\alpha-2}}.
+\)
+具体地，映射
+\(
+  \Cyc2\times \Cyc{2^{\alpha-2}}
+  \longrightarrow
+  \U{2^\alpha},\qquad
+  (u,v)\longmapsto (-1)^u5^v
+\)
+是群同构。也可以把 $5$ 换成 $3$；此时 $3$ 在第二个因子中也生成一个阶为 $2^{\alpha-2}$ 的循环子群。
+\end{theorem}
+
+\begin{proof}
+先证明 $5$ 的阶为 $2^{\alpha-2}$。由二项式展开可归纳得到
+\(
+  5^{2^r}\equiv 1+2^{r+2}\pmod {2^{r+3}}\qquad(r\ge 0).
+\)
+因此 $5^{2^{\alpha-2}}\equiv 1\pmod {2^\alpha}$，但
+$5^{2^{\alpha-3}}\not\equiv 1\pmod {2^\alpha}$，所以
+\(
+  \delta_{2^\alpha}(5)=2^{\alpha-2}.
+\)
+
+接着说明每个奇数类都唯一写成 $(-1)^u5^v$。集合
+\(
+  \{5^v:0\le v<2^{\alpha-2}\}
+\)
+全部同余于 $1\pmod 4$；而
+\(
+  \{-5^v:0\le v<2^{\alpha-2}\}
+\)
+全部同余于 $-1\pmod 4$。这两个集合不相交，总共有
+$2\cdot 2^{\alpha-2}=2^{\alpha-1}=\varphi(2^\alpha)$ 个元素，因此正好给出全部奇剩余类。唯一性也随之成立。
+\end{proof}
+
+\begin{theorem}[一般结构定理]
+设
+\(
+  n=2^{\alpha_0}p_1^{\alpha_1}\cdots p_s^{\alpha_s},
+\)
+其中 $p_i$ 为两两不同的奇素数。对每个 $i$ 取模 $p_i^{\alpha_i}$ 的原根 $g_i$。则
+\(
+  \U n
+  \simeq
+  \U{2^{\alpha_0}}
+  \times
+  \U{p_1^{\alpha_1}}
+  \times\cdots\times
+  \U{p_s^{\alpha_s}}.
+\)
+这里的同构由中国剩余定理给出：
+\(
+  a\pmod n
+  \longmapsto
+  \bigl(a\bmod 2^{\alpha_0},\ a\bmod p_1^{\alpha_1},\ldots,a\bmod p_s^{\alpha_s}\bigr).
+\)
+反向映射是唯一满足
+\(
+  a\equiv a_0\pmod {2^{\alpha_0}},\qquad
+  a\equiv a_i\pmod {p_i^{\alpha_i}}\quad(1\le i\le s)
+\)
+的剩余类 $a\pmod n$。
+\end{theorem}
+
+\begin{proof}
+这是中国剩余定理在单位群上的限制。因为一个类模 $n$ 可逆，当且仅当它在每个素数幂模数下都可逆，所以环同构限制为单位群同构。
+\end{proof}
+
+把局部同构写开，可得到完全显式的坐标表示：若 $\alpha_0=0$，没有二次因子坐标；若 $\alpha_0=1$，$\U2$ 为平凡群，也没有有效坐标；若 $\alpha_0=2$，$\U4=\{\pm1\}$，用一个坐标 $u\in\Cyc2$ 表示 $(-1)^u$；若 $\alpha_0\ge3$，用两个坐标 \(u\in\Cyc2,\ v\in\Cyc{2^{\alpha_0-2}}\) 表示 \((-1)^u5^v\pmod {2^{\alpha_0}}\)；对每个奇素数幂 $p_i^{\alpha_i}$，用坐标 \(r_i\in \Cyc{\varphi(p_i^{\alpha_i})}\) 表示 \(g_i^{r_i}\pmod {p_i^{\alpha_i}}\)。因此在这些坐标下，群运算就是各坐标相加。这是后面“指标组”的来源。
+
+\begin{definition}[指标]
+若模 $n$ 存在原根 $g$，对任意 $(a,n)=1$，唯一的
+\(
+  r\in \Z/\varphi(n)\Z
+\)
+使
+\(
+  g^r\equiv a\pmod n
+\)
+成立。这个 $r$ 称为 $a$ 以 $g$ 为底的指标（index，指标），记为
+\(
+  \operatorname{ind}_g a\equiv r\pmod{\varphi(n)}.
+\)
+\end{definition}
+
+\begin{proposition}[指标的基本性质]
+设 $g$ 是模 $n$ 的原根，$(a,n)=(b,n)=1$。则
+\(
+  \operatorname{ind}_g(ab)
+  \equiv
+  \operatorname{ind}_g a+\operatorname{ind}_g b
+  \pmod{\varphi(n)}.
+\)
+并且
+\(
+  \delta_n(a)
+  =
+  \frac{\varphi(n)}
+  {(\varphi(n),\operatorname{ind}_g a)}.
+\)
+\end{proposition}
+
+\begin{proof}
+若 $a\equiv g^r$、$b\equiv g^s$，则 $ab\equiv g^{r+s}$，这给出指标的加法公式。阶公式则由
+\(
+  \delta_n(g^r)=\frac{\delta_n(g)}{(\delta_n(g),r)}
+  =
+  \frac{\varphi(n)}{(\varphi(n),r)}
+\)
+直接得到。
+\end{proof}
+
+\begin{proposition}[换底公式]
+若 $g_1,g_2$ 都是模 $n$ 的原根，则
+\(
+  \operatorname{ind}_{g_1}g_2\cdot \operatorname{ind}_{g_2}g_1
+  \equiv 1\pmod{\varphi(n)}.
+\)
+并且对任意 $(a,n)=1$，
+\(
+  \operatorname{ind}_{g_1}a
+  \equiv
+  \operatorname{ind}_{g_1}g_2\cdot \operatorname{ind}_{g_2}a
+  \pmod{\varphi(n)}.
+\)
+\end{proposition}
+
+\begin{proof}
+设 $g_2\equiv g_1^u$，$g_1\equiv g_2^v$。代入得到
+\(
+  g_1\equiv (g_1^u)^v=g_1^{uv}\pmod n.
+\)
+因为 $g_1$ 的阶为 $\varphi(n)$，所以 $uv\equiv1\pmod{\varphi(n)}$。
+若 $a\equiv g_2^r$，则
+\(
+  a\equiv (g_1^u)^r=g_1^{ur}\pmod n,
+\)
+即得到第二个公式。
+\end{proof}
+
+\begin{definition}[指标组]
+若模 $n$ 不一定存在原根，就用上一节结构定理给出的坐标来代替单一指标。设
+\(
+  n=2^{\alpha_0}p_1^{\alpha_1}\cdots p_s^{\alpha_s}.
+\)
+对奇素数幂部分，取原根 $g_i$，令
+\(
+  r_i=\operatorname{ind}_{g_i}(a\bmod p_i^{\alpha_i})
+  \in \Cyc{\varphi(p_i^{\alpha_i})}.
+\)
+对二的幂部分，若 $\alpha_0\ge3$，唯一写
+\(
+  a\equiv (-1)^{r_{-1}}5^{r_5}\pmod {2^{\alpha_0}},
+  \qquad
+  r_{-1}\in\Cyc2,\quad r_5\in \Cyc{2^{\alpha_0-2}}.
+\)
+把这些坐标合在一起，称为 $a$ 的指标组（index group coordinates，指标组坐标）。
+\end{definition}
+
+在指标组中，乘法变成坐标加法。例如当 $\alpha\ge3$ 时，
+\(
+  a\equiv (-1)^{r_{-1}(a)}5^{r_5(a)},\qquad
+  b\equiv (-1)^{r_{-1}(b)}5^{r_5(b)}
+  \pmod {2^\alpha}
+\)
+蕴含
+\(
+  r_{-1}(ab)\equiv r_{-1}(a)+r_{-1}(b)\pmod 2,
+\)
+\(
+  r_5(ab)\equiv r_5(a)+r_5(b)\pmod {2^{\alpha-2}}.
+\)
+这正是手写稿中“指标组”的含义：用一个或多个循环坐标记录单位群元素。
+
+\section{二项同余方程与 $k$ 次剩余}
+
+所谓二项同余方程，就是
+\(
+  x^k\equiv a\pmod n,\qquad (a,n)=1.
+\)
+在群论语言中，它就是询问 $a$ 是否属于群 $\U n$ 中的 $k$ 次幂像。
+
+\begin{theorem}[循环情形的判别]
+假设模 $n$ 存在原根 $g$，令
+\(
+  m=\varphi(n),\qquad r=\operatorname{ind}_g a.
+\)
+则同余方程
+\(
+  x^k\equiv a\pmod n
+\)
+有解当且仅当
+\(
+  (k,m)\mid r.
+\)
+若有解，则解的个数为
+\(
+  (k,m).
+\)
+\end{theorem}
+
+\begin{proof}
+写 $x\equiv g^y$。方程等价于
+\(
+  g^{ky}\equiv g^r\pmod n,
+\)
+即
+\(
+  ky\equiv r\pmod m.
+\)
+这是一个一次同余。它有解当且仅当 $(k,m)\mid r$；有解时模 $m$ 的解数为 $(k,m)$。
+\end{proof}
+
+\begin{corollary}[循环情形的指数判别]
+在上一定理的假设下，$a$ 是模 $n$ 的 $k$ 次剩余当且仅当
+\(
+  a^{\,\varphi(n)/(k,\varphi(n))}\equiv 1\pmod n.
+\)
+模 $n$ 的 $k$ 次剩余个数为
+\(
+  \frac{\varphi(n)}{(k,\varphi(n))}.
+\)
+\end{corollary}
+
+\begin{proof}
+令 $m=\varphi(n)$，$r=\operatorname{ind}_g a$。条件 $(k,m)\mid r$ 等价于
+\(
+  \frac{m}{(k,m)}r\equiv 0\pmod m,
+\)
+也就是
+\(
+  (g^r)^{m/(k,m)}\equiv 1\pmod n.
+\)
+而满足 $(k,m)\mid r$ 的 $r\in\Z/m\Z$ 恰有 $m/(k,m)$ 个。
+\end{proof}
+
+\begin{theorem}[模 $2^\alpha$ 的二项同余]
+设 $\alpha\ge3$，$a$ 为奇数，并写
+\(
+  a\equiv (-1)^{r_{-1}}5^{r_5}\pmod {2^\alpha},
+  \qquad
+  r_{-1}\in\Cyc2,\quad r_5\in\Cyc{2^{\alpha-2}}.
+\)
+则
+\(
+  x^k\equiv a\pmod {2^\alpha}
+\)
+的可解性如下：
+
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+  \item 若 $k$ 为奇数，则方程总有唯一解。
+  \item 若 $k$ 为偶数，则方程有解当且仅当
+  \(
+    r_{-1}=0,\qquad
+    (k,2^{\alpha-2})\mid r_5.
+  \)
+  有解时，解数为
+  \(
+    2\,(k,2^{\alpha-2}).
+  \)
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+写
+\(
+  x\equiv (-1)^u5^v\pmod {2^\alpha}.
+\)
+方程 $x^k\equiv a$ 等价于指标组中的两个同余：
+\(
+  ku\equiv r_{-1}\pmod 2,\qquad
+  kv\equiv r_5\pmod {2^{\alpha-2}}.
+\)
+若 $k$ 为奇数，乘以 $k$ 在两个循环群上都是自同构，因此唯一可解。
+若 $k$ 为偶数，则第一个同余变成 $0\equiv r_{-1}\pmod2$，所以必须 $r_{-1}=0$；此时 $u$ 有两个选择。第二个同余有解当且仅当
+$(k,2^{\alpha-2})\mid r_5$，有解时 $v$ 有 $(k,2^{\alpha-2})$ 个选择。乘起来得到解数。
+\end{proof}
+
+\begin{theorem}[一般模数的二项同余]
+设
+\(
+  n=2^{\alpha_0}p_1^{\alpha_1}\cdots p_s^{\alpha_s}.
+\)
+则
+\(
+  x^k\equiv a\pmod n
+\)
+有解当且仅当它在每个局部模数
+\(
+  2^{\alpha_0},\quad p_1^{\alpha_1},\ldots,p_s^{\alpha_s}
+\)
+下都有解。若有解，则总解数等于各局部解数之积。
+\end{theorem}
+
+\begin{proof}
+中国剩余定理给出
+\(
+  \Z/n\Z\simeq
+  \Z/2^{\alpha_0}\Z\times
+  \Z/p_1^{\alpha_1}\Z\times\cdots\times
+  \Z/p_s^{\alpha_s}\Z.
+\)
+在这个同构下，方程 $x^k=a$ 逐坐标成立。因此整体可解性等价于每个局部方程可解；整体解由局部解唯一拼接，所以解数相乘。
+\end{proof}
+
+\chapter{Dirichlet 特征}
+
+\section{有限 Abel 群的特征}
+
+\begin{definition}
+设 $G$ 为有限 Abel 群（finite Abelian group，有限 Abel 群）。一个群同态
+\(
+  \chi:G\longrightarrow \C^\times
+\)
+称为 $G$ 的一个特征（character，特征）。由于 $G$ 有限，$\chi(g)$ 都是单位根，所以也可把值域看成
+\(
+  S^1=\{z\in\C:|z|=1\}.
+\)
+所有特征在逐点乘法下构成群，记为
+\(
+  G^\vee=\Hom(G,\C^\times),
+\)
+称为 $G$ 的特征群（character group，特征群）。
+\end{definition}
+
+\begin{example}
+若 $G=\Cyc m$，则每个特征由 $1\in\Cyc m$ 的像决定。对
+$j\in\Z/m\Z$，定义
+\(
+  \chi_j(r)=\expi{jr/m}\qquad(r\in\Z/m\Z).
+\)
+则
+\(
+  (\Cyc m)^\vee=\{\chi_j:j\in\Z/m\Z\},
+\)
+并且 $j\mapsto \chi_j$ 给出
+\(
+  \Cyc m\simeq (\Cyc m)^\vee.
+\)
+\end{example}
+
+\begin{theorem}[直积的对偶群]
+设 $G,H$ 为有限 Abel 群。则映射
+\(\Phi:G^\vee\times H^\vee\longrightarrow (G\times H)^\vee,\quad
+(\chi,\psi)\longmapsto\bigl((g,h)\mapsto \chi(g)\psi(h)\bigr)\)
+是群同构。它的逆映射为
+\(\Psi:(G\times H)^\vee\longrightarrow G^\vee\times H^\vee,\quad
+\eta\longmapsto(\eta_G,\eta_H)\)，其中
+\(\eta_G(g)=\eta(g,1_H)\)，\(\eta_H(h)=\eta(1_G,h)\)。
+\end{theorem}
+
+\begin{proof}
+先看 \(\Phi\)。若 \(\chi\in G^\vee\)、\(\psi\in H^\vee\)，则 \((g,h)\mapsto \chi(g)\psi(h)\) 是 \(G\times H\) 到 \(\C^\times\) 的群同态，所以 \(\Phi\) 定义良好，并且显然保持逐点乘法。
+
+再看 \(\Psi\)。若 \(\eta\in (G\times H)^\vee\)，则 \(g\mapsto\eta(g,1_H)\) 是 \(G\) 的特征，\(h\mapsto\eta(1_G,h)\) 是 \(H\) 的特征，所以 \(\Psi\) 也定义良好。对任意 \(\eta\in (G\times H)^\vee\)，因为 \((g,h)=(g,1_H)(1_G,h)\)，所以 \(\eta(g,h)=\eta(g,1_H)\eta(1_G,h)=\eta_G(g)\eta_H(h)\)，即 \(\Phi(\Psi(\eta))=\eta\)。另一方面，若从 \((\chi,\psi)\) 出发，则 \(\Psi(\Phi(\chi,\psi))=(\chi,\psi)\)。因此 \(\Phi\) 是同构，逆映射就是 \(\Psi\)。
+\end{proof}
+
+\begin{theorem}[有限 Abel 群的对偶]
+若 $G$ 为有限 Abel 群，则
+\(
+  G^\vee\simeq G.
+\)
+更自然地说，求值映射
+\(
+  G\longrightarrow G^{\vee\vee},\qquad
+  a\longmapsto\bigl(\chi\mapsto \chi(a)\bigr)
+\)
+是典范同构。
+\end{theorem}
+
+\begin{proof}
+有限 Abel 群可分解为循环群直积：
+\(
+  G\simeq \Cyc{m_1}\times\cdots\times \Cyc{m_r}.
+\)
+由上一定理，直积的特征群等于各因子的特征群之积：
+\(
+  G^\vee\simeq
+  (\Cyc{m_1})^\vee\times\cdots\times(\Cyc{m_r})^\vee.
+\)
+每个循环因子都有
+\(
+  (\Cyc{m_i})^\vee\simeq \Cyc{m_i},
+\)
+所以 $G^\vee\simeq G$。再对 $G^\vee$ 应用同样结论，并注意求值映射在每个循环因子上就是
+\(
+  r\longmapsto(\chi_j\mapsto \expi{jr/m}),
+\)
+可见它是同构。
+\end{proof}
+
+\begin{theorem}[特征的正交关系]
+设 $G$ 为有限 Abel 群，$\chi,\psi\in G^\vee$。则
+\(
+  \sum_{a\in G}\chi(a)\psi^{-1}(a)
+  =
+  \begin{cases}
+    |G|,& \chi=\psi,\\
+    0,& \chi\ne\psi.
+  \end{cases}
+\)
+这里 \(\psi^{-1}\) 表示 \(G^\vee\) 中 \(\psi\) 的逆特征；由于特征取值为单位根，\(\psi^{-1}(a)=\psi(a)^{-1}=\overline{\psi(a)}=\psi(a^{-1})\)。特别地，取 \(\psi=1\)，得到
+\(
+  \sum_{a\in G}\chi(a)
+  =
+  \begin{cases}
+    |G|,& \chi=1,\\
+    0,& \chi\ne1.
+  \end{cases}
+\)
+并且对任意 \(g,h\in G\)，有与上式对偶的正交关系
+\(
+  \sum_{\chi\in G^\vee}\chi(g)\chi(h^{-1})
+  =
+  \begin{cases}
+    |G|,& g=h,\\
+    0,& g\ne h.
+  \end{cases}
+\)
+特别地，取 \(h=1\)，得到
+\(
+  \sum_{\chi\in G^\vee}\chi(g)
+  =
+  \begin{cases}
+    |G|,& g=1,\\
+    0,& g\ne1.
+  \end{cases}
+\)
+\end{theorem}
+
+\begin{proof}
+第一式中若 $\chi=\psi$，每项为 $1$。若 $\chi\ne\psi$，令
+\(
+  \eta=\chi\psi^{-1}.
+\)
+则 $\eta$ 是非平凡特征。取 $b\in G$ 使 $\eta(b)\ne1$，记
+\(
+  S=\sum_{a\in G}\eta(a).
+\)
+乘以 $\eta(b)$ 后
+\(
+  \eta(b)S=\sum_{a\in G}\eta(ba)=\sum_{a\in G}\eta(a)=S,
+\)
+故 $(\eta(b)-1)S=0$，所以 $S=0$。
+
+对偶正交关系也可直接证明。若 \(g\ne h\)，则 \(gh^{-1}\ne1\)，由
+$G\simeq G^{\vee\vee}$ 可知存在 $\chi_0$ 使 $\chi_0(gh^{-1})\ne1$。令
+\(
+  T=\sum_{\chi\in G^\vee}\chi(g)\chi(h^{-1}).
+\)
+则
+\(
+  \chi_0(gh^{-1})T
+  =
+  \sum_{\chi\in G^\vee}(\chi_0\chi)(g)(\chi_0\chi)(h^{-1})
+  =
+  T,
+\)
+故 $T=0$。若 \(g=h\)，每项为 \(1\)。两个特例分别由第一式取 \(\psi=1\) 和对偶式取 \(h=1\) 得到。
+\end{proof}
+
+\section{Dirichlet 特征的定义与正交关系}
+
+\begin{definition}
+设 $N\ge1$。模 $N$ 的 Dirichlet 特征（Dirichlet character，Dirichlet 特征）是群
+\(
+  \U N
+\)
+的特征
+\(
+  \chi:\U N\longrightarrow \C^\times
+\)
+延拓到整数上的函数：若 $(a,N)=1$，则 $\chi(a)$ 只由 $a\bmod N$ 决定；若 $(a,N)>1$，则规定
+\(
+  \chi(a)=0.
+\)
+\end{definition}
+
+因此 Dirichlet 特征满足：
+\(
+  \chi(a+N)=\chi(a),\qquad
+  \chi(ab)=\chi(a)\chi(b),\qquad
+  \chi(1)=1.
+\)
+这里第二个等式对所有整数 $a,b$ 成立；若某个数与 $N$ 不互素，两边都按上面的零值规则理解。
+
+\begin{definition}
+模 $N$ 的主特征（principal character，主特征）记为 $\chi_0$，定义为
+\(
+  \chi_0(a)=
+  \begin{cases}
+    1,&(a,N)=1,\\
+    0,&(a,N)>1.
+  \end{cases}
+\)
+\end{definition}
+
+\begin{proposition}
+模 $N$ 的 Dirichlet 特征共有 $\varphi(N)$ 个，并且它们构成群 $(\U N)^\vee$。
+\end{proposition}
+
+\begin{proof}
+这是有限 Abel 群 $\U N$ 的特征群。因为
+\(
+  |(\U N)^\vee|=|\U N|=\varphi(N),
+\)
+所以模 $N$ 的 Dirichlet 特征共有 $\varphi(N)$ 个。
+\end{proof}
+
+\begin{theorem}[Dirichlet 特征的正交关系]
+设 $\chi$ 遍历模 $N$ 的所有 Dirichlet 特征。若 $(a,N)=1$，则
+\(
+  \sum_{\chi\bmod N}\chi(a)
+  =
+  \begin{cases}
+    \varphi(N),& a\equiv 1\pmod N,\\
+    0,& a\not\equiv 1\pmod N.
+  \end{cases}
+\)
+若 $\chi,\psi$ 为模 $N$ 的特征，则
+\(
+  \sum_{a\bmod N,\allowbreak{}(a,N)=1}
+  \chi(a)\overline{\psi(a)}
+  =
+  \begin{cases}
+    \varphi(N),& \chi=\psi,\\
+    0,& \chi\ne\psi.
+  \end{cases}
+\)
+\end{theorem}
+
+\begin{proof}
+这就是上一节有限 Abel 群正交关系在
+\(
+  G=\U N
+\)
+上的直接应用。注意求和只在可逆剩余类上进行；延拓到非互素整数时特征值为 $0$。
+\end{proof}
+
+\section{本原特征与导子}
+
+\begin{definition}
+设 $\chi$ 是模 $N$ 的 Dirichlet 特征。若存在真因子 $d\mid N$，$d<N$，以及模 $d$ 的特征 $\chi^\ast$，使得对所有整数 $a$，
+\(
+  \chi(a)=\chi^\ast(a)\chi_0^{(N)}(a),
+\)
+即当 $(a,N)=1$ 时
+\(
+  \chi(a)=\chi^\ast(a),
+\)
+则称 $\chi$ 由模 $d$ 的特征提升而来。若不存在这样的真因子 $d$，则称 $\chi$ 是本原特征（primitive character，本原特征）。
+
+使 $\chi$ 可由模 $d$ 的特征提升而来的最小正整数 $d$，称为 $\chi$ 的导子（conductor，导子），记为
+\(
+  \cond(\chi).
+\)
+\end{definition}
+
+\begin{lemma}[降模判别]
+设 \(\chi\) 是模 \(N\) 的 Dirichlet 特征，且 \(d\mid N\)。则以下三个条件等价：
+\begin{enumerate}[label=(\alph*)]
+  \item 存在模 \(d\) 的 Dirichlet 特征 \(\chi'\)，使得当 \((a,N)=1\) 时有 \(\chi(a)=\chi'(a)\)；
+  \item 若 \((a,N)=1\) 且 \(a\equiv1\pmod d\)，则 \(\chi(a)=1\)；
+  \item 若 \((a,N)=(a',N)=1\) 且 \(a\equiv a'\pmod d\)，则 \(\chi(a)=\chi(a')\)。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\((a)\Rightarrow(b)\Rightarrow(c)\) 是直接的。只证 \((c)\Rightarrow(a)\)。先说明：若 \((a,d)=1\)，则可取 \(A\in\Z\) 满足 \(A\equiv a\pmod d\) 且 \((A,N)=1\)。事实上令 \(q=\prod_{p\mid N,\ p\nmid ad}p\)，空积时取 \(q=1\)，并取 \(A=a+qd\)。对任意 \(p\mid N\)：若 \(p\mid d\)，则 \(p\nmid a\)，故 \(A\equiv a\not\equiv0\pmod p\)；若 \(p\nmid d\) 且 \(p\nmid a\)，则 \(p\mid q\)，故 \(A\equiv a\not\equiv0\pmod p\)；若 \(p\nmid d\) 且 \(p\mid a\)，则 \(p\nmid qd\)，故 \(A\equiv qd\not\equiv0\pmod p\)。所以 \((A,N)=1\)。
+
+现在定义模 \(d\) 上的函数 \(\chi'\)：若 \((a,d)>1\)，令 \(\chi'(a)=0\)；若 \((a,d)=1\)，取上述 \(A\equiv a\pmod d\)、\((A,N)=1\)，令 \(\chi'(a)=\chi(A)\)。若 \(A,B\) 是两个这样的选择，则 \(A\equiv B\pmod d\) 且 \((A,N)=(B,N)=1\)，由 \((c)\) 得 \(\chi(A)=\chi(B)\)，所以 \(\chi'\) 定义良好。它显然只依赖于 \(a\bmod d\)。若 \((a,d)=(b,d)=1\)，取提升 \(A,B\)；再取 \(C\equiv ab\pmod d\)、\((C,N)=1\)，则 \(C\equiv AB\pmod d\)，由 \((c)\) 得 \(\chi'(ab)=\chi(C)=\chi(AB)=\chi(A)\chi(B)=\chi'(a)\chi'(b)\)。若 \(a\) 或 \(b\) 与 \(d\) 不互素，乘法两边都为 \(0\)。因此 \(\chi'\) 是模 \(d\) 的 Dirichlet 特征。最后，当 \((a,N)=1\) 时，可在定义中直接取 \(A=a\)，于是 \(\chi'(a)=\chi(a)\)，即 \(\chi\) 由模 \(d\) 的特征提升而来。
+\end{proof}
+
+\begin{theorem}[导子的基本刻画]
+设 $\chi$ 是模 $N$ 的 Dirichlet 特征。则存在唯一的本原特征 $\chi^\ast$，其模数为
+\(
+  d=\cond(\chi),
+\)
+使得当 $(a,N)=1$ 时
+\(
+  \chi(a)=\chi^\ast(a).
+\)
+换言之，$\chi$ 是从唯一的本原特征 $\chi^\ast\bmod d$ 提升到模 $N$ 的。
+\end{theorem}
+
+\begin{proof}
+令 $d$ 为所有可提升模数中的最小者。若对应的 $\chi^\ast\bmod d$ 仍然不是本原的，则它又可由某个真因子 $d'<d$ 的特征提升而来，于是 $\chi$ 也可由模 $d'$ 的特征提升而来，矛盾。因此 $\chi^\ast$ 本原。
+
+唯一性来自可逆类上的一致性：若两个本原特征 $\chi_1\bmod d_1$、$\chi_2\bmod d_2$ 都诱导出 $\chi\bmod N$，则 $\chi$ 可由模
+$(d_1,d_2)$ 上的特征诱导。由 $d_1,d_2$ 的最小性得到 $d_1=d_2$，再由可逆类上的取值相同得到特征相同。
+\end{proof}
+
+\begin{theorem}[中国剩余定理下的分解]
+设
+\(
+  N=\prod_{i=1}^s p_i^{\alpha_i}.
+\)
+则
+\(
+  \U N\simeq \prod_{i=1}^s \U{p_i^{\alpha_i}},
+\)
+从而每个模 $N$ 的特征可唯一写成
+\(
+  \chi=\prod_{i=1}^s\chi_i,
+\)
+其中 $\chi_i$ 是模 $p_i^{\alpha_i}$ 的特征，并按中国剩余定理拉回到模 $N$。并且
+\(
+  \cond(\chi)=\prod_{i=1}^s \cond(\chi_i).
+\)
+特别地，$\chi\bmod N$ 本原当且仅当每个 $\chi_i\bmod p_i^{\alpha_i}$ 都本原。
+\end{theorem}
+
+\begin{proof}
+中国剩余定理给出单位群直积分解。有限 Abel 群直积的特征群分解为各因子特征群的直积，因此得到唯一分解
+\(
+  \chi(a)=\prod_i \chi_i(a_i),
+\)
+其中 $a_i$ 是 $a$ 在模 $p_i^{\alpha_i}$ 下的分量。
+
+一个特征能否降到较小模数，逐个素数幂分量判断即可：若 $\chi_i$ 的导子为 $p_i^{\beta_i}$，则整体特征只依赖于模
+\(
+  \prod_i p_i^{\beta_i}
+\)
+的可逆剩余类；反过来，整体若能降模，则每个局部分量也随之降模。因此导子等于局部导子的乘积，本原性等价于所有局部分量本原。
+\end{proof}
+
+\begin{theorem}[素数幂模特征的指标表示]
+设 $p$ 为奇素数，$\alpha\ge1$，取模 $p^\alpha$ 的原根 $g$。模 $p^\alpha$ 的所有特征为
+\(
+  \chi_m(g^r)=\expi{mr/\varphi(p^\alpha)},
+  \qquad
+  m\in\Z/\varphi(p^\alpha)\Z.
+\)
+其中，当 \(\alpha=1\) 时，\(\chi_m\) 本原当且仅当 \(m\not\equiv0\pmod {p-1}\)；当 \(\alpha\ge2\) 时，\(\chi_m\) 本原当且仅当 \(p\nmid m\)。
+\end{theorem}
+
+\begin{proof}
+前半部分来自
+\(
+  \U{p^\alpha}\simeq \Cyc{\varphi(p^\alpha)}.
+\)
+循环群的特征由生成元的像决定，因此恰为上述形式。
+
+先说明这里的“核”是什么。设 \(\alpha\ge2\)，自然约化同态为
+\(\rho_\alpha:\U{p^\alpha}\to\U{p^{\alpha-1}},\ [x]_{p^\alpha}\mapsto [x]_{p^{\alpha-1}}\)，它的核（kernel）是
+\(K_\alpha=\ker\rho_\alpha=\{[1+tp^{\alpha-1}]_{p^\alpha}:t\in\Z/p\Z\}\)。一个模 \(p^\alpha\) 的特征 \(\chi\) 由模 \(p^{\alpha-1}\) 的特征提升而来，当且仅当 \(\chi\) 在 \(K_\alpha\) 上恒等于 \(1\)：若 \(\chi=\chi'\circ\rho_\alpha\)，则它显然在 \(\ker\rho_\alpha\) 上为 \(1\)；反过来，若 \(\chi|_{K_\alpha}=1\)，则可定义 \(\chi'([x]_{p^{\alpha-1}})=\chi([X]_{p^\alpha})\)，其中 \(X\) 是任一提升，这一定义因两个提升相差一个 \(K_\alpha\) 中的元素而良定。
+
+在原根 \(g\) 下，\(K_\alpha\) 是阶为 \(p\) 的子群，且由 \(g^{\varphi(p^{\alpha-1})}\) 生成。于是
+\(\chi_m(g^{\varphi(p^{\alpha-1})})=\expi{m\varphi(p^{\alpha-1})/\varphi(p^\alpha)}=\expi{m/p}\)。因此当 \(p\mid m\) 时，\(\chi_m\) 在 \(K_\alpha\) 上平凡，故由模 \(p^{\alpha-1}\) 提升而来，不本原；当 \(p\nmid m\) 时，\(\chi_m\) 在这个约化同态的核上非平凡，不能降到模 \(p^{\alpha-1}\)，也就不能降到任何更小模数，故本原。
+
+若 \(\alpha=1\)，则模 \(p\) 的主特征对应 \(m\equiv0\pmod {p-1}\)，它由模 \(1\) 提升而来；其余特征都不能再降模，所以都本原。
+\end{proof}
+
+\begin{theorem}[二的幂模特征的指标组表示]
+若 $\alpha\ge3$，则模 $2^\alpha$ 的特征由
+\(
+  \chi_{\eta,m}\bigl((-1)^u5^v\bigr)
+  =
+  (-1)^{\eta u}\expi{mv/2^{\alpha-2}},
+  \qquad
+  \eta\in\Cyc2,\quad m\in\Cyc{2^{\alpha-2}}
+\)
+给出。它本原当且仅当
+\(
+  m\ \text{为奇数}.
+\)
+另外，模 $4$ 的非主特征本原；模 $2$ 的特征均由模 $1$ 提升。
+\end{theorem}
+
+\begin{proof}
+由
+\(
+  \U{2^\alpha}\simeq \Cyc2\times \Cyc{2^{\alpha-2}}
+\)
+可知特征正是两个循环因子特征的乘积，因此得到公式。
+
+若 $m$ 为偶数，则第二因子的特征可降到
+\(
+  \Cyc{2^{\alpha-3}},
+\)
+从而整体特征由模 $2^{\alpha-1}$ 提升而来。
+
+下面说明“最后一级核”的含义。这里的自然约化同态是
+\(\rho_\alpha:\U{2^\alpha}\to\U{2^{\alpha-1}},\ [x]_{2^\alpha}\mapsto [x]_{2^{\alpha-1}}\)，它的核为
+\(K_\alpha=\ker\rho_\alpha=\{[1]_{2^\alpha},[1+2^{\alpha-1}]_{2^\alpha}\}\)。所谓最后一级核，就是从模 \(2^\alpha\) 降到模 \(2^{\alpha-1}\) 这一步的约化同态 \(\rho_\alpha\) 的核。与上一证明同理，模 \(2^\alpha\) 的特征能由模 \(2^{\alpha-1}\) 提升，当且仅当它在 \(K_\alpha\) 上恒等于 \(1\)。
+
+在分解 \(\U{2^\alpha}=\langle -1\rangle\times\langle5\rangle\) 中，有 \(1+2^{\alpha-1}\equiv5^{2^{\alpha-3}}\pmod {2^\alpha}\)，所以 \(K_\alpha=\langle 5^{2^{\alpha-3}}\rangle\)。于是
+\(\chi_{\eta,m}(5^{2^{\alpha-3}})=\expi{m2^{\alpha-3}/2^{\alpha-2}}=(-1)^m\)。若 \(m\) 为奇数，则 \(\chi_{\eta,m}\) 在 \(K_\alpha\) 上非平凡，不能降到模 \(2^{\alpha-1}\)，更不能降到更小模数，因此本原。模 $4$、模 $2$ 的结论直接检查即可。
+\end{proof}
+
+\section{Gauss 和}
+
+本节使用
+\(
+  e(x)=\exp(2\pi i x).
+\)
+设 $\chi$ 是模 $N$ 的 Dirichlet 特征。
+
+\begin{definition}[Gauss 和]
+对整数 $m$，定义
+\(
+  G(m;\chi)
+  =
+  \sum_{a=1}^{N}\chi(a)e\!\left(\frac{ma}{N}\right).
+\)
+特别地，
+\(
+  \tau(\chi)=G(1;\chi)
+  \)
+称为 $\chi$ 的 Gauss 和（Gauss sum，高斯和）。若 $\chi=\chi_0$ 是主特征，则
+\(
+  C(m;N)=G(m;\chi_0)
+  =
+  \sum_{1\leq a\leq N,\allowbreak{}(a,N)=1}
+  e\!\left(\frac{ma}{N}\right)
+ \)
+称为 Ramanujan 和（Ramanujan sum，拉马努金和）。
+\end{definition}
+
+\begin{theorem}[Gauss 和的基本性质]
+设 $\chi$ 为模 $N$ 的特征。则：
+\((i)\ G(m+N;\chi)=G(m;\chi)\)；\((ii)\ G(-m;\chi)=\overline{\chi}(-1)\,G(m;\chi)\)；\((iii)\ G(m;\overline{\chi})=\chi(-1)\,\overline{G(m;\chi)}\)；\((iv)\) 若 \(\chi=\chi_0\)，则 \(G(0;\chi_0)=\varphi(N)\)，若 \(\chi\ne\chi_0\)，则 \(G(0;\chi)=0\)；\((v)\) 若 \((m,N)=1\)，则 \(G(m;\chi)=\overline{\chi}(m)\tau(\chi)\)。
+\end{theorem}
+
+\begin{theorem}[互素模数下的乘法公式]
+设 $N=N_1N_2$，$(N_1,N_2)=1$。若
+\(
+  \chi=\chi_1\chi_2
+\)
+是由模 $N_1$ 的特征 $\chi_1$ 与模 $N_2$ 的特征 $\chi_2$ 通过中国剩余定理得到的模 $N$ 特征，则
+\(
+  G(m;\chi)
+  =
+  \chi_1(N_2)\chi_2(N_1)
+  G(m;\chi_1)G(m;\chi_2).
+\)
+\end{theorem}
+
+\begin{proof}
+由中国剩余定理，每个 $a\bmod N$ 可唯一写成
+\(
+  a\equiv a_1N_2+a_2N_1\pmod N
+\)
+其中 $a_1\bmod N_1$、$a_2\bmod N_2$。于是
+\(
+  e\!\left(\frac{ma}{N}\right)
+  =
+  e\!\left(\frac{ma_1}{N_1}\right)
+  e\!\left(\frac{ma_2}{N_2}\right),
+\)
+而
+\(
+  \chi(a)
+  =
+  \chi_1(a)\chi_2(a)
+  =
+  \chi_1(a_1N_2)\chi_2(a_2N_1)
+  =
+  \chi_1(N_2)\chi_2(N_1)\chi_1(a_1)\chi_2(a_2).
+\)
+把这些代入求和，二重和分离为
+\(
+  \chi_1(N_2)\chi_2(N_1)
+  \left(\sum_{a_1\bmod N_1}\chi_1(a_1)e\!\left(\frac{ma_1}{N_1}\right)\right)
+  \left(\sum_{a_2\bmod N_2}\chi_2(a_2)e\!\left(\frac{ma_2}{N_2}\right)\right),
+\)
+即所需公式。
+\end{proof}
+
+\begin{corollary}
+Ramanujan 和关于模数是乘法的：若 $(N_1,N_2)=1$，则
+\(
+  C(m;N_1N_2)=C(m;N_1)C(m;N_2).
+\)
+\end{corollary}
+
+\begin{proof}
+在上一公式中取 $\chi_1,\chi_2$ 都为主特征。由于
+\(
+  \chi_1(N_2)=\chi_2(N_1)=1,
+\)
+便得到结论。
+\end{proof}
+
+\begin{theorem}[Ramanujan 和公式]
+对任意正整数 $N$ 与整数 $m$，
+\(
+  C(m;N)
+  =
+  \mu\!\left(\frac{N}{(m,N)}\right)
+  \frac{\varphi(N)}{\varphi\!\left(\frac{N}{(m,N)}\right)}.
+\)
+特别地，若 $(m,N)=1$，则
+\(
+  C(m;N)=\mu(N).
+\)
+\end{theorem}
+
+\begin{proof}
+由乘法性，只需证明 $N=p^\alpha$ 的情形。记 $h=(m,p^\alpha)$。
+
+若 $p^\alpha\mid m$，则
+\(
+  C(m;p^\alpha)=\varphi(p^\alpha),
+\)
+右边也等于 $\mu(1)\varphi(p^\alpha)$。
+
+若 $p^{\alpha-1}\Vert m$，则
+\(
+  C(m;p^\alpha)
+  =
+  \sum_{a\bmod p^\alpha,\allowbreak{}p\nmid a}
+  e\!\left(\frac{ma}{p^\alpha}\right).
+\)
+写 $m=p^{\alpha-1}u$，$p\nmid u$，于是每项为 $e(ua/p)$。在模 $p^\alpha$ 的可逆类中，每个非零模 $p$ 剩余类出现
+$p^{\alpha-1}$ 次，所以
+\(
+  C(m;p^\alpha)
+  =
+  p^{\alpha-1}\sum_{a=1}^{p-1}e\!\left(\frac{ua}{p}\right)
+  =
+  -p^{\alpha-1}.
+\)
+右边公式中 $p^\alpha/h=p$，也给出
+\(
+  \mu(p)\frac{\varphi(p^\alpha)}{\varphi(p)}
+  =
+  -p^{\alpha-1}.
+\)
+
+若 $p^{\alpha-1}\nmid m$，则 $p^\alpha/h$ 含有 $p^2$，右边为 $0$。左边也为 $0$：因为此时指数和在每个模 $p$ 的平移块中相互抵消。具体地，取 $t=p^{\alpha-1-\nu_p(m)}$，则
+\(
+  e\!\left(\frac{m(a+t)}{p^\alpha}\right)
+  =
+  e\!\left(\frac{ma}{p^\alpha}\right)
+  e\!\left(\frac{mt}{p^\alpha}\right),
+\)
+其中第二因子是非平凡 $p$ 次单位根；按平移分组求和为 $0$。
+\end{proof}
+
+\begin{theorem}[本原特征的消失性]
+若 $\chi$ 是模 $N$ 的本原特征，则
+\(
+  G(m;\chi)=0\qquad\bigl((m,N)>1\bigr).
+\)
+\end{theorem}
+
+\begin{proof}
+先处理素数幂模数。
+
+若 $N=p^\alpha$，$p$ 为奇素数，取原根 $g$ 并写
+\(
+  \chi(g^r)=\expi{cr/\varphi(p^\alpha)}.
+\)
+本原性等价于 $p\nmid c$。若 $p\mid m$，把可逆剩余类按
+\(
+  a=v+up^{\alpha-1}\qquad(u=0,1,\ldots,p-1)
+\)
+分组，其中 $v$ 模 $p^{\alpha-1}$ 可逆。因为 $p\mid m$，
+\(
+  e\!\left(\frac{m(v+up^{\alpha-1})}{p^\alpha}\right)
+  =
+  e\!\left(\frac{mv}{p^\alpha}\right)
+\)
+与 $u$ 无关。而本原性说明 $\chi$ 在核
+\(
+  1+p^{\alpha-1}\Z/p^\alpha\Z
+\)
+上是非平凡特征，所以
+\(
+  \sum_{u=0}^{p-1}\chi(v+up^{\alpha-1})=0.
+\)
+故每组求和为 $0$，从而 $G(m;\chi)=0$。当 $\alpha=1$ 时，$p\mid m$ 时指数因子恒为 $1$，而非主特征求和为 $0$，结论同样成立。
+
+若 $N=2^\alpha$，$\alpha\ge3$，写
+\(
+  \chi((-1)^u5^v)=(-1)^{\eta u}\expi{cv/2^{\alpha-2}}.
+\)
+本原性等价于 $c$ 为奇数。若 $2\mid m$，把奇剩余类按
+\(
+  a=v+\ell 2^{\alpha-1}\qquad(\ell=0,1)
+\)
+分组。指数因子对 $\ell$ 不变，而
+\(
+  1+2^{\alpha-1}
+\)
+在指标组中对应第二个循环因子的最高阶元素，因 $c$ 为奇数，
+\(
+  \chi(1+2^{\alpha-1})=-1.
+\)
+于是每组两项相消。模 $4$ 的非主本原特征也直接检查成立。
+
+一般模数
+\(
+  N=\prod_i p_i^{\alpha_i}
+\)
+由乘法公式化归到局部情形。若 $(m,N)>1$，则某个 $p_i\mid m$，对应的局部 Gauss 和为 $0$，所以整体为 $0$。
+\end{proof}
+
+\begin{theorem}[本原特征的 Gauss 和公式]
+若 $\chi$ 是模 $N$ 的本原特征，则对所有整数 $m$，
+\(
+  G(m;\chi)=\overline{\chi}(m)\tau(\chi).
+\)
+这里若 $(m,N)>1$，按 Dirichlet 特征的约定有 $\overline{\chi}(m)=0$。
+\end{theorem}
+
+\begin{proof}
+若 $(m,N)=1$，这是基本性质中的换元公式。若 $(m,N)>1$，上一 theorem 给出
+$G(m;\chi)=0$，而右边也为 $0$。
+\end{proof}
+
+\begin{theorem}[本原 Gauss 和的绝对值]
+若 $\chi$ 是模 $N$ 的本原特征，则
+\(
+  |\tau(\chi)|=\sqrt N.
+\)
+\end{theorem}
+
+\begin{proof}
+由本原特征的 Gauss 和公式，
+\(
+  G(m;\chi)=\overline{\chi}(m)\tau(\chi).
+\)
+对 $m=1,\ldots,N$ 取绝对值平方并求和，得
+\(
+  \sum_{m=1}^{N}|G(m;\chi)|^2
+  =
+  |\tau(\chi)|^2
+  \sum_{m=1}^{N}|\chi(m)|^2
+  =
+  |\tau(\chi)|^2\varphi(N).
+\)
+另一方面，按定义展开：
+\(
+  \sum_{m=1}^{N}|G(m;\chi)|^2
+  =
+  \sum_{m=1}^{N}
+  \sum_{a,b=1}^{N}
+  \chi(a)\overline{\chi(b)}
+  e\!\left(\frac{m(a-b)}{N}\right).
+\)
+利用
+\(
+  \sum_{m=1}^{N}e\!\left(\frac{m(a-b)}{N}\right)
+  =
+  \begin{cases}
+    N,& a\equiv b\pmod N,\\
+    0,& a\not\equiv b\pmod N,
+  \end{cases}
+\)
+得到
+\(
+  \sum_{m=1}^{N}|G(m;\chi)|^2
+  =
+  N\sum_{a=1}^{N}|\chi(a)|^2
+  =
+  N\varphi(N).
+\)
+比较两式，得 $|\tau(\chi)|^2=N$。
+\end{proof}
+
+\begin{theorem}[Pólya--Vinogradov 不等式，本原情形]
+若 $\chi$ 是模 $N$ 的本原非主特征，则对任意整数 $A$ 和 $M\ge1$，存在绝对常数 $C$，使得
+\(
+  \left|\sum_{A<n\le A+M}\chi(n)\right|
+  \le C\sqrt N\log N.
+\)
+一般非本原的非主特征情形见习题 5-6。
+\end{theorem}
+
+\begin{proof}
+由本原 Gauss 和公式，对任意整数 $a$ 有
+\(
+  \chi(a)
+  =
+  \frac1{\tau(\overline{\chi})}
+  \sum_{r=1}^{N}\overline{\chi}(r)e\!\left(\frac{ar}{N}\right).
+\)
+这是有限 Fourier 展开。于是
+\(
+  \sum_{A<n\le A+M}\chi(n)
+  =
+  \frac1{\tau(\overline{\chi})}
+  \sum_{r=1}^{N}\overline{\chi}(r)
+  \sum_{A<n\le A+M}e\!\left(\frac{nr}{N}\right).
+\)
+因为 $\chi$ 非主，任一整周期上的和为 $0$，又 $\chi$ 以 $N$ 为周期，故不失一般性可设 $M<N$。记左边的和为 $S$。由 $|\tau(\overline{\chi})|=\sqrt N$ 且 $\overline{\chi}(N)=0$ 得
+\(
+  |S|
+  \le
+  \frac1{\sqrt N}
+  \sum_{r=1}^{N-1}
+  \left|
+  \sum_{A<n\le A+M}e\!\left(\frac{nr}{N}\right)
+  \right|.
+\)
+对内层和作平移，初始因子模长为 $1$，所以
+\(
+  \left|
+  \sum_{A<n\le A+M}e\!\left(\frac{nr}{N}\right)
+  \right|
+  =
+  \left|
+  \sum_{j=0}^{M-1}e\!\left(\frac{jr}{N}\right)
+  \right|.
+\)
+当 $1\le r\le N-1$ 时，由几何级数公式得
+\(
+  \left|
+  \sum_{j=0}^{M-1}e\!\left(\frac{jr}{N}\right)
+  \right|
+  =
+  \left|
+  \frac{1-e(Mr/N)}{1-e(r/N)}
+  \right|
+  \le
+  \frac2{|1-e(r/N)|}
+  =
+  \left(\sin\frac{\pi r}{N}\right)^{-1}.
+\)
+于是
+\(
+  |S|
+  \le
+  \frac1{\sqrt N}
+  \sum_{r=1}^{N-1}
+  \left(\sin\frac{\pi r}{N}\right)^{-1}.
+\)
+利用对称性 $\sin(\pi(N-r)/N)=\sin(\pi r/N)$ 和 $0\le x\le\pi/2$ 时的 $\sin x\ge 2x/\pi$：若 $N$ 为奇数，则
+\(
+  |S|
+  \le
+  \frac2{\sqrt N}
+  \sum_{r=1}^{(N-1)/2}
+  \left(\sin\frac{\pi r}{N}\right)^{-1}
+  <
+  \sqrt N
+  \sum_{r=1}^{(N-1)/2}\frac1r;
+\)
+若 $N$ 为偶数，则中间项 $r=N/2$ 贡献 $1/\sqrt N$，并有
+\(
+  |S|
+  \le
+  \frac2{\sqrt N}
+  \sum_{r=1}^{N/2-1}
+  \left(\sin\frac{\pi r}{N}\right)^{-1}
+  +
+  \frac1{\sqrt N}
+  \le
+  \sqrt N
+  \sum_{r=1}^{N/2-1}\frac1r
+  +
+  \frac1{\sqrt N}.
+\)
+最后由 $\log\frac{2m+1}{2m-1}=\int_{2m-1}^{2m+1}\frac{dt}{t}>1/m$ 得到相应调和和为 $O(\log N)$，故 $|S|\ll\sqrt N\log N$。
+\end{proof}
