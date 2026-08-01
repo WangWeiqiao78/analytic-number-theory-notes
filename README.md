@@ -17,7 +17,3 @@
 - `源码/第五六章重写/chapter5-6-rewrite.tex`
 - `源码/习题答案/exercise-solutions.tex`
 - `源码/考试cheating paper版笔记/压缩版讲义/main-compact.tex`
-
-## 发布
-
-把本仓库推到 GitHub 后，在仓库的 Settings -> Pages 中选择 `main` 分支、根目录发布即可。
